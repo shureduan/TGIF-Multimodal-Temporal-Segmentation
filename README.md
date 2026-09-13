@@ -27,16 +27,15 @@ different state. DWA first obtains a preliminary video-guided prediction, then
 uses its contiguous segments to adjust the sensor attention range.
 
 <p align="center">
-  <img src="assets/dwa_method.svg" width="100%" alt="Prediction-guided Dynamic Window Attention pipeline">
+  <img src="assets/dwa_pipline.png" width="100%" alt="Dynamic window sampling and one-way local attention pipeline">
 </p>
 
 The window determines **which temporal positions can be read**; one-way local
 attention determines **how those permitted sensor positions are weighted** by
-the video query. The attended context is concatenated with the video feature;
-the attention weights are relative weights within the selected window, not a
-calibrated sensor-reliability estimate. Equations, tensor dimensions, both
-passes, the shared MS-TCN, training/inference behavior, and WEAR background
-calibration are documented in [docs/method.md](docs/method.md).
+the video query. The resulting sensor context is fused with the video
+representation for temporal segmentation. Equations, tensor dimensions, the
+maintained two-pass implementation, training/inference behavior, and WEAR
+background calibration are documented in [docs/method.md](docs/method.md).
 
 ## TGIF results
 
@@ -68,18 +67,32 @@ The comparison uses the first 18 WEAR subjects, leave-one-subject-out folds,
 seed 47, and the 2 Hz feature grid. Concatenated Macro-F1 evaluates the combined
 held-out-subject predictions over all 19 classes, including background.
 
+<p align="center">
+  <img src="assets/wear_main_results.png" width="100%" alt="WEAR aggregate, cross-subject, and temporal localization results">
+</p>
+
+*Aggregate performance, paired cross-subject changes in mAP@0.5, and temporal
+localization performance from tIoU 0.3 to 0.7.*
+
 | Method | Mean fold Macro-F1 | Concatenated Macro-F1 | Accuracy | mAP@0.5 | Avg mAP |
 |---|---:|---:|---:|---:|---:|
 | Video-only MS-TCN | 0.7292 ± 0.0861 | 0.7573 | 0.7929 | 0.6755 | 0.6814 |
 | Final multimodal model | **0.7998 ± 0.1621** | **0.8109** | **0.8284** | **0.7756** | **0.7640** |
 
 <p align="center">
-  <img src="assets/wear_gt_vs_final.png" width="88%" alt="WEAR ground-truth and final multimodal class-ID trace">
+  <img src="assets/wear_ablation_robustness.png" width="100%" alt="WEAR component ablation, boundary robustness, and support allocation">
 </p>
 
-*Existing WEAR class-ID trace over feature-grid index, showing ground truth and
-the final multimodal prediction. It is a qualitative two-track example and does
-not include the video-only prediction.*
+*Incremental component results, boundary-jitter robustness, and the learned
+attention mass within the prediction-guided support.*
+
+<p align="center">
+  <img src="assets/wear_temporal_segmentation.png" width="100%" alt="WEAR temporal segmentation comparison across four methods">
+</p>
+
+*WEAR median-baseline qualitative example over 2,776 seconds. The tracks show
+Ground truth, Video-only, Early concatenation, Fixed attention, and the Final
+model using a shared class-color mapping.*
 
 The held-out subject in each fold was also used for best-epoch selection, so
 these are validation-selected LOSO results. Record metrics use the 2 Hz feature

@@ -38,6 +38,3 @@ NumPy 2.2.6, SciPy 1.15.3, and scikit-learn 1.7.2.
   confirmed result figures are treated as a separate research result record.
 - Official WEAR 50 Hz record scoring and official detector-format TAL evaluation
   are not implemented.
-- A WEAR three-track GT/video-only/multimodal timeline is still missing. The
-  existing multi-track files have a class-rendering defect; the available valid
-  class-ID trace contains GT and final only.

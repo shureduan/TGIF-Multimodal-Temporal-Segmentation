@@ -63,7 +63,15 @@ Important scope limits:
   detector outputs.
 - One training seed is available; no multi-seed WEAR claim is made.
 
-`assets/wear_gt_vs_final.png` is an existing GT-versus-final class-ID trace. It
-does not contain the video-only track and is shown as a qualitative two-track
-example rather than a three-method comparison. The quantitative table remains
-the source for the Video-only versus Final comparison.
+The README uses three approved result figures:
+
+- `assets/wear_main_results.png` summarizes aggregate performance,
+  subject-level paired changes in mAP@0.5, and localization performance across
+  tIoU thresholds.
+- `assets/wear_ablation_robustness.png` shows incremental components,
+  boundary-jitter robustness, and soft support allocation.
+- `assets/wear_temporal_segmentation.png` is a qualitative 2,776-second trace
+  with Ground truth, Video-only, Early concatenation, Fixed attention, and the
+  Final model under a shared class-color mapping.
+
+The frozen tables above remain the source for the exact values quoted in text.
