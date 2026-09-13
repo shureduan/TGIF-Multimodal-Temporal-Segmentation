@@ -39,7 +39,7 @@ refine the dense action sequence.
 ### TGIF video baseline
 
 <p align="center">
-  <img src="assets/tgif_video_pipeline.png" width="100%" alt="TGIF pure-video data processing and temporal segmentation pipeline">
+  <img src="assets/tgif_video_pipeline_overview.png" width="100%" alt="TGIF pure-video data processing and temporal segmentation pipeline">
 </p>
 
 The TGIF video baseline converts ROS bag recordings to MP4, obtains two visual
