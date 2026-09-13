@@ -9,6 +9,44 @@ by an MS-TCN, to produce dense temporal predictions. The repository presents
 confirmed TGIF study results together with a maintained WEAR training,
 inference, and evaluation baseline.
 
+### Why dynamic sensor windows?
+
+<p align="center">
+  <img src="assets/tgif_vibration_window_accuracy.png" width="68%" alt="Vibration classification accuracy for different temporal window lengths">
+</p>
+
+The vibration-only diagnostic exposes a temporal-support problem. Accuracy is
+36% below 2 seconds and 58% at 2–4 seconds, then rises to 82% at 4–8 seconds.
+The 94% result uses an oracle window close to the ground-truth action duration
+(about 9 seconds), which is not available during normal inference. A fixed
+window must therefore trade off noisy short measurements against windows that
+can span unrelated action states.
+
+<p align="center">
+  <img src="assets/tgif_vibration_smoothing.png" width="100%" alt="Smoothed vibration RMS and ground-truth action intervals at two TGIF stations">
+</p>
+
+*Vibration RMS at stations 2 and 3 with 2-second raw measurements and 3/6-second
+smoothing. Background colors show the ground-truth sewing and handling
+intervals.*
+
+The traces show useful recurring sensor structure, but the appropriate temporal
+extent changes with the predicted action segment and its boundaries. This is
+the motivation for DWA: use an initial segmentation to define the sensor
+support, apply video-query local attention within that support, and let MS-TCN
+refine the dense action sequence.
+
+### TGIF video baseline
+
+<p align="center">
+  <img src="assets/tgif_video_pipeline.png" width="100%" alt="TGIF pure-video data processing and temporal segmentation pipeline">
+</p>
+
+The TGIF video baseline converts ROS bag recordings to MP4, obtains two visual
+ROIs, prepares rolling clips for VideoMAE feature extraction, and applies
+MS-TCN for action prediction. The multimodal model extends this temporal video
+path with aligned vibration evidence rather than replacing the video encoder.
+
 ## Overall pipeline
 
 <p align="center">
