@@ -1,0 +1,39 @@
+dataset: wear
+protocol: feature_grid_2hz_loso18
+seed: 47
+classes: 19
+background_id: 18
+feature_stride_seconds: 0.5
+
+input:
+  video_dim: 2048
+  inertial_dim: 600
+  inertial_layout: [12, 50]
+  inertial_sample_rate_hz: 50
+  video_normalization: none
+  inertial_normalization: per_raw_channel_train_subjects_only
+
+model:
+  attention_dim: 128
+  rounds: 2
+  round0_radius_seconds: 2.0
+  round1_uncertainty_margin_seconds: 1.0
+  round1_core_prior: 1.0
+  round1_margin_prior: 0.5
+  round1_outside_prior: 0.0
+  mstcn_stages: 4
+  mstcn_layers_per_stage: 8
+  mstcn_channels: 64
+  task_presence_beta: 0.5
+
+training:
+  parent_epochs: 30
+  probe_epochs: 15
+  parent_learning_rate: 0.0005
+  probe_learning_rate: 0.001
+  weight_decay: 0.0001
+  gradient_clip: 5.0
+  tmse_weight: 0.15
+  round0_loss_weight: 0.5
+  round1_loss_weight: 1.0
+  checkpoint_selection: held_out_subject_macro_f1_19

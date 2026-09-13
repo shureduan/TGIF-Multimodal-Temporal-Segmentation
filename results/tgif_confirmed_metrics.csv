@@ -1,0 +1,7 @@
+metric,video_only_percent,multimodal_percent,change_percentage_points
+Accuracy,91.9,92.5,0.6
+Edit score,89.7,91.4,1.7
+Macro-F1,92.3,92.7,0.4
+Idle recall,93.6,94.2,0.6
+Sewing recall,91.8,92.3,0.5
+Handling recall,87.7,88.2,0.5

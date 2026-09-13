@@ -1,0 +1,16 @@
+dataset: tgif_sewing
+classes:
+  0: idle
+  1: sewing
+  2: handling
+display_names:
+  baseline: Video-only
+  final: Multimodal
+quantitative_asset: assets/tgif_video_vs_multimodal.png
+timeline_asset: assets/tgif_timeline_seed43.png
+timeline_seed: 43
+timeline_scope: validation_good_vibration_concatenated
+result_source: project_owner_confirmed_original_figures
+runtime_validation_reported_separately: true
+data_publicly_available: false
+public_tgif_model_bundle_available: false

@@ -1,0 +1,78 @@
+[
+  {
+    "local_id": 0,
+    "official_internal_name": "jogging"
+  },
+  {
+    "local_id": 1,
+    "official_internal_name": "jogging (rotating arms)"
+  },
+  {
+    "local_id": 2,
+    "official_internal_name": "jogging (skipping)"
+  },
+  {
+    "local_id": 3,
+    "official_internal_name": "jogging (sidesteps)"
+  },
+  {
+    "local_id": 4,
+    "official_internal_name": "jogging (butt-kicks)"
+  },
+  {
+    "local_id": 5,
+    "official_internal_name": "stretching (triceps)"
+  },
+  {
+    "local_id": 6,
+    "official_internal_name": "stretching (lunging)"
+  },
+  {
+    "local_id": 7,
+    "official_internal_name": "stretching (shoulders)"
+  },
+  {
+    "local_id": 8,
+    "official_internal_name": "stretching (hamstrings)"
+  },
+  {
+    "local_id": 9,
+    "official_internal_name": "stretching (lumbar rotation)"
+  },
+  {
+    "local_id": 10,
+    "official_internal_name": "push-ups"
+  },
+  {
+    "local_id": 11,
+    "official_internal_name": "push-ups (complex)"
+  },
+  {
+    "local_id": 12,
+    "official_internal_name": "sit-ups"
+  },
+  {
+    "local_id": 13,
+    "official_internal_name": "sit-ups (complex)"
+  },
+  {
+    "local_id": 14,
+    "official_internal_name": "burpees"
+  },
+  {
+    "local_id": 15,
+    "official_internal_name": "lunges"
+  },
+  {
+    "local_id": 16,
+    "official_internal_name": "lunges (complex)"
+  },
+  {
+    "local_id": 17,
+    "official_internal_name": "bench-dips"
+  },
+  {
+    "local_id": 18,
+    "official_internal_name": "null/background"
+  }
+]

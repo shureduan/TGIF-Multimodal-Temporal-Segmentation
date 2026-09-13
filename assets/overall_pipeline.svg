@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="650" viewBox="0 0 1800 650" role="img" aria-labelledby="title desc">
+  <title id="title">Overall multimodal temporal segmentation pipeline</title>
+  <desc id="desc">Video and sensor streams are preprocessed, encoded and aligned. Dynamic Window Attention creates a video-guided sensor context, which is concatenated with video features and classified by an MS-TCN into dense action segments.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
+    </marker>
+    <style>
+      .title { font: 700 38px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+      .lane { font: 700 23px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+      .head { font: 700 21px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+      .body { font: 400 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #374151; }
+      .small { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5563; }
+      .arrow { stroke: #111111; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1800" height="650" fill="#ffffff"/>
+  <text x="900" y="55" text-anchor="middle" class="title">Overall Multimodal Temporal Segmentation Pipeline</text>
+
+  <text x="42" y="163" class="lane">Video</text>
+  <rect x="125" y="105" width="230" height="120" rx="16" fill="#f3f4f6" stroke="#111827" stroke-width="2.5"/>
+  <text x="240" y="150" text-anchor="middle" class="head">Video stream</text>
+  <text x="240" y="182" text-anchor="middle" class="body">Long industrial recording</text>
+
+  <path d="M 355 165 L 408 165" class="arrow"/>
+  <rect x="410" y="105" width="270" height="120" rx="16" fill="#f8fafc" stroke="#111827" stroke-width="2.5"/>
+  <text x="545" y="143" text-anchor="middle" class="head">Video preparation</text>
+  <text x="545" y="175" text-anchor="middle" class="body">ROI crops / clip sampling</text>
+  <text x="545" y="202" text-anchor="middle" class="small">Dataset-specific adapter</text>
+
+  <path d="M 680 165 L 733 165" class="arrow"/>
+  <rect x="735" y="105" width="275" height="120" rx="16" fill="#ede9fe" stroke="#6d28d9" stroke-width="2.5"/>
+  <text x="872" y="143" text-anchor="middle" class="head">Visual encoder</text>
+  <text x="872" y="175" text-anchor="middle" class="body">TGIF: VideoMAE</text>
+  <text x="872" y="202" text-anchor="middle" class="body">WEAR: I3D</text>
+
+  <text x="42" y="440" class="lane">Sensor</text>
+  <rect x="125" y="382" width="230" height="120" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="240" y="427" text-anchor="middle" class="head">Sensor stream</text>
+  <text x="240" y="459" text-anchor="middle" class="body">Vibration or IMU</text>
+
+  <path d="M 355 442 L 408 442" class="arrow"/>
+  <rect x="410" y="382" width="270" height="120" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="545" y="420" text-anchor="middle" class="head">Sensor preparation</text>
+  <text x="545" y="452" text-anchor="middle" class="body">Clean / window / normalize</text>
+  <text x="545" y="479" text-anchor="middle" class="small">Training-fold statistics</text>
+
+  <path d="M 680 442 L 733 442" class="arrow"/>
+  <rect x="735" y="382" width="275" height="120" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="872" y="420" text-anchor="middle" class="head">Sensor features</text>
+  <text x="872" y="452" text-anchor="middle" class="body">TGIF: vibration features</text>
+  <text x="872" y="479" text-anchor="middle" class="body">WEAR: RAW600</text>
+
+  <path d="M 1010 165 C 1058 165 1050 262 1085 262" class="arrow"/>
+  <path d="M 1010 442 C 1058 442 1050 332 1085 332" class="arrow"/>
+  <rect x="1087" y="230" width="230" height="135" rx="18" fill="#ecfeff" stroke="#0891b2" stroke-width="2.5"/>
+  <text x="1202" y="270" text-anchor="middle" class="head">Temporal alignment</text>
+  <text x="1202" y="303" text-anchor="middle" class="body">Common timestamps</text>
+  <text x="1202" y="332" text-anchor="middle" class="small">aligned pair (V<tspan baseline-shift="sub">t</tspan>, S<tspan baseline-shift="sub">t</tspan>)</text>
+
+  <path d="M 1317 297 L 1365 297" class="arrow"/>
+  <rect x="1367" y="230" width="190" height="135" rx="18" fill="#fef3c7" stroke="#b45309" stroke-width="2.5"/>
+  <text x="1462" y="283" text-anchor="middle" class="head">DWA</text>
+  <text x="1462" y="316" text-anchor="middle" class="body">Video-guided</text>
+  <text x="1462" y="342" text-anchor="middle" class="body">sensor context</text>
+
+  <path d="M 1557 297 L 1605 297" class="arrow"/>
+  <rect x="1607" y="215" width="155" height="165" rx="18" fill="#dcfce7" stroke="#15803d" stroke-width="2.5"/>
+  <text x="1684" y="263" text-anchor="middle" class="head">MS-TCN</text>
+  <text x="1684" y="297" text-anchor="middle" class="body">Temporal</text>
+  <text x="1684" y="323" text-anchor="middle" class="body">classification</text>
+  <text x="1684" y="353" text-anchor="middle" class="small">dense labels</text>
+
+  <path d="M 1684 380 L 1684 455" class="arrow"/>
+  <rect x="1480" y="458" width="282" height="98" rx="16" fill="#f3f4f6" stroke="#111827" stroke-width="2.5"/>
+  <text x="1621" y="498" text-anchor="middle" class="head">Temporal segmentation</text>
+  <text x="1621" y="529" text-anchor="middle" class="body">Per-timestep action sequence</text>
+
+  <text x="900" y="612" text-anchor="middle" class="small">Separate encoders preserve modality structure; fusion occurs only after timestamp alignment.</text>
+</svg>

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tgif-dwa"
+version = "0.1.0"
+description = "Dynamic-window multimodal temporal segmentation research code"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+  "torch==2.12.0",
+  "numpy==2.2.6",
+  "scipy==1.15.3",
+  "scikit-learn==1.7.2",
+  "PyYAML==6.0.3",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
