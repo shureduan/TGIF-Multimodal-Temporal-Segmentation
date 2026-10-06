@@ -61,7 +61,13 @@ python scripts/train_wear.py \
 ```
 
 The command trains the two-round parent for 30 epochs and a video+RAW600
-background probe for 15 epochs. Parent loss is
+background probe for 15 epochs. Parent training uses fixed ±2-second support
+in Round 0 and the detached predicted segment alone in Round 1
+(`IterativeRawDWA`, `max_escape_seconds=0.0`). The final inference wrapper loads
+these parameters into `BoundaryUncertaintyDWA`, which adds the fixed ±1-second
+margin and 1.0/0.5 temporal prior, then applies the separate background probe.
+See [the training/inference comparison](method.md#training-and-inference).
+Parent loss is
 `0.5 × L_round0 + L_round1`; each round loss sums four-stage cross entropy and
 `0.15 ×` truncated temporal smoothing. Adam uses learning rate `5e-4`, weight
 decay `1e-4`, gradient clipping at 5, and seed 47. The probe uses Adam at

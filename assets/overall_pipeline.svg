@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="650" viewBox="0 0 1800 650" role="img" aria-labelledby="title desc">
   <title id="title">Overall multimodal temporal segmentation pipeline</title>
-  <desc id="desc">Video and sensor streams are preprocessed, encoded and aligned. Dynamic Window Attention creates a video-guided sensor context, which is concatenated with video features and classified by an MS-TCN into dense action segments.</desc>
+  <desc id="desc">Video and sensor features are prepared and aligned. In each of two rounds, Dynamic Window Attention creates a video-guided sensor context, which is concatenated with video features and classified by the shared MS-TCN. Detached Round-0 segments define Round-1 support. WEAR applies a separate background prior after Round 1.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
@@ -68,14 +68,18 @@
   <path d="M 1557 297 L 1605 297" class="arrow"/>
   <rect x="1607" y="215" width="155" height="165" rx="18" fill="#dcfce7" stroke="#15803d" stroke-width="2.5"/>
   <text x="1684" y="263" text-anchor="middle" class="head">MS-TCN</text>
-  <text x="1684" y="297" text-anchor="middle" class="body">Temporal</text>
-  <text x="1684" y="323" text-anchor="middle" class="body">classification</text>
-  <text x="1684" y="353" text-anchor="middle" class="small">dense labels</text>
+  <text x="1684" y="297" text-anchor="middle" class="small">[video, context]</text>
+  <text x="1684" y="323" text-anchor="middle" class="body">concatenation</text>
+  <text x="1684" y="353" text-anchor="middle" class="small">shared classifier</text>
+
+  <path d="M 1684 215 V 145 H 1462 V 227" class="arrow"/>
+  <text x="1540" y="112" text-anchor="middle" class="small">Detached Round-0 segments define Round-1 support</text>
 
   <path d="M 1684 380 L 1684 455" class="arrow"/>
   <rect x="1480" y="458" width="282" height="98" rx="16" fill="#f3f4f6" stroke="#111827" stroke-width="2.5"/>
   <text x="1621" y="498" text-anchor="middle" class="head">Temporal segmentation</text>
   <text x="1621" y="529" text-anchor="middle" class="body">Per-timestep action sequence</text>
 
-  <text x="900" y="612" text-anchor="middle" class="small">Separate encoders preserve modality structure; fusion occurs only after timestamp alignment.</text>
+  <text x="900" y="604" text-anchor="middle" class="small">Two rounds within one forward pass; query/key projections and MS-TCN are shared.</text>
+  <text x="900" y="632" text-anchor="middle" class="small">WEAR applies a separate background prior to the final Round-1 logits.</text>
 </svg>

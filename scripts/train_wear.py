@@ -4,6 +4,10 @@
 This command intentionally accepts one fold only.  It preserves the audited
 seed, loss, training-only inertial normalization, and held-out-subject checkpoint
 selection used by the existing experiment.
+
+Parent training uses segment-only Round-1 support. The final inference wrapper
+loads these parameters with a fixed boundary margin and the separate probe;
+see docs/method.md for the training/inference support settings.
 """
 
 from __future__ import annotations

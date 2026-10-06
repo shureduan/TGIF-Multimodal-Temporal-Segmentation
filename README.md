@@ -4,9 +4,9 @@
 
 Industrial activity segmentation assigns an action label to every point in a
 long recording. This project combines video with time-aligned vibration or
-inertial measurements and implements Dynamic Window Attention (DWA), followed
-by an MS-TCN, to produce dense temporal predictions. The repository presents
-confirmed TGIF study results together with a maintained WEAR training,
+inertial measurements and implements Dynamic Window Attention (DWA) with a
+shared MS-TCN in two successive rounds to produce dense temporal predictions.
+The repository presents confirmed TGIF study results together with a maintained WEAR training,
 inference, and evaluation baseline.
 
 ### Why dynamic sensor windows?
@@ -53,26 +53,35 @@ path with aligned vibration evidence rather than replacing the video encoder.
   <img src="assets/overall_pipeline.svg" width="100%" alt="Overall multimodal temporal segmentation pipeline">
 </p>
 
-Video and sensor streams are prepared independently, encoded on a common time
-grid, and passed to DWA. The attended sensor context is combined with the video
-representation before temporal classification. TGIF uses global/operator ROI
-VideoMAE features with vibration; WEAR uses I3D features with windowed IMU.
+Video and sensor streams are prepared independently, aligned on a common time
+grid, and passed to DWA. In each round, the attended sensor context is
+concatenated with the video representation and passed to the shared MS-TCN.
+TGIF uses global/operator ROI VideoMAE features with vibration; WEAR uses I3D
+features with windowed IMU.
 
 ## DWA pipeline
 
 A fixed sensor window can cross action boundaries and include evidence from a
-different state. DWA first obtains a preliminary video-guided prediction, then
-uses its contiguous segments to adjust the sensor attention range.
+different state. DWA first uses fixed-window video-to-sensor attention and the
+shared MS-TCN to obtain a preliminary multimodal prediction (Round 0). Its
+contiguous predicted segments then define the sensor support for Round 1.
 
 <p align="center">
-  <img src="assets/dwa_pipline.png" width="100%" alt="Dynamic window sampling and one-way local attention pipeline">
+  <img src="assets/dwa_pipeline.svg" width="100%" alt="Two-round DWA: fixed-window attention, detached predicted segments, prediction-guided attention, and concatenation with video before the shared MS-TCN">
 </p>
+
+*Maintained WEAR inference configuration: Round 0 uses a ±2-second window;
+Round 1 uses the predicted segment plus a ±1-second margin, with temporal
+priors of 1.0 in the segment and 0.5 in the margin. Both rounds run within one
+forward pass and share the query/key projections and MS-TCN.*
 
 The window determines **which temporal positions can be read**; one-way local
 attention determines **how those permitted sensor positions are weighted** by
 the video query. The resulting sensor context is fused with the video
-representation for temporal segmentation. Equations, tensor dimensions, the
-maintained two-pass implementation, training/inference behavior, and WEAR
+representation by concatenation for temporal segmentation. The WEAR training
+script uses segment-only Round-1 support; the final inference wrapper adds the
+fixed boundary margin and a separately trained background prior. Equations,
+tensor dimensions, training/inference behavior, and WEAR
 background calibration are documented in [docs/method.md](docs/method.md).
 
 ## TGIF results

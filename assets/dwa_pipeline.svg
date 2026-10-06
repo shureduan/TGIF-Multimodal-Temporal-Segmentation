@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="825" viewBox="0 0 1600 825" role="img" aria-labelledby="title desc">
+  <title id="title">Dynamic Window Attention: two-round WEAR inference</title>
+  <desc id="desc">Aligned video and normalized sensor features feed both attention rounds. Round 0 uses a fixed plus or minus two-second window. Its detached MS-TCN labels define contiguous segments for Round 1, which adds a fixed one-second margin with prior 0.5 around the segment with prior 1.0. Each round concatenates the original video feature with the attention-weighted sensor context before the shared MS-TCN. A separate background probe adjusts final Round-1 logits. Parent training uses segment-only Round-1 support.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#334155"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; fill: #172033; }
+      .title { font-size: 32px; font-weight: 700; }
+      .head { font-size: 21px; font-weight: 700; }
+      .body { font-size: 19px; }
+      .small { font-size: 17px; fill: #475569; }
+      .flow { fill: none; stroke: #334155; stroke-width: 2.8; marker-end: url(#arrow); }
+      .seed { fill: none; stroke: #334155; stroke-width: 2.8; stroke-dasharray: 8 5; marker-end: url(#arrow); }
+      .box { stroke-width: 2; rx: 16; }
+    </style>
+  </defs>
+  <rect width="1600" height="825" fill="#ffffff"/>
+  <text x="800" y="48" class="title">Dynamic Window Attention · two-round WEAR inference</text>
+  <text x="800" y="84" class="body">One forward pass · shared query/key projections and shared MS-TCN</text>
+
+  <rect x="30" y="130" width="235" height="520" class="box" fill="#f8fafc" stroke="#94a3b8"/>
+  <text x="147" y="184" class="head">Aligned inputs</text>
+  <text x="147" y="214" class="small">0.5-second feature grid</text>
+  <text x="147" y="290" class="head">Video features V</text>
+  <text x="147" y="323" class="body">I3D · 2048-D</text>
+  <path d="M58 360 H237" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="147" y="403" class="head">Sensor features S</text>
+  <text x="147" y="436" class="body">Normalized RAW600</text>
+  <text x="147" y="467" class="small">12 channels × 50 samples</text>
+  <text x="147" y="580" class="small">Same V and S</text>
+  <text x="147" y="606" class="small">used in both rounds</text>
+
+  <path d="M265 215 H312" class="flow"/>
+  <rect x="315" y="130" width="280" height="170" class="box" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="455" y="171" class="head">Round 0 · fixed support</text>
+  <text x="455" y="207" class="body">±2 seconds around t</text>
+  <text x="455" y="237" class="small">Video Q → sensor K / values</text>
+  <text x="455" y="273" class="body">Context c₀ = weighted sum</text>
+  <path d="M595 215 H642" class="flow"/>
+  <rect x="645" y="130" width="220" height="170" class="box" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="755" y="180" class="head">Concatenate</text>
+  <text x="755" y="222" class="body">[V, c₀]</text>
+  <text x="755" y="259" class="small">2048 + 600 = 2648-D</text>
+  <path d="M865 215 H912" class="flow"/>
+  <rect x="915" y="130" width="245" height="170" class="box" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="1037" y="180" class="head">Shared MS-TCN</text>
+  <text x="1037" y="222" class="body">4 stages · 8 layers each</text>
+  <text x="1037" y="259" class="small">Preliminary logits</text>
+  <path d="M1160 215 H1207" class="flow"/>
+  <rect x="1210" y="130" width="360" height="170" class="box" fill="#f8fafc" stroke="#94a3b8"/>
+  <text x="1390" y="180" class="head">Round-0 prediction</text>
+  <text x="1390" y="222" class="body">Argmax over final-stage logits</text>
+  <text x="1390" y="259" class="small">Uses both video and sensor evidence</text>
+
+  <path d="M1390 300 V327" class="seed"/>
+  <rect x="1060" y="330" width="450" height="82" class="box" fill="#fefce8" stroke="#ca8a04"/>
+  <text x="1285" y="364" class="head">Detach Round-0 labels</text>
+  <text x="1285" y="393" class="body">Extract contiguous predicted segments</text>
+  <path d="M1060 371 H455 V442" class="seed"/>
+  <text x="755" y="353" class="small">Segment boundaries define Round-1 support</text>
+
+  <path d="M265 547 H312" class="flow"/>
+  <rect x="315" y="445" width="280" height="205" class="box" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="455" y="483" class="head">Round 1 · dynamic</text>
+  <text x="455" y="519" class="body">Predicted segment ±1 s</text>
+  <text x="455" y="551" class="small">Prior: core 1.0 / margin 0.5</text>
+  <text x="455" y="581" class="small">Video Q → sensor K / values</text>
+  <text x="455" y="621" class="body">Context c₁ = weighted sum</text>
+  <path d="M595 547 H642" class="flow"/>
+  <rect x="645" y="445" width="220" height="205" class="box" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="755" y="509" class="head">Concatenate</text>
+  <text x="755" y="551" class="body">[V, c₁]</text>
+  <text x="755" y="590" class="small">2048 + 600 = 2648-D</text>
+  <path d="M865 547 H912" class="flow"/>
+  <rect x="915" y="445" width="245" height="205" class="box" fill="#f0fdf4" stroke="#16a34a"/>
+  <text x="1037" y="509" class="head">Shared MS-TCN</text>
+  <text x="1037" y="551" class="small">Reuses Round-0 weights</text>
+  <text x="1037" y="590" class="small">Round-1 logits</text>
+  <path d="M1160 547 H1207" class="flow"/>
+  <rect x="1210" y="445" width="360" height="205" class="box" fill="#f5f3ff" stroke="#8b5cf6"/>
+  <text x="1390" y="483" class="head">Final WEAR prediction</text>
+  <text x="1390" y="519" class="body">Separate probe on [V, S]</text>
+  <text x="1390" y="551" class="body">Background log-prior · β = 0.5</text>
+  <text x="1390" y="586" class="small">Adjust Round-1 logits → softmax</text>
+  <text x="1390" y="621" class="head">Per-timestep action labels</text>
+
+  <rect x="30" y="695" width="760" height="102" rx="12" fill="#f8fafc"/>
+  <text x="410" y="735" class="body">Attention uses normalized 128-D Q/K and a learned cosine scale.</text>
+  <text x="410" y="768" class="body">Values stay RAW600; fusion concatenates video and sensor context.</text>
+  <rect x="810" y="695" width="760" height="102" rx="12" fill="#f8fafc"/>
+  <text x="1190" y="735" class="body">Parent training uses segment-only Round-1 support (zero margin).</text>
+  <text x="1190" y="768" class="body">The fixed margin and background prior are applied at final inference.</text>
+</svg>

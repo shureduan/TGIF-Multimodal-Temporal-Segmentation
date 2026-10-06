@@ -9,10 +9,13 @@ Design goals
 3. No preliminary Conv1D window predictor.
 4. Round 0 uses one fixed local window and produces an MS-TCN prediction.
 5. Round >=1 uses the PREVIOUS ROUND'S detached predicted segment as the
-   seed window, then expands beyond that segment in 0.5 s steps until the
-   attention context saturates. Predicted segment boundaries are a seed,
-   never a hard boundary.
+   seed window. With max_escape_seconds=0 (the released training setting),
+   support is exactly that segment. Positive values enable optional expansion
+   in 0.5 s steps until the attention context saturates.
 6. The same attention projections and the same MS-TCN are reused across rounds.
+
+Final WEAR inference uses BoundaryUncertaintyDWA, which overrides Round-1
+support with the predicted segment plus a fixed margin and soft temporal prior.
 
 Expected feature convention
 ---------------------------
@@ -61,7 +64,8 @@ class IterativeRawDWA(nn.Module):
     Round 1+
       previous detached prediction
       -> contiguous predicted segment containing t = seed window
-      -> seed-and-expand Context-Saturation DW (may cross old boundaries)
+      -> segment-only support when max_escape_seconds=0;
+         optional context-saturation expansion when max_escape_seconds>0
       -> attention-weighted RAW600 context
       -> concat(video_2048, context_600)
       -> the SAME shared MS-TCN

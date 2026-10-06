@@ -15,6 +15,12 @@ training-fold IMU normalization statistics. The probe checkpoint contains the
 separate background/action classifier. Publishing only one of the two does not
 reproduce final predictions.
 
+The training script uses segment-only Round-1 support. The final inference
+wrapper loads the same parent parameter structure with a fixed ±1-second
+boundary margin and a 1.0/0.5 temporal prior, then applies the separate probe.
+These support settings are defined by the wrapper, not learned checkpoint
+parameters; see [the method definition](method.md#training-and-inference).
+
 The complete 18-fold set is 100,559,226 bytes (95.90 MiB):
 
 - 18 parents: 76,079,484 bytes
