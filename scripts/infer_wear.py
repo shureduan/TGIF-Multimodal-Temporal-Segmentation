@@ -11,7 +11,8 @@ import numpy as np
 import torch
 
 from tgif_dwa.wear_data import load_sequence, orient_feature
-from tgif_dwa.wear_model import load_wear_final, normalize_wear_inertial
+from tgif_dwa.wear_baselines import load_wear_predictor
+from tgif_dwa.wear_model import normalize_wear_inertial
 
 
 def parse_args() -> argparse.Namespace:
@@ -22,7 +23,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--subject", help="subject name, required with --data-root (for example sbj_0)")
     parser.add_argument("--imu", type=Path, help="standalone [T,600] NumPy array")
     parser.add_argument("--parent", type=Path, required=True, help="fold parent checkpoint")
-    parser.add_argument("--probe", type=Path, required=True, help="paired task-presence probe")
+    parser.add_argument("--probe", type=Path, help="paired probe, required for FINAL_MODEL")
     parser.add_argument("--output", type=Path, required=True, help="output .npz path")
     parser.add_argument("--device", default="cpu", help="cpu, mps, or cuda")
     return parser.parse_args()
@@ -30,9 +31,13 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    model, mean, std = load_wear_predictor(args.parent, args.probe, device=args.device)
+    metadata = model.run_metadata
     if args.data_root is not None:
         if not args.subject:
             raise SystemExit("--subject is required with --data-root")
+        if metadata.get("test_subject") and args.subject != metadata["test_subject"]:
+            raise ValueError("--subject must match the checkpoint's outer test subject")
         sequence = load_sequence(args.data_root, args.subject)
         video = sequence["video"]
         inertial = sequence["inertial"]
@@ -48,7 +53,6 @@ def main() -> None:
         target = None
         sequence_id = args.video.stem
 
-    model, mean, std = load_wear_final(args.parent, args.probe, device=args.device)
     normalized = normalize_wear_inertial(inertial, mean, std)
     device = torch.device(args.device)
     with torch.inference_mode():
@@ -61,9 +65,14 @@ def main() -> None:
         "id": np.asarray(sequence_id),
         "pred": output["predictions"].cpu().numpy(),
         "probabilities": output["probabilities"].cpu().numpy(),
-        "p_background": output["p_background"].cpu().numpy(),
         "feature_stride_seconds": np.asarray(0.5),
+        "protocol": np.asarray(metadata["protocol"]),
     }
+    if "p_background" in output:
+        payload["p_background"] = output["p_background"].cpu().numpy()
+    for key in ("fold", "seed", "method", "run_id"):
+        if key in metadata:
+            payload[key] = np.asarray(metadata[key])
     if target is not None:
         payload["true"] = target
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -9,13 +9,15 @@ Design goals
 3. No preliminary Conv1D window predictor.
 4. Round 0 uses one fixed local window and produces an MS-TCN prediction.
 5. Round >=1 uses the PREVIOUS ROUND'S detached predicted segment as the
-   seed window. With max_escape_seconds=0 (the released training setting),
+   seed window. With max_escape_seconds=0 (legacy segment-only training),
    support is exactly that segment. Positive values enable optional expansion
    in 0.5 s steps until the attention context saturates.
 6. The same attention projections and the same MS-TCN are reused across rounds.
 
-Final WEAR inference uses BoundaryUncertaintyDWA, which overrides Round-1
+Maintained WEAR training and inference use BoundaryUncertaintyDWA, which overrides Round-1
 support with the predicted segment plus a fixed margin and soft temporal prior.
+The optional context-saturation expansion below is retained for legacy research
+experiments and is not part of the maintained final model.
 
 Expected feature convention
 ---------------------------
@@ -164,6 +166,8 @@ class IterativeRawDWA(nn.Module):
     def _validate_inputs(self, video: torch.Tensor, raw600: Optional[torch.Tensor]) -> None:
         if video.ndim != 2 or video.shape[-1] != self.video_dim:
             raise ValueError(f"video must be [T,{self.video_dim}], got {tuple(video.shape)}")
+        if video.shape[0] == 0:
+            raise ValueError("video sequence must be nonempty")
         if raw600 is not None:
             if raw600.ndim != 2 or raw600.shape != (video.shape[0], self.imu_dim):
                 raise ValueError(
@@ -178,10 +182,12 @@ class IterativeRawDWA(nn.Module):
         valid:  broadcastable boolean [..., K]
         """
         valid = valid.bool()
-        masked = scores.masked_fill(~valid, float("-inf"))
-        weights = torch.softmax(masked, dim=-1)
-        weights = torch.nan_to_num(weights, nan=0.0, posinf=0.0, neginf=0.0)
         any_valid = valid.any(dim=-1, keepdim=True)
+        masked = scores.masked_fill(~valid, float("-inf"))
+        # An all -inf softmax has NaN gradients even when its output is later
+        # replaced by zero. Avoid computing that softmax in the first place.
+        masked = torch.where(any_valid, masked, torch.zeros_like(masked))
+        weights = torch.softmax(masked, dim=-1)
         return torch.where(any_valid, weights, torch.zeros_like(weights))
 
     def _project_qk(self, video: torch.Tensor, raw600: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -204,13 +210,13 @@ class IterativeRawDWA(nn.Module):
             return labels.new_empty(0), labels.new_empty(0)
         change = torch.ones(T, dtype=torch.bool, device=labels.device)
         change[1:] = labels[1:] != labels[:-1]
-        seg_starts = torch.nonzero(change, as_tuple=False).flatten()
-        seg_ends = torch.cat([seg_starts[1:] - 1, labels.new_tensor([T - 1])])
-        starts = torch.empty(T, dtype=torch.long, device=labels.device)
-        ends = torch.empty(T, dtype=torch.long, device=labels.device)
-        for s, e in zip(seg_starts.tolist(), seg_ends.tolist()):
-            starts[s : e + 1] = s
-            ends[s : e + 1] = e
+        indices = torch.arange(T, device=labels.device)
+        starts = torch.cummax(torch.where(change, indices, 0), dim=0).values
+        end_change = torch.ones_like(change)
+        end_change[:-1] = change[1:]
+        ends = torch.cummin(
+            torch.where(end_change, indices, T - 1).flip(0), dim=0
+        ).values.flip(0)
         return starts, ends
 
     # ------------------------------------------------------------------
@@ -221,6 +227,7 @@ class IterativeRawDWA(nn.Module):
         video: torch.Tensor,
         raw600: torch.Tensor,
         aux_valid: torch.Tensor,
+        return_diagnostics: bool = True,
     ) -> Dict[str, torch.Tensor]:
         T = video.shape[0]
         q, k = self._project_qk(video, raw600)
@@ -240,6 +247,8 @@ class IterativeRawDWA(nn.Module):
         scores = self.effective_temperature() * torch.einsum("td,twd->tw", q, k_win)
         attn = self._safe_attention(scores, valid_win)
         context = torch.einsum("tw,twi->ti", attn, v_win)
+        if not return_diagnostics:
+            return {"context": context}
         entropy = -(attn.clamp_min(1e-8).log() * attn).sum(-1)
         max_weight = attn.max(-1).values
 
@@ -273,6 +282,7 @@ class IterativeRawDWA(nn.Module):
         seed_start: torch.Tensor,
         seed_end: torch.Tensor,
         aux_valid: torch.Tensor,
+        return_diagnostics: bool = True,
     ) -> Dict[str, torch.Tensor]:
         T = video.shape[0]
         if seed_start.shape != (T,) or seed_end.shape != (T,):
@@ -420,6 +430,7 @@ class IterativeRawDWA(nn.Module):
         aux_valid: Optional[torch.Tensor] = None,
         force_context_zero: bool = False,
         n_rounds: Optional[int] = None,
+        return_diagnostics: bool = True,
     ) -> Dict[str, object]:
         self._validate_inputs(video, raw600)
         T = video.shape[0]
@@ -432,7 +443,12 @@ class IterativeRawDWA(nn.Module):
         else:
             if aux_valid.shape != (T,):
                 raise ValueError("aux_valid must be [T]")
-            aux_valid = aux_valid.bool()
+            aux_valid = aux_valid.to(device=video.device, dtype=torch.bool)
+
+        if raw600 is not None:
+            # Mask values before either projection or aggregation: 0 * NaN
+            # is still NaN, so masking attention scores alone is insufficient.
+            raw600 = raw600.masked_fill(~aux_valid[:, None], 0.0)
 
         # Matched no-auxiliary path: same classifier shape, exact zero RAW600 context.
         if raw600 is None:
@@ -457,7 +473,9 @@ class IterativeRawDWA(nn.Module):
 
         for round_idx in range(rounds):
             if round_idx == 0:
-                diag = self.fixed_window_attention(video, raw600, aux_valid)
+                diag = self.fixed_window_attention(
+                    video, raw600, aux_valid, return_diagnostics=return_diagnostics
+                )
             else:
                 assert previous_prediction is not None
                 # HARD RULE: the dynamic seed comes only from the previous round's
@@ -465,7 +483,8 @@ class IterativeRawDWA(nn.Module):
                 with torch.no_grad():
                     seed_start, seed_end = self.labels_to_bounds(previous_prediction.detach())
                 diag = self.segment_seed_expand_attention(
-                    video, raw600, seed_start, seed_end, aux_valid
+                    video, raw600, seed_start, seed_end, aux_valid,
+                    return_diagnostics=return_diagnostics,
                 )
 
             context = diag["context"]

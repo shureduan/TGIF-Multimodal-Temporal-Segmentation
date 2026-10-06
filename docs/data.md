@@ -2,7 +2,15 @@
 
 ## WEAR
 
-The maintained final model consumes pre-extracted, time-aligned NumPy arrays:
+The maintained final model consumes pre-extracted, time-aligned NumPy arrays.
+Use the official download's `processed` features and `annotations`, linked in
+[the WEAR download instructions](https://github.com/mariusbock/wear#download).
+Select the 2048-D video and 600-D inertial features on the 0.5-second grid, not
+combined video+IMU features. Copy or symlink their subject arrays into `video/`
+and `imu/` below, and the original annotation JSON files into `label/`. Preserve
+subject filenames, feature values, sensor channel order and annotation IDs;
+the loader handles either array orientation. This repository starts from those
+features and does not extract I3D features from raw video.
 
 ```text
 WEAR_prepared/
@@ -21,6 +29,19 @@ Each 600-D inertial row is interpreted as `[12,50]`: four sensors × three axes
 × 50 samples from a one-second, 50 Hz window. Consecutive feature rows are 0.5
 seconds apart. The released alignment maps feature index `t` to center time
 `(t + 1.0) × 0.5` seconds. Unmatched frames use class 18 (background).
+
+Only `sbj_0` through `sbj_17` enter this protocol. Annotation lookup first checks
+`wear_split_18.json`, then `wear_test_split_1.json` through
+`wear_test_split_6.json`; together they must cover these subjects. The JSON's
+`database[subject].annotations` entries need `segment: [start_seconds,
+end_seconds]` and integer `label_id`. Preserve the mapping in
+[`configs/wear_label_mapping.json`](../configs/wear_label_mapping.json).
+
+Before training, run:
+
+```bash
+python scripts/check_wear_data.py --data-root /path/to/WEAR_prepared
+```
 
 The loader accepts either array orientation, crops video and IMU to their common
 length when they differ by no more than two rows, and fails on larger length

@@ -1,6 +1,7 @@
 dataset: wear
-protocol: feature_grid_2hz_loso18
-seed: 47
+protocol: fixed_epoch_loso_v2
+feature_grid_protocol: feature_grid_2hz_loso18
+seeds: [41, 47, 53]
 classes: 19
 background_id: 18
 feature_stride_seconds: 0.5
@@ -13,7 +14,7 @@ input:
   video_normalization: none
   inertial_normalization: per_raw_channel_train_subjects_only
 
-# Final inference settings (WearFinalModel / BoundaryUncertaintyDWA).
+# Shared parent settings for both training and inference.
 model:
   attention_dim: 128
   rounds: 2
@@ -27,8 +28,7 @@ model:
   mstcn_channels: 64
   task_presence_beta: 0.5
 
-# train_wear.py uses IterativeRawDWA with max_escape_seconds=0.0:
-# Round 1 has segment-only support; the margin above is added at inference.
+# Both components save their final epoch; no outer-test checkpoint selection.
 training:
   parent_epochs: 30
   probe_epochs: 15
@@ -39,4 +39,6 @@ training:
   tmse_weight: 0.15
   round0_loss_weight: 0.5
   round1_loss_weight: 1.0
-  checkpoint_selection: held_out_subject_macro_f1_19
+  checkpoint_selection: fixed_epoch_last
+  outer_test_loaded_during_training: false
+  evaluation_schedule: after_all_benchmark_training

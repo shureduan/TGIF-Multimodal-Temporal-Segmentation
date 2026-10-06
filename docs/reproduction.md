@@ -1,81 +1,172 @@
-# Reproduction levels
+# Reproducing the WEAR v2 code
 
-## 1. Source and interface checks
+The current training protocol is `fixed_epoch_loso_v2`. It trains from prepared
+WEAR features and saves the final epoch of each component. The existing WEAR
+figures in the README, WEAR tables in `results/`, and
+`models/wear_final/manifest.json` describe an older WEAR experiment; they are
+not numerical targets for this training protocol.
 
-From a clean environment:
+## 1. Install and check inputs
+
+Run all commands from the repository root. The pinned environment uses Python
+3.10 and the versions in `environment.yml` / `pyproject.toml`:
 
 ```bash
 conda env create -f environment.yml
 conda activate tgif-temporal
-python -m pip install -e .
 python -m unittest discover -s tests -v
 ```
 
-The tests cover tensor shapes, fixed and prediction-derived support, missing-IMU
-zero context in the parent, metric fixtures, and the exact TGIF asset hashes.
-They use synthetic arrays and do not establish experimental reproduction.
+Alternatively, in a Python 3.10 environment, use `python -m pip install -e .`.
+The tests run on CPU with synthetic inputs; the optional checkpoint test is
+skipped unless `WEAR_PARENT_CKPT` and `WEAR_PROBE_CKPT` are set.
 
-## 2. Existing-weight WEAR inference
-
-Obtain the verified 18-fold model archive, then run
-`scripts/verify_model_files.py`. A fold number maps to held-out subject
-`sbj_{fold-1}`. For example, split 1 must run on `sbj_0` with the split-1 parent
-and probe.
+Obtain the precomputed WEAR I3D and RAW600 features and annotations, and arrange
+them as described in [data.md](data.md#wear). A complete run requires `sbj_0`
+through `sbj_17`. Dataset files and trained checkpoints are not bundled.
 
 ```bash
+python scripts/check_wear_data.py --data-root /path/to/WEAR_prepared
+```
+
+This checks all subjects for readable arrays, dimensions, aligned lengths,
+finite values and label range. It does not select epochs or tune the model.
+The command-line training/inference path expects complete video/IMU pairs.
+An explicit `aux_valid` mask is supported by the model API, but is not generated
+automatically by these scripts.
+
+## 2. Train, predict and evaluate one fold
+
+This example uses the full epoch budget. Fold 1 holds out `sbj_0`; in general,
+fold `f` holds out `sbj_{f-1}`. Use `--device cuda` for a suitable CUDA setup or
+`--device mps` on Apple Silicon. CPU is the portable default.
+
+```bash
+OMP_NUM_THREADS=1 python scripts/train_wear.py \
+  --data-root /path/to/WEAR_prepared \
+  --fold 1 --seed 47 --method FINAL_MODEL \
+  --parent-epochs 30 --probe-epochs 15 \
+  --device cpu --output outputs/wear_training
+
 python scripts/infer_wear.py \
-  --data-root /path/to/WEAR_prepared \
-  --subject sbj_0 \
-  --parent models/wear_final/split_01/parent.pt \
-  --probe models/wear_final/split_01/background_probe.pt \
-  --output outputs/final_model_split_01.npz
-```
+  --data-root /path/to/WEAR_prepared --subject sbj_0 \
+  --parent outputs/wear_training/FINAL_MODEL/seed_47/split_01/parent.pt \
+  --probe outputs/wear_training/FINAL_MODEL/seed_47/split_01/background_probe.pt \
+  --device cpu --output outputs/wear_split_01.npz
 
-Expected output arrays are `pred [T]`, `probabilities [T,19]`,
-`p_background [T]`, and (when `--data-root` is used) `true [T]`.
-
-## 3. Recompute the saved WEAR feature-grid metrics
-
-Run inference for all 18 fold/subject pairs and pass every output to:
-
-```bash
 python scripts/evaluate_wear.py \
-  outputs/final_model_split_*.npz \
-  --output outputs/final_model_18fold_metrics.json
+  outputs/wear_split_01.npz --output outputs/wear_split_01_metrics.json
 ```
 
-Compare the evaluator's `mean_fold` values and concatenated Macro-F1 against
-`results/wear_aggregate.json`. Exact agreement additionally requires the same
-official feature arrays and annotation JSON files. The public
-repository currently supplies neither data nor weights, so an external clean
-clone cannot yet complete this level.
+For a short pipeline check, use `--parent-epochs 1 --probe-epochs 1` and a
+separate output directory. Those weights are only a smoke test, not the full
+experiment. The trainer refuses to overwrite an existing fold directory.
 
-## 4. Train WEAR from scratch
+Each completed training directory contains `parent.pt`, `background_probe.pt`,
+`protocol.json`, `training.json` and loss logs. Keep the parent/probe from the
+same run together: the loader verifies their run, fold, seed, model
+configuration and final-epoch metadata. Baselines do not create or accept a
+probe. Their names are `VIDEO_ONLY`, `EARLY_CONCAT` and
+`FIXED_WINDOW_ATTENTION`.
+
+Inference writes `pred [T]`, `probabilities [T,19]`, run identity metadata,
+`p_background [T]` for FINAL_MODEL, and `true [T]` when using `--data-root`.
+With `--video features.npy --imu imu.npy`, inference needs no annotation file
+and writes no ground truth; such outputs cannot be scored by the evaluator.
+
+## 3. Run the complete matched benchmark
 
 ```bash
-python scripts/train_wear.py \
+python scripts/run_wear_benchmark.py \
   --data-root /path/to/WEAR_prepared \
-  --fold 1 \
-  --output outputs/wear_training \
-  --device cuda
+  --output outputs/wear_v2_benchmark \
+  --device cpu --workers 1 --threads 1 \
+  --seeds 41 47 53 --parent-epochs 30 --probe-epochs 15
 ```
 
-The command trains the two-round parent for 30 epochs and a video+RAW600
-background probe for 15 epochs. Parent training uses fixed ±2-second support
-in Round 0 and the detached predicted segment alone in Round 1
-(`IterativeRawDWA`, `max_escape_seconds=0.0`). The final inference wrapper loads
-these parameters into `BoundaryUncertaintyDWA`, which adds the fixed ±1-second
-margin and 1.0/0.5 temporal prior, then applies the separate background probe.
-See [the training/inference comparison](method.md#training-and-inference).
-Parent loss is
-`0.5 × L_round0 + L_round1`; each round loss sums four-stage cross entropy and
-`0.15 ×` truncated temporal smoothing. Adam uses learning rate `5e-4`, weight
-decay `1e-4`, gradient clipping at 5, and seed 47. The probe uses Adam at
-`1e-3`, weight decay `1e-4`, and binary cross entropy.
+This schedules 18 folds × 3 seeds × 4 methods = 216 training jobs. It freezes
+source files, input hashes, seeds, device assignments and epoch budgets before
+training. Test inference starts only after all scheduled training completes.
+Allow several hours or longer depending on hardware; one full subject sequence
+is processed at a time. Start with one worker to limit memory use.
 
-The held-out LOSO subject is used for parent best-epoch selection, matching the
-existing result rather than creating a new train/validation/test protocol.
-Full training was not rerun during release preparation.
+Use `--plan-only` to freeze/check the plan without training. Rerun the identical
+command to reuse completed jobs and restart interrupted jobs from their seeds;
+it does not resume an intermediate optimizer state. A changed source tree,
+dataset, device assignment or setting requires a new output directory.
+
+The reference run used one CPU thread per job, three concurrent CPU workers,
+and a separate one-worker MPS queue for even folds. To use that assignment on
+an Apple Silicon machine, replace `--workers 1` above with:
+
+```text
+--workers 3 --mps-folds 2 4 6 8 10 12 14 16 18
+```
+
+All methods and seeds within a fold use the same device. A CPU-only or CUDA run
+uses the same mathematical protocol, but hardware and numerical differences
+can affect predicted boundaries and training trajectories; bitwise equality
+across devices is not promised.
+
+Outputs are written under the selected directory:
+
+```text
+benchmark_plan.json        settings and source/input SHA-256 values
+source_snapshot/           frozen code and configuration
+status.json                job progress and completion state
+checkpoints/METHOD/seed_N/split_FF/
+checkpoint_manifest.json   hashes of this run's saved weights
+predictions/METHOD/seed_N/split_FF.npz
+metrics/METHOD_seed_N.json per-subject and aggregate metrics
+paired_statistics.json     matched subject-level comparisons
+logs/                      training, inference and evaluation logs
+```
+
+To recompute the statistics from the 12 evaluation summaries:
+
+```bash
+python scripts/analyze_wear_statistics.py \
+  outputs/wear_v2_benchmark/metrics/*.json \
+  --output outputs/wear_v2_benchmark/paired_statistics.json
+```
+
+The evaluator accepts one method/seed/protocol at a time. `mean_fold` weights
+subjects equally; `concatenated` pools frame predictions. Macro-F1 includes all
+19 classes. TAL scores come from contiguous predictions on the 2 Hz grid, not
+the official 50 Hz evaluation. Per-seed `mean_fold.std` uses population SD
+(`ddof=0`). For a multi-seed subject summary, average each subject's seed scores
+first, then compute the mean and sample SD (`ddof=1`) over the 18 subjects.
+
+Statistics average matched seed differences within each subject, then use
+18 paired subject differences and Holm correction across three comparators ×
+two metrics. They are exploratory because LOSO training sets overlap.
+
+## 4. Protocol and checkpoint compatibility
+
+Training and inference share `build_wear_parent()`: Round 0 uses ±2-second
+support; Round 1 uses the detached predicted segment plus a ±1-second margin,
+with core/margin priors of 1.0/0.5. Parent training uses
+`0.5 × L_round0 + L_round1`; each round sums four-stage cross entropy and
+`0.15 ×` truncated temporal smoothing. Adam uses learning rate `5e-4`, weight
+decay `1e-4` and gradient clipping at 5. The separate background probe uses
+Adam at `1e-3`, weight decay `1e-4` and binary cross entropy.
+
+Parent/probe budgets are fixed at 30/15 epochs; both save their last epoch.
+Training and IMU normalization use only the 17 training subjects. The probe's
+seed is `(seed + fold * 100 + 2) % 2**32`. Baselines use the same parent budget,
+optimizer and MS-TCN dimensions, but one round and no probe. Thus comparisons
+with FINAL_MODEL measure the full two-round/probe recipe, not an isolated
+window-only change. [method.md](method.md) describes the implementation.
+
+`configs/wear_final.yaml` documents this fixed recipe; scripts do not take a
+`--config` option. Use `--help` for supported arguments. Changing the YAML alone
+does not change the model or training parameters.
+
+Legacy unversioned parent/probe pairs remain loadable, but their identity must
+be verified with the original manifest using `scripts/verify_model_files.py`.
+That script and `models/wear_final/manifest.json` apply only to the old bundle,
+not newly trained v2 checkpoints. New and legacy components cannot be mixed.
+No public weight archive is required for training from scratch.
 
 ## 5. TGIF result and runtime scope
 

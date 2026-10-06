@@ -10,7 +10,7 @@ choose the sensor support for a second pass.
 The prediction supplies boundaries only; the predicted class is not inserted
 into the sensor feature.
 
-## Final WEAR inference algorithm
+## Current WEAR algorithm
 
 The diagram in [the README](../README.md#dwa-pipeline) follows this inference
 path. Round 0 and Round 1 are successive computations within one forward pass.
@@ -73,36 +73,30 @@ The final probabilities are the softmax of these adjusted 19-class logits.
 
 ## Training and inference
 
-The released `scripts/train_wear.py` trains the parent jointly in two rounds
-using `IterativeRawDWA` with `WindowConfig(max_escape_seconds=0.0)`: Round 0 has
-the fixed ±2-second window, and Round 1 uses only the predicted segment, with
-uniform temporal prior. The training loss is:
+The current `fixed_epoch_loso_v2` protocol uses the same
+`build_wear_parent()` factory for training and final inference. Both use
+`BoundaryUncertaintyDWA`: fixed ±2-second support in Round 0, then the predicted
+segment plus a ±1-second margin and 1.0/0.5 core/margin prior in Round 1.
+The parent is trained jointly in two rounds:
 
 ```text
 total loss = 0.5 × L_round0 + 1.0 × L_round1
 L_round = sum over MS-TCN stages [cross entropy + 0.15 × truncated TMSE]
 ```
 
-The final inference wrapper loads those parent parameters into the
-checkpoint-compatible `BoundaryUncertaintyDWA` and adds the fixed ±1-second
-margin with the 1.0/0.5 temporal prior. The background probe is trained
-separately on the training subjects and frozen for final prediction.
+Both paths derive windows from current, detached predictions. Ground-truth
+labels provide training supervision; they do not define attention windows.
+The background probe is trained separately on the same 17 training subjects
+and frozen for final prediction. Parent and probe save the last epoch of fixed
+30/15-epoch budgets; the held-out subject is not read during training or used
+for checkpoint selection. See [the runnable protocol](reproduction.md).
 
-| Setting | Parent training | Final WEAR inference |
-|---|---|---|
-| Round 0 | Fixed ±2-second support | Fixed ±2-second support |
-| Round-1 seed | Detached Round-0 prediction | Detached Round-0 prediction |
-| Round-1 support | Predicted segment only | Predicted segment + ±1-second margin |
-| Round-1 temporal prior | Uniform within segment | 1.0 in segment; 0.5 in margin |
-| Background probe | Trained separately | Adjusts final Round-1 logits |
-
-Both paths derive windows from current predictions. Ground-truth labels provide
-training supervision; they do not define attention windows. Inference uses no
-ground-truth windows or label caches.
-
-The base `IterativeRawDWA` also supports optional context-saturation expansion
-when `max_escape_seconds > 0`. That option is disabled in the released training
-script; final inference uses the fixed-margin override described above.
+The base `IterativeRawDWA` retains optional context-saturation expansion for
+legacy experiments. The current fixed-margin model disables that branch and
+rejects a positive `max_escape_seconds`; setting its margin to zero means
+segment-only support. With an explicit invalid-sensor mask, empty support
+produces zero context and the probe contributes a neutral prior at invalid
+query positions. This is an API behavior; the CLI expects complete inputs.
 
 ## Dataset adapters and result presentation
 
@@ -124,6 +118,8 @@ separately. The method definition above follows the maintained final-model code.
 - `src/tgif_dwa/boundary_dwa.py`: Round-1 segment support and 1.0/0.5 prior.
 - `src/tgif_dwa/mstcn.py`: checkpoint-compatible MS-TCN blocks.
 - `src/tgif_dwa/wear_model.py`: parent/probe composition and final logit update.
-- `scripts/train_wear.py`: segment-only parent training, loss, fold
-  normalization, probe training, and checkpoint output.
+- `src/tgif_dwa/wear_training.py`: fixed-epoch training, loss, fold normalization,
+  probe training, and checkpoint output.
+- `scripts/train_wear.py`: single-fold training entry point.
+- `scripts/run_wear_benchmark.py`: frozen multi-seed LOSO schedule and evaluation.
 - `scripts/infer_wear.py` and `scripts/evaluate_wear.py`: public run interfaces.
