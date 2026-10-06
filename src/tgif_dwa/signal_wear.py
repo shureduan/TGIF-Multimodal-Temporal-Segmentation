@@ -6,32 +6,44 @@ import numpy as np
 import torch
 from torch import nn
 
-from .signal_dwa import SignalAdaptiveDWA, SignalWindowConfig
+from .signal_dwa import SignalAdaptiveDWA, SignalWindowConfig, SignalAblationConfig
 from .wear_data import loso_subjects
 from .wear_model import TaskPresenceProbe, WearFinalModel, checkpoint_normalization
 
 PROTOCOL = 'signal_adaptive_loso_v3_candidate'
 METHOD = 'SIGNAL_ADAPTIVE_DWA'
+VARIANTS = {
+    METHOD: SignalAblationConfig(),
+    'NO_SENSOR_RESIZE': SignalAblationConfig(resize=False, contract=False, expand=False),
+    'NO_CONTRACTION': SignalAblationConfig(contract=False),
+    'NO_EXPANSION': SignalAblationConfig(expand=False),
+    'UNIFORM_POOL': SignalAblationConfig(learned_attention=False),
+}
 
 
-def build_signal_parent(config=None):
-    return SignalAdaptiveDWA(signal_config=config or SignalWindowConfig(), video_dim=2048,
+def build_signal_parent(config=None, method=METHOD):
+    if method not in VARIANTS:
+        raise ValueError(f'unknown sensor-driven variant: {method}')
+    return SignalAdaptiveDWA(signal_config=config or SignalWindowConfig(), ablation_config=VARIANTS[method], video_dim=2048,
                              imu_dim=600, attn_dim=128, n_classes=19, n_rounds=2,
                              dropout=0.0, n_stages=4, n_layers=8, ch=64)
 
 
 class SignalWearModel(WearFinalModel):
-    def __init__(self, signal_config=None, beta=0.5):
+    def __init__(self, signal_config=None, beta=0.5, method=METHOD):
         nn.Module.__init__(self)
-        self.parent = build_signal_parent(signal_config)
+        self.parent = build_signal_parent(signal_config, method)
         self.probe = TaskPresenceProbe(2648)
         self.beta = beta
         self.run_metadata = {}
 
 
 def validate_signal_metadata(metadata):
-    if not isinstance(metadata, dict) or metadata.get('protocol') != PROTOCOL or metadata.get('method') != METHOD:
+    if not isinstance(metadata, dict) or metadata.get('protocol') != PROTOCOL or metadata.get('method') not in VARIANTS:
         raise ValueError('expected a sensor-adaptive v3 candidate checkpoint, not v2 weights')
+    expected_ablation = asdict(VARIANTS[metadata['method']])
+    if metadata.get('ablation_config', asdict(VARIANTS[METHOD]) if metadata['method'] == METHOD else None) != expected_ablation:
+        raise ValueError('checkpoint ablation configuration does not match its method')
     train, test = loso_subjects(metadata['fold'])
     if metadata['train_subjects'] != train or metadata['test_subject'] != test:
         raise ValueError('checkpoint split mismatch')
@@ -61,7 +73,7 @@ def load_signal_wear(parent, probe, device='cpu'):
     for payload, kind, key in ((parent, 'parent', 'seed'), (probe, 'probe', 'probe_seed')):
         if payload.get('epoch') != metadata[kind + '_epochs'] - 1 or payload.get('seed') != metadata[key]:
             raise ValueError('checkpoint epoch or seed mismatch')
-    model = SignalWearModel(SignalWindowConfig(**metadata['window_config']), metadata['beta'])
+    model = SignalWearModel(SignalWindowConfig(**metadata['window_config']), metadata['beta'], metadata['method'])
     model.parent.load_state_dict(parent['model'], strict=True)
     model.probe.load_state_dict(probe['model'], strict=True)
     if not bool(model.parent.signal_calibrated):

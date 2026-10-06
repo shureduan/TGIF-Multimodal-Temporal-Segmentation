@@ -10,30 +10,32 @@ import numpy as np
 import torch
 
 from .signal_dwa import SignalWindowConfig
-from .signal_wear import PROTOCOL, METHOD, build_signal_parent
+from .signal_wear import PROTOCOL, METHOD, VARIANTS, build_signal_parent
 from .wear_data import load_sequence, loso_subjects, fit_inertial_normalizer
 from .wear_model import normalize_wear_inertial
 from .wear_training import set_seed, stage_loss, training_tensors, train_probe
 
 
-def run_signal_training(*, data_root, fold, output, seed=47, parent_epochs=30, probe_epochs=15, device='cpu'):
+def run_signal_training(*, data_root, fold, output, seed=47, parent_epochs=30, probe_epochs=15, device='cpu', method=METHOD):
     if parent_epochs < 1 or probe_epochs < 1 or not 0 <= seed < 2**32:
         raise ValueError('invalid seed or epoch budget')
     train_ids, test_id = loso_subjects(fold)
-    folder = Path(output) / METHOD / f'seed_{seed}' / f'split_{fold:02d}'
+    if method not in VARIANTS:
+        raise ValueError(f'unknown sensor-driven variant: {method}')
+    folder = Path(output) / method / f'seed_{seed}' / f'split_{fold:02d}'
     folder.mkdir(parents=True, exist_ok=False)
-    metadata = {'protocol': PROTOCOL, 'method': METHOD, 'run_id': uuid.uuid4().hex,
+    metadata = {'protocol': PROTOCOL, 'method': method, 'run_id': uuid.uuid4().hex,
                 'fold': fold, 'seed': seed, 'probe_seed': (seed + fold * 100 + 2) % 2**32,
                 'train_subjects': train_ids, 'test_subject': test_id,
                 'parent_epochs': parent_epochs, 'probe_epochs': probe_epochs,
                 'checkpoint_selection': 'fixed_epoch_last', 'beta': .5,
-                'window_config': asdict(SignalWindowConfig())}
+                'window_config': asdict(SignalWindowConfig()), 'ablation_config': asdict(VARIANTS[method])}
     (folder / 'protocol.json').write_text(json.dumps(metadata, indent=2) + '\n')
     # The only subject reads in training. Calibration receives no labels.
     train = [load_sequence(data_root, subject) for subject in train_ids]
     mean, std = fit_inertial_normalizer(train)
     set_seed(seed)
-    parent = build_signal_parent()
+    parent = build_signal_parent(method=method)
     calibration = parent.fit_signal_statistics([normalize_wear_inertial(s['inertial'], mean, std) for s in train])
     (folder / 'signal_calibration.json').write_text(json.dumps(calibration, indent=2) + '\n')
     parent.to(device)
@@ -54,7 +56,7 @@ def run_signal_training(*, data_root, fold, output, seed=47, parent_epochs=30, p
         history.append(row)
         with (folder / 'parent_log.jsonl').open('a') as handle:
             handle.write(json.dumps(row) + '\n')
-        print(f"{METHOD} epoch={epoch:02d} train_loss={row['train_loss']:.6f} seconds={row['seconds']:.1f}", flush=True)
+        print(f"{method} epoch={epoch:02d} train_loss={row['train_loss']:.6f} seconds={row['seconds']:.1f}", flush=True)
     torch.save({'model': {k: v.detach().cpu().clone() for k, v in parent.state_dict().items()},
                 'normalization_mean': mean, 'normalization_std': std, 'epoch': parent_epochs - 1,
                 'seed': seed, 'run_metadata': metadata}, folder / 'parent.pt')

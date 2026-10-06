@@ -67,6 +67,8 @@ def main() -> None:
         "probabilities": output["probabilities"].cpu().numpy(),
         "feature_stride_seconds": np.asarray(0.5),
         "protocol": np.asarray(metadata["protocol"]),
+        "parent_probabilities": output['parent']['round_logits'][1][-1, 0].T.softmax(-1).cpu().numpy(),
+        "round0_probabilities": output['parent']['round_logits'][0][-1, 0].T.softmax(-1).cpu().numpy(),
     }
     for round_index, diagnostics in enumerate(output['parent']['round_diagnostics']):
         for key in ('selected_window_start', 'selected_window_end', 'seed_segment_start',

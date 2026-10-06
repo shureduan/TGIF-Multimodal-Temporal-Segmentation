@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 from tgif_dwa.signal_training import run_signal_training
+from tgif_dwa.signal_wear import VARIANTS, METHOD
 
 
 def main():
@@ -14,6 +15,7 @@ def main():
     parser.add_argument('--parent-epochs', type=int, default=30)
     parser.add_argument('--probe-epochs', type=int, default=15)
     parser.add_argument('--device', default='cpu')
+    parser.add_argument('--method', choices=list(VARIANTS), default=METHOD)
     print(run_signal_training(**vars(parser.parse_args())))
 
 

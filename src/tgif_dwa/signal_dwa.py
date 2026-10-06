@@ -13,6 +13,14 @@ from .iterative_dwa import IterativeRawDWA, WindowConfig
 
 
 @dataclass(frozen=True)
+class SignalAblationConfig:
+    resize: bool = True
+    contract: bool = True
+    expand: bool = True
+    learned_attention: bool = True
+
+
+@dataclass(frozen=True)
 class SignalWindowConfig:
     channels: int = 12
     samples_per_token: int = 50
@@ -113,8 +121,9 @@ class SignalAdaptiveDWA(IterativeRawDWA):
     predicted segment. Decisions are discrete and deterministic, not learned
     scalar radii. Q/K, temperature and MS-TCN are trained through final contexts.
     """
-    def __init__(self, *, signal_config=SignalWindowConfig(), **kwargs):
+    def __init__(self, *, signal_config=SignalWindowConfig(), ablation_config=SignalAblationConfig(), **kwargs):
         self.signal_config = signal_config
+        self.ablation_config = ablation_config
         kwargs.setdefault('imu_dim', signal_config.channels * signal_config.samples_per_token)
         kwargs.setdefault('window', WindowConfig(feature_stride_seconds=signal_config.stride_seconds,
                                                  max_escape_seconds=0.0))
@@ -188,19 +197,30 @@ class SignalAdaptiveDWA(IterativeRawDWA):
         # Local maxima suppress multiple cuts around one transition. Missing data
         # creates hard barriers, so it cannot alter neighboring valid contexts.
         cut = (score > boundary_tau) & (score >= np.r_[score[0], score[:-1]]) & (score > np.r_[score[1:], score[-1]])
+        if not self.ablation_config.resize:
+            cut[:] = False
         cut[0] = True
         cut[1:] |= ~valid[:-1] | ~valid[1:]
         region_left = np.maximum.accumulate(np.where(cut, positions, 0))
         ends = np.r_[cut[1:], True]
         region_right = np.minimum.accumulate(np.where(ends, positions, n - 1)[::-1])[::-1]
-        left = np.maximum(left, region_left); right = np.minimum(right, region_right)
+        if self.ablation_config.resize and self.ablation_config.contract:
+            clip_left, clip_right = region_left, region_right
+        else:
+            # Missing data remains a hard safety boundary in every variant.
+            # Disabling contraction removes BOTH signal-boundary clipping and
+            # redundancy trimming, not merely one source of window shrinkage.
+            missing_cut = np.r_[True, ~valid[:-1] | ~valid[1:]]
+            clip_left = np.maximum.accumulate(np.where(missing_cut, positions, 0))
+            clip_right = np.minimum.accumulate(np.where(np.r_[missing_cut[1:], True], positions, n - 1)[::-1])[::-1]
+        left = np.maximum(left, clip_left); right = np.minimum(right, clip_right)
         clipped_left, clipped_right = left.copy(), right.copy()
         moments = _Moments(x)
         reference = moments.at(left, right)
         # Contract only when the smaller current window preserves the reference
         # moments AND its temporal halves are stable. Compare to the same anchor
         # throughout, preventing accumulated small changes from drifting away.
-        while True:
+        while self.ablation_config.resize and self.ablation_config.contract:
             candidate_left = (left + positions + 1) // 2
             candidate_right = (right + positions) // 2
             accept = (valid & (candidate_right - candidate_left + 1 >= config.min_tokens)
@@ -213,11 +233,12 @@ class SignalAdaptiveDWA(IterativeRawDWA):
         contracted_left, contracted_right = left.copy(), right.copy()
         # Expand unstable/undersampled windows one feature step at a time, with
         # independent endpoint clipping at sensor transitions and missing data.
-        for _ in range(config.max_expansion_steps):
+        expansion_budget = config.max_expansion_steps if self.ablation_config.resize and self.ablation_config.expand else 0
+        for _ in range(expansion_budget):
             active = valid & (((right - left + 1) < config.min_tokens)
                               | (moments.stability(left, right) > stable_tau))
-            candidate_left = np.maximum(region_left, left - 1)
-            candidate_right = np.minimum(region_right, right + 1)
+            candidate_left = np.minimum(left, np.maximum(region_left, left - 1))
+            candidate_right = np.maximum(right, np.minimum(region_right, right + 1))
             active &= (candidate_left != left) | (candidate_right != right)
             if not active.any():
                 break
@@ -244,7 +265,8 @@ class SignalAdaptiveDWA(IterativeRawDWA):
         raw600 = raw600.masked_fill(~aux_valid[:, None], 0.0)
         diagnostics = self.select_sensor_windows(raw600, seed_start, seed_end, aux_valid)
         left = diagnostics['selected_window_start']; right = diagnostics['selected_window_end']
-        q, k = self._project_qk(video, raw600)
+        learned = self.ablation_config.learned_attention
+        q, k = self._project_qk(video, raw600) if learned else (None, None)
         length = right - left + 1
         widths = 2 ** torch.ceil(torch.log2(length.float())).long()
         contexts, entropies, maxima, indices = [], [], [], []
@@ -256,11 +278,12 @@ class SignalAdaptiveDWA(IterativeRawDWA):
             pair = (left_list[query], right_list[query])
             long_groups.setdefault(pair, []).append(query)
         for (lo, hi), group in long_groups.items():
-            keys, values = k[lo:hi + 1], raw600[lo:hi + 1]
+            keys, values = k[lo:hi + 1] if learned else None, raw600[lo:hi + 1]
             selected = torch.tensor(group, device=video.device)
             for subset in selected.split(min(256, max(1, (1 << 20) // (hi - lo + 1)))):
                 mask = aux_valid[lo:hi + 1][None, :] & aux_valid[subset, None]
-                scores = self.effective_temperature() * (q[subset] @ keys.T)
+                scores = (self.effective_temperature() * (q[subset] @ keys.T) if learned
+                          else video.new_zeros((len(subset), hi - lo + 1)))
                 attention = self._safe_attention(scores, mask)
                 contexts.append(attention @ values); indices.append(subset)
                 if return_diagnostics:
@@ -277,7 +300,8 @@ class SignalAdaptiveDWA(IterativeRawDWA):
                 mask = (key_index <= right[subset, None]) & (key_index < len(video))
                 safe = key_index.clamp(max=len(video) - 1)
                 mask &= aux_valid[safe] & aux_valid[subset, None]
-                scores = self.effective_temperature() * torch.einsum('qd,qkd->qk', q[subset], k[safe])
+                scores = (self.effective_temperature() * torch.einsum('qd,qkd->qk', q[subset], k[safe]) if learned
+                          else video.new_zeros((len(subset), width)))
                 attention = self._safe_attention(scores, mask)
                 contexts.append(torch.einsum('qk,qkd->qd', attention, raw600[safe]))
                 indices.append(subset)
