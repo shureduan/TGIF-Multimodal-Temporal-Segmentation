@@ -226,10 +226,3 @@ scripts/             WEAR training, inference, evaluation, and plotting
 src/tgif_dwa/        self-contained DWA and MS-TCN implementation
 tests/               synthetic interfaces plus optional private-weight loading
 ```
-
-## Scope
-
-No claim is made about state of the art, real-time deployment, or broad
-cross-domain generalization. A project license, stable citation metadata,
-public model archive, and complete public data-preparation route remain release
-tasks; third-party code, models, and datasets retain their own terms.
