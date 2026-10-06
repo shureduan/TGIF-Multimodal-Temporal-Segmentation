@@ -23,6 +23,12 @@ before computing Q/K scores.** Predictions initialize geometry only; the resize
 controller accepts sensor values, sensor validity and seed endpoints. It has
 no video, class-label, attention-context or test-score input.
 
+The inherited entry-point name `fixed_window_attention` refers to the initial
+fixed seed; this class overrides it and resizes that seed before attention.
+Likewise, the inherited `max_escape_seconds=0` disables the old attention-context
+saturation search only. Actual sensor-driven growth is controlled separately
+by `SignalWindowConfig.max_expansion_steps=12` and is exercised in both rounds.
+
 The candidate operational definition of sensor information uses six statistics
 per raw channel: mean, log mean-square energy, and log squared-DFT band
 magnitudes in four frequency bands. At 50 Hz these bands are (0,2], (2,5],
