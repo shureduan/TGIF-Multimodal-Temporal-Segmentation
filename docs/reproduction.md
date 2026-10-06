@@ -5,7 +5,8 @@ WEAR features and saves the final epoch of each component. The WEAR figures in
 the README and tables in `results/` use the completed 18-fold, three-seed run
 under this protocol. Metric definitions and scope are in [results.md](results.md).
 The checkpoint manifest at `models/wear_final/manifest.json` belongs to an older
-bundle and does not reproduce these current scores.
+bundle and does not reproduce these current scores. To run the published
+pretrained weights without retraining, follow [models.md](models.md).
 
 ## 1. Install and check inputs
 
@@ -24,7 +25,8 @@ skipped unless `WEAR_PARENT_CKPT` and `WEAR_PROBE_CKPT` are set.
 
 Obtain the precomputed WEAR I3D and RAW600 features and annotations, and arrange
 them as described in [data.md](data.md#wear). A complete run requires `sbj_0`
-through `sbj_17`. Dataset files and trained checkpoints are not bundled.
+through `sbj_17`. Dataset files are not bundled. The pretrained checkpoints are
+available separately through [the model release](models.md).
 
 ```bash
 python scripts/check_wear_data.py --data-root /path/to/WEAR_prepared

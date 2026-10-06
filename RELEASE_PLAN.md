@@ -3,11 +3,9 @@
 The repository now treats the maintained final DWA model as the code baseline
 and the confirmed TGIF figures as the result record. Before public release:
 
-1. Publish the current WEAR v2 checkpoints as an immutable archive with a new
-   manifest: 54 final-model parent/probe pairs (18 folds × 3 seeds), plus the
-   three baseline checkpoint sets if distributed. The existing
-   `models/wear_final/manifest.json` belongs only to the legacy bundle. Add a
-   download URL after validating the new archive.
+1. WEAR v2 checkpoints are published in the
+   [pretrained release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-v2-pretrained-20261006): 54 Final parent/probe pairs and 162 baseline parents. Keep its assets
+   immutable; use a new version and manifest for future experiments.
 2. Document how users obtain or prepare the exact WEAR feature-grid inputs, then
    run one licensed sample through the fresh-clone inference/evaluation chain.
 3. Decide which TGIF assets, if any, may be distributed. The confirmed figures

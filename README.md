@@ -169,27 +169,33 @@ conda activate tgif-temporal
 python -m unittest discover -s tests -v
 ```
 
-After preparing the WEAR feature-grid inputs described in
-[docs/data.md](docs/data.md), train and evaluate one fold:
+Pretrained WEAR v2 weights are available in the
+[model release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-v2-pretrained-20261006). After preparing the I3D/RAW600 inputs described in
+[docs/data.md](docs/data.md), download the seed-47 Final model and run inference
+without training:
 
 ```bash
-python scripts/check_wear_data.py --data-root /path/to/WEAR_prepared
-
-OMP_NUM_THREADS=1 python scripts/train_wear.py \
-  --data-root /path/to/WEAR_prepared \
-  --fold 1 --seed 47 --method FINAL_MODEL \
-  --parent-epochs 30 --probe-epochs 15 \
-  --device cpu --output outputs/wear_training
+# Downloads all 18 fold-specific parent/probe pairs for seed 47 (~88 MiB).
+# Archive and checkpoint SHA-256 checks run automatically.
+python scripts/download_wear_weights.py
 
 python scripts/infer_wear.py \
   --data-root /path/to/WEAR_prepared --subject sbj_0 \
-  --parent outputs/wear_training/FINAL_MODEL/seed_47/split_01/parent.pt \
-  --probe outputs/wear_training/FINAL_MODEL/seed_47/split_01/background_probe.pt \
+  --parent models/wear_v2/FINAL_MODEL/seed_47/split_01/parent.pt \
+  --probe models/wear_v2/FINAL_MODEL/seed_47/split_01/background_probe.pt \
   --device cpu --output outputs/wear_split_01.npz
 
 python scripts/evaluate_wear.py \
   outputs/wear_split_01.npz --output outputs/wear_split_01_metrics.json
 ```
+
+Fold 1 is for held-out `sbj_0`; fold `f` is for `sbj_{f-1}`. Keep parent and
+probe from the same fold and seed. One fold is a quick check; the published
+aggregate uses all 18 folds and three seeds. Use
+`python scripts/download_wear_weights.py --all` for all four methods and seeds
+41/47/53 (729 MiB compressed). Download options and pretrained evaluation
+are in [docs/models.md](docs/models.md); training from scratch remains in
+[docs/reproduction.md](docs/reproduction.md).
 
 To redraw the four WEAR figures from the committed numerical inputs, without
 training or private data:
@@ -209,10 +215,12 @@ benchmark and regenerating figure inputs from trained checkpoints, see
   laboratory assets and are not distributed by this repository.
 - WEAR data and third-party features must be obtained under their own terms
   from the [WEAR project](https://mariusbock.github.io/wear/).
-- Current WEAR v2 checkpoints are not bundled; the commands above train them
-  from prepared inputs. The [legacy manifest](models/wear_final/manifest.json)
-  describes an older 18-pair, 95.90 MiB bundle and does not match the current
-  results. No public checkpoint download is currently available.
+- The [WEAR v2 release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-v2-pretrained-20261006) provides all 54 Final parent/probe pairs and 162 baseline checkpoints,
+  matching the current result tables. Their hashes are recorded in
+  [models/wear_v2/manifest.json](models/wear_v2/manifest.json). These are
+  downstream segmentation weights; I3D extraction weights and data are not
+  included. The [legacy manifest](models/wear_final/manifest.json) describes an
+  older experiment.
 
 ## Repository structure
 
@@ -220,7 +228,8 @@ benchmark and regenerating figure inputs from trained checkpoints, see
 assets/              overall method, DWA, and confirmed result figures
 configs/             model, protocol, and label metadata
 docs/                method, data, results, models, and reproduction details
-models/wear_final/   weight manifest; checkpoints remain external
+models/wear_v2/      release manifest; downloaded checkpoints stay outside Git
+models/wear_final/   historical checkpoint manifest
 results/             TGIF tables, WEAR v2 metrics, and figure inputs
 scripts/             WEAR training, inference, evaluation, and plotting
 src/tgif_dwa/        self-contained DWA and MS-TCN implementation

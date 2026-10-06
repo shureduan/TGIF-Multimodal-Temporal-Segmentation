@@ -1,0 +1,2317 @@
+{
+  "schema_version": 1,
+  "protocol": "fixed_epoch_loso_v2",
+  "release_tag": "wear-v2-pretrained-20261006",
+  "results_commit": "d22807c70baab778af9b9c5a96161caafd59c222",
+  "feature_stride_seconds": 0.5,
+  "parent_epochs": 30,
+  "probe_epochs": 15,
+  "seeds": [
+    41,
+    47,
+    53
+  ],
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "scope": "Fold-specific downstream models for prepared I3D/RAW600 features; no feature extractor or dataset included.",
+  "archives": [
+    {
+      "method": "FINAL_MODEL",
+      "seed": 41,
+      "asset": "wear-v2-final_model-seed-41.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-final_model-seed-41.tar.gz",
+      "bytes": 92624193,
+      "sha256": "709a9284df34719fa9f3287407ee3f243c0d251417046843334097c3ad860652",
+      "files": [
+        {
+          "path": "FINAL_MODEL/seed_41/split_01/parent.pt",
+          "bytes": 4223360,
+          "sha256": "e174e0256c4e87f8f922fa61730355fa603a4eb82acdab82df58662a2346fd61",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "9588d6efb13e4f9a86b5d52a2d4debe5"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_01/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "046d82635a823b1ecbbb2b9709de93cbc53818d189278513f3574a392be6236e",
+          "fold": 1,
+          "component": "probe",
+          "run_id": "9588d6efb13e4f9a86b5d52a2d4debe5"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_02/parent.pt",
+          "bytes": 4223360,
+          "sha256": "98a3b01221415713939c966c3723bcff4cc8b21494156c3dd9eb8eeeb577fb8a",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "cd4d3f91e467435a8d1654d88f46c56b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_02/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "ec2ffa24a847d9fc09722e346897121085771a7853e5a75d7ed59f4ed0929aca",
+          "fold": 2,
+          "component": "probe",
+          "run_id": "cd4d3f91e467435a8d1654d88f46c56b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_03/parent.pt",
+          "bytes": 4223360,
+          "sha256": "860ba92be52d193968f7b7d297d3212ed00425b203662b8ce30d0702d79eacfc",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "dc4ce0857d574fd2986149857119e691"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_03/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "f268582f999fc6147aa8a4828e2169276d74da477d2ba871c88665c640260eb9",
+          "fold": 3,
+          "component": "probe",
+          "run_id": "dc4ce0857d574fd2986149857119e691"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_04/parent.pt",
+          "bytes": 4223360,
+          "sha256": "f2e7c0ce3ba52ede9a39a16dd143e32ae211ef3f5e57421f3820d76a5d139fb3",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "dbd27302be2848f5b9339574c6fd8d6f"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_04/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "4ab84f86a3b9a927fad6b01d47cee474c0759a1035bc3750a63f7a8cdf9b6c8a",
+          "fold": 4,
+          "component": "probe",
+          "run_id": "dbd27302be2848f5b9339574c6fd8d6f"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_05/parent.pt",
+          "bytes": 4223360,
+          "sha256": "05f86f2994f2c1873c3694edadadd1f4da716c3edb814bc1c233e071f726253e",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "ec29c921d31243ea97fb410f8c0f14df"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_05/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "27cdd486be9364d5c900c4b46cfdd52ef8f1084f29361c2f0499b05837137896",
+          "fold": 5,
+          "component": "probe",
+          "run_id": "ec29c921d31243ea97fb410f8c0f14df"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_06/parent.pt",
+          "bytes": 4223360,
+          "sha256": "6ef7e7699c2e8e0d370952b8c3bf846ce9a71f04f28b5d101b0e141693da26bb",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "8bd7c411b1dd4f55877474c99e1cd1ee"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_06/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "9812479c4302d5246b0d2a14007de1d231633cca87824ae42d308773e013b5fa",
+          "fold": 6,
+          "component": "probe",
+          "run_id": "8bd7c411b1dd4f55877474c99e1cd1ee"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_07/parent.pt",
+          "bytes": 4223360,
+          "sha256": "fb5e763c591825b8da220a7d2f83e8d13cf34c084128fb3935b4b181dcf563fb",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "63c902686c9a46cc8bf1cb10912b0ac6"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_07/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "47baeeeb367993c42e3ce8614c951787ee78f09ca54232f1c81dff667f4c10c2",
+          "fold": 7,
+          "component": "probe",
+          "run_id": "63c902686c9a46cc8bf1cb10912b0ac6"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_08/parent.pt",
+          "bytes": 4223360,
+          "sha256": "3adbc71c226fb62e0e392a78d9011a55523f1e923647faacfe219e32e4bccc86",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "dcb0d6f14bea40079ae750280eb742b2"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_08/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "fd14b8f85da12cfdfebdb78812dc1d29723ce0ff467a20ab1492a6e22c54e702",
+          "fold": 8,
+          "component": "probe",
+          "run_id": "dcb0d6f14bea40079ae750280eb742b2"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_09/parent.pt",
+          "bytes": 4223360,
+          "sha256": "f1e8617c70424f9e166c8a8856587c707bcf80c63820396520e6ae9140e60c8a",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "7894bf5f18d9495d96b50ad96f170c55"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_09/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "e6ca29dc121a975d81582a2097fed90d2feeb820adffc3bb1f3f1e2f1124834c",
+          "fold": 9,
+          "component": "probe",
+          "run_id": "7894bf5f18d9495d96b50ad96f170c55"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_10/parent.pt",
+          "bytes": 4223360,
+          "sha256": "9a4dd73d8ada94d6d7ae43cccbf49348b298c9eeedcd7938bdeb414c7b7c686e",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "b046c00cf7c14b9f83ce031d86f74313"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_10/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "7f6d417d68294b5551b2c6913ca3bb4b47fdb1c92d1349fb7a19a16a40a918ac",
+          "fold": 10,
+          "component": "probe",
+          "run_id": "b046c00cf7c14b9f83ce031d86f74313"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_11/parent.pt",
+          "bytes": 4223360,
+          "sha256": "86124aa7b09690005987cdb77f14b3e5971cea13a7cb0a2160b6c16855bfcd67",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "bddb8767f2a84970a57c24d60304f43e"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_11/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "b95c5e7723152c3cfced77cf9005e1fdc5f8bb35430ec8778daf8aebc777475b",
+          "fold": 11,
+          "component": "probe",
+          "run_id": "bddb8767f2a84970a57c24d60304f43e"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_12/parent.pt",
+          "bytes": 4223360,
+          "sha256": "a566d454bd80b7bb0b09b0db056c34130cf5f8c341b352783438a553cb3aa915",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "aa55e58f458041dbb93719f5c6d91f28"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_12/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "fa38f540f20cac2ffe6db3ec9d9bd8b4a48990f1b62c83c263643027503cefc5",
+          "fold": 12,
+          "component": "probe",
+          "run_id": "aa55e58f458041dbb93719f5c6d91f28"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_13/parent.pt",
+          "bytes": 4223360,
+          "sha256": "25767382fd52c53e0fe80245ae70a70fedb6e1f9b1483d22d429a0c978635fb4",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "f9e4e6a7ae584146b6917d49d954ba6b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_13/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "9537b05d21968b540f91d74c46a039a3f59bd40125070209cdb6e8ae753b3d24",
+          "fold": 13,
+          "component": "probe",
+          "run_id": "f9e4e6a7ae584146b6917d49d954ba6b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_14/parent.pt",
+          "bytes": 4223360,
+          "sha256": "b6a4cdbc9d2085b661df25e42340f223744cb8431c484fdb577082259e9dec58",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "ad8f662b850f4f8cbb57ea267dc1105e"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_14/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "3c91923f134243406c1a808fc3abe980c95770570ddec296536c5882caaea450",
+          "fold": 14,
+          "component": "probe",
+          "run_id": "ad8f662b850f4f8cbb57ea267dc1105e"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_15/parent.pt",
+          "bytes": 4223360,
+          "sha256": "fbe1418e74cdb651e85004828b56eea60d32e3202f691dda3d88be730040ad80",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "eb21401dfd51420196ffdaf10e92855e"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_15/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "4c668668c2f5075e877f67b1b6499b5ec7eea262b256490fe88eb32b3c350939",
+          "fold": 15,
+          "component": "probe",
+          "run_id": "eb21401dfd51420196ffdaf10e92855e"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_16/parent.pt",
+          "bytes": 4223360,
+          "sha256": "a04d1d728b08e20943c9306c52bed91b8c298fe4ab27b9a454795c2524830426",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "365b7c9eb9804c67b596890086961c53"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_16/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "76cd49ec24a9a97cc8cc70ff463b0d5926232974499bd5b0c2152c288ee5b04d",
+          "fold": 16,
+          "component": "probe",
+          "run_id": "365b7c9eb9804c67b596890086961c53"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_17/parent.pt",
+          "bytes": 4223360,
+          "sha256": "9462f13730380fa8634056ad25b689f3b5747005f255626810312cd48951c834",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "24cf5536ae05433599451e0fd1b0700b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_17/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "2f8766e0cb4c54315b6eeecdf3a262b86b366275754e081b441e8207c2f861d1",
+          "fold": 17,
+          "component": "probe",
+          "run_id": "24cf5536ae05433599451e0fd1b0700b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_18/parent.pt",
+          "bytes": 4223360,
+          "sha256": "757210f9e12e68dd4826ba2aa5550d96aba7be2fd51bf323e6059f0e3b6d48a2",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "b06cbe0a334642a397d44b92d812fc91"
+        },
+        {
+          "path": "FINAL_MODEL/seed_41/split_18/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "473ec16ec055a72733a8fe65d50fc24907f582c7c8a534a64102d65c0ff54dea",
+          "fold": 18,
+          "component": "probe",
+          "run_id": "b06cbe0a334642a397d44b92d812fc91"
+        }
+      ]
+    },
+    {
+      "method": "FINAL_MODEL",
+      "seed": 47,
+      "asset": "wear-v2-final_model-seed-47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-final_model-seed-47.tar.gz",
+      "bytes": 92623702,
+      "sha256": "810f08f9fd128cdf0c031ab49a7d701a3956071b61de555ea87aa03e9a0bd971",
+      "files": [
+        {
+          "path": "FINAL_MODEL/seed_47/split_01/parent.pt",
+          "bytes": 4223360,
+          "sha256": "5d3164405a099c05ee7d1134fac37c2c380525c697f3ccfd9d764f088d60b8cd",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "fede37473e02455cbeb3dea9021e97c0"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_01/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "720c07d43ed9e7edc69d5c33c4b9826ebede78a3c7c3fef5d4b9247c0279b541",
+          "fold": 1,
+          "component": "probe",
+          "run_id": "fede37473e02455cbeb3dea9021e97c0"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_02/parent.pt",
+          "bytes": 4223360,
+          "sha256": "37e7bc3752b72954a98028b07da7a91291b77920d76932dfadb5f1dc4eb1ac30",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "6162b613e85f4595a4119f58c27f6289"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_02/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "a674ce18a8c362da8bb99acc4fd7af9fe37ef9bd3e9d7c7081306fa6998e97fe",
+          "fold": 2,
+          "component": "probe",
+          "run_id": "6162b613e85f4595a4119f58c27f6289"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_03/parent.pt",
+          "bytes": 4223360,
+          "sha256": "ff9c7916f2b4453edb64fd7c28991c6569b25618dc3ce72a44a52280eb04af06",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "d334521c3bbf4dbf8f4ff53fe10d95b2"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_03/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "b650730b9f17208ebb2eac8648b0a12cc5b37997a4e6e5b839e3ce8a480be1db",
+          "fold": 3,
+          "component": "probe",
+          "run_id": "d334521c3bbf4dbf8f4ff53fe10d95b2"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_04/parent.pt",
+          "bytes": 4223360,
+          "sha256": "3e273ba39bdd363fbfaa5a33acea19b1b6c49cf500630dead9f33f59527aec43",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "83e2fbb850f34812abb54e1b2886cd8d"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_04/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "495f895881e8be8f19a16c7494dc44343c502582859837d935bf4e13fa6ea63b",
+          "fold": 4,
+          "component": "probe",
+          "run_id": "83e2fbb850f34812abb54e1b2886cd8d"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_05/parent.pt",
+          "bytes": 4223360,
+          "sha256": "74de14a0fbef917d628917546394bd416581478d0867204c47f8b5b3a85b4d6a",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "b9df492072ff4c10bed51beb787e9ebc"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_05/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "65ce26b14966cb4490cc4fd83aeb1e0d27db69376d2269634c220c38f85609a6",
+          "fold": 5,
+          "component": "probe",
+          "run_id": "b9df492072ff4c10bed51beb787e9ebc"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_06/parent.pt",
+          "bytes": 4223360,
+          "sha256": "ee8acb8c4906afaed9258b6a0fc4991f0fcd0c94990d552078377177fdf93545",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "7150202797f34f0782a5bb8fb54dc452"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_06/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "62b8a2514256b01782fec45df8cf68aa998f0c0d39879b439f28531a1eba933f",
+          "fold": 6,
+          "component": "probe",
+          "run_id": "7150202797f34f0782a5bb8fb54dc452"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_07/parent.pt",
+          "bytes": 4223360,
+          "sha256": "9d3f2e6a55c5cffb7925530d89b3c14d367d1027cf371d0f2e0d39c4681b461f",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "1f5b23e79c8242219b1880b6f4150afb"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_07/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "b7d6f2548ff9eae33be31a9abc02f3997fb29758952c6ddd54765fc71e13707c",
+          "fold": 7,
+          "component": "probe",
+          "run_id": "1f5b23e79c8242219b1880b6f4150afb"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_08/parent.pt",
+          "bytes": 4223360,
+          "sha256": "139e5ceebc3b8303b3fbc65616a031e79b75d6d8b3c5f17b5956496de77d84f7",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "c40b758b524341e4815ec8f078bfbc12"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_08/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "efd04fc994d5716bad20e154444b0a1f8b8cb5d456a50c1cd5c0b13785d38de7",
+          "fold": 8,
+          "component": "probe",
+          "run_id": "c40b758b524341e4815ec8f078bfbc12"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_09/parent.pt",
+          "bytes": 4223360,
+          "sha256": "172b88df2be990c87db7780ba038dded073d01a7e6209131acdb91460ee6929d",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "b3b539901c7a4a3ebf8d513caebf08cd"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_09/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "417287bb00b7a14ed4bcc6398f316d69f051a69b9cef86a219c5479e2fcb192e",
+          "fold": 9,
+          "component": "probe",
+          "run_id": "b3b539901c7a4a3ebf8d513caebf08cd"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_10/parent.pt",
+          "bytes": 4223360,
+          "sha256": "6cf6c341bfccdf4623578176ae3ba140f045b640363ade13ef497d3e92d0f2ad",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "6e5654bf5e3344ea81e18fa37f9ed318"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_10/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "0322c2b55088e955e147ea128a049eb9da97d8c8ff0ffea39a0840502cc3c689",
+          "fold": 10,
+          "component": "probe",
+          "run_id": "6e5654bf5e3344ea81e18fa37f9ed318"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_11/parent.pt",
+          "bytes": 4223360,
+          "sha256": "98ab0d513b42828c3257ddbc3f86d3a2bc5a5b2b1bc02d89968f367bf3b2d930",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "28f496de6dd84a498bc0488703f4c267"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_11/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "fa73d8845e97c3d940e1861dd11ce62da4b14ff85d0c78cb21ba794c5cc40de2",
+          "fold": 11,
+          "component": "probe",
+          "run_id": "28f496de6dd84a498bc0488703f4c267"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_12/parent.pt",
+          "bytes": 4223360,
+          "sha256": "fc87f56ea20df06e0a6c7e64487d6f669b5f46d61839ad6a92bf90bf4cae7d49",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "cfabb8ef73334772aa5508085bc858ae"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_12/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "7559ed9a41787f8a40a02bfbe58f17897839584543f60395873ca29194370a41",
+          "fold": 12,
+          "component": "probe",
+          "run_id": "cfabb8ef73334772aa5508085bc858ae"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_13/parent.pt",
+          "bytes": 4223360,
+          "sha256": "792a564f49e0a553dc544357e5a1bf798d2259229b2619029f025ba08635a086",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "0c02efe24c4f4611924839b5496b2d8a"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_13/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "a1f33d059295f309bd99315636b49201b88d33c28e182c599e61a1c6200895bf",
+          "fold": 13,
+          "component": "probe",
+          "run_id": "0c02efe24c4f4611924839b5496b2d8a"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_14/parent.pt",
+          "bytes": 4223360,
+          "sha256": "500beaf252411c3b7612ac4addacaff576f3c1664922479f4f2072afff3aac1b",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "a02f4a785fdc4f88bb2d3db6fa528a24"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_14/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "bb639beef580aea7ce7c159de82195d4e4348f5bdc6dd908554bf961778ccdb4",
+          "fold": 14,
+          "component": "probe",
+          "run_id": "a02f4a785fdc4f88bb2d3db6fa528a24"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_15/parent.pt",
+          "bytes": 4223360,
+          "sha256": "69827d9eb13e5de6bac1728d5c758502e764dcec69b8a278d72c9cf2c58300f4",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "e89773ac01f3458dad88e617d66b61db"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_15/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "586d01bc6b7e05ca1d0917b2a34e5df188a3250a016681d0dd78d1e785fc901b",
+          "fold": 15,
+          "component": "probe",
+          "run_id": "e89773ac01f3458dad88e617d66b61db"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_16/parent.pt",
+          "bytes": 4223360,
+          "sha256": "343a2e9e59eee361e247acdc90edaf1badeb7f1bfc4030744f6e460b438b05d3",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "f883fd04bc7b42ffa62a0259cc61b5e7"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_16/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "fbed9527e9c3fd998c2a500e8b8335f31396232b43a5f7fbe5986f0c53dc106b",
+          "fold": 16,
+          "component": "probe",
+          "run_id": "f883fd04bc7b42ffa62a0259cc61b5e7"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_17/parent.pt",
+          "bytes": 4223360,
+          "sha256": "1df65962b865413bffbe1a380ecc7751216a0f164efff350ac2cb2eb0dee446d",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "f0f778ecbaf940dd9fcef3947d3e07a5"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_17/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "8446ea4dba423ca413986eb01905015c4be5a3d09c5895ea4e8cb7aa39fe912c",
+          "fold": 17,
+          "component": "probe",
+          "run_id": "f0f778ecbaf940dd9fcef3947d3e07a5"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_18/parent.pt",
+          "bytes": 4223360,
+          "sha256": "94b167fdeff28443fedbc0706b03c9bf7e5cc7ab7ef5488a88d41d3db9bd011e",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "870a02239825466f813d2dc4d1e7d1d1"
+        },
+        {
+          "path": "FINAL_MODEL/seed_47/split_18/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "c74f43d0dca125506ca1f14d7ad7c186d5e2d6fa3077c0ecaf5db1a718fa74d6",
+          "fold": 18,
+          "component": "probe",
+          "run_id": "870a02239825466f813d2dc4d1e7d1d1"
+        }
+      ]
+    },
+    {
+      "method": "FINAL_MODEL",
+      "seed": 53,
+      "asset": "wear-v2-final_model-seed-53.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-final_model-seed-53.tar.gz",
+      "bytes": 92657085,
+      "sha256": "72cdb3dfa3a895adacf27d167b359deaf42e013e7d9221fcbb8a190a5a601663",
+      "files": [
+        {
+          "path": "FINAL_MODEL/seed_53/split_01/parent.pt",
+          "bytes": 4223360,
+          "sha256": "8b677f286a45d7d5622286d7db653562bb372f9f0c1b5f7c1b1abdf84df4597a",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "6809e5b8e45f400687f09a0d127ab541"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_01/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "a95b150a4dddfcfc7059bdd8fbdd85e7eecd5f5ce56e0709cda69fe242fd090b",
+          "fold": 1,
+          "component": "probe",
+          "run_id": "6809e5b8e45f400687f09a0d127ab541"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_02/parent.pt",
+          "bytes": 4223360,
+          "sha256": "3a1872d8dd63adf383e6f4b5b1b8dd8b95eb2ad7f87b6944a6f108ae25149cfd",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "f34fa8af838a4aafbf6754f04e2e33e8"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_02/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "836d067147354cee46f2623bcc2c0b0931685cf4217004723af58d0e61c4ee13",
+          "fold": 2,
+          "component": "probe",
+          "run_id": "f34fa8af838a4aafbf6754f04e2e33e8"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_03/parent.pt",
+          "bytes": 4223360,
+          "sha256": "e56b949dade4a546393a4803bb393d133f6439f1944477b3e1bbc3642f1246cf",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "78a97496735c4485bc3249bcf1e62e64"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_03/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "e693930d8814cd908661e7049cfc7016734ce355d34ec23bc6e98f9f49736864",
+          "fold": 3,
+          "component": "probe",
+          "run_id": "78a97496735c4485bc3249bcf1e62e64"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_04/parent.pt",
+          "bytes": 4223360,
+          "sha256": "2b43cda7ca9e6e670e10264a5cb9f04cbe916b7c34acdeba0c9014187ca80cce",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "ab023cbdfc9446e892e8674928715e2b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_04/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "65cc9ad26c3031eea4242058cf7c1c76efc1e640d1e377538e5a52f13221df5c",
+          "fold": 4,
+          "component": "probe",
+          "run_id": "ab023cbdfc9446e892e8674928715e2b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_05/parent.pt",
+          "bytes": 4223360,
+          "sha256": "bc48e46d46f3da72cf78dc03448561e1b8da4a5ed35cf4e125cf53ac78afc6e0",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "b06d47a9c9bd458eaafea15b7ced8b15"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_05/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "7b910f24deb9809368de6b00d9a4a69dc369871a793193e6851c92bc00aaee33",
+          "fold": 5,
+          "component": "probe",
+          "run_id": "b06d47a9c9bd458eaafea15b7ced8b15"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_06/parent.pt",
+          "bytes": 4223360,
+          "sha256": "87e56a18d545802d96ac5e04b3bbfc3efc81d6f7b60ed9b392de6b3619ec7cc9",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "1c8519c8b2c7499b8a5dfd95f7a87534"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_06/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "9a14f64a4367046b30101e675c41b23d0de249ce0acdeb7cf4349d871fb1eb67",
+          "fold": 6,
+          "component": "probe",
+          "run_id": "1c8519c8b2c7499b8a5dfd95f7a87534"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_07/parent.pt",
+          "bytes": 4223360,
+          "sha256": "631a4209df3711e076367c4b17a0fbe227e3acbff28d4cc0f5567e8cc6f2cde1",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "b16c24894b0047a3a0b18dca393e7f23"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_07/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "9b21c75b3f1a3a3e5d29c6a5bb482299362b8064bb72c3d52026a156299e0c57",
+          "fold": 7,
+          "component": "probe",
+          "run_id": "b16c24894b0047a3a0b18dca393e7f23"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_08/parent.pt",
+          "bytes": 4223360,
+          "sha256": "23e915754167eb743ea39536705c42f525447039e9da547bc3009e10ea5311fe",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "c7ab9d1c9567494e98a16bb5406cfad6"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_08/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "b23be1865c339ef4213e6cfde101673cd81d80e86c03b63ff00c571f7a59b388",
+          "fold": 8,
+          "component": "probe",
+          "run_id": "c7ab9d1c9567494e98a16bb5406cfad6"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_09/parent.pt",
+          "bytes": 4223360,
+          "sha256": "446b3401a5cbfe5828dfb715c8c02c2a4bbd06093670ff5874e609965a4162f7",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "7cddc98945854d92b0d1fac1b13dc4f3"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_09/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "1725bc569c6690142161a74bfc644630219bd729e0114ef78fc997e7826e4ce4",
+          "fold": 9,
+          "component": "probe",
+          "run_id": "7cddc98945854d92b0d1fac1b13dc4f3"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_10/parent.pt",
+          "bytes": 4223360,
+          "sha256": "6fa2cef38d752a071284722c7117f87f7bb070d7502aa0b386ecf4f9b09a244c",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "ce631c313ef146119f309f05da23d03b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_10/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "e8c42871b17cbb3a12983e88cbaf4e20a2abee3b1034c25f11069c0362843936",
+          "fold": 10,
+          "component": "probe",
+          "run_id": "ce631c313ef146119f309f05da23d03b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_11/parent.pt",
+          "bytes": 4223360,
+          "sha256": "ab78a3834e214ed29d0ed4faa73a738ec0933fafcdc4e39c03ab97a6542900bf",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "7f136c75eb33466dba3c17e51bc249b7"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_11/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "7c613472912ac55f27acea73911045b542bd55a698133a1f921b9891988ed498",
+          "fold": 11,
+          "component": "probe",
+          "run_id": "7f136c75eb33466dba3c17e51bc249b7"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_12/parent.pt",
+          "bytes": 4223360,
+          "sha256": "d7f07508d0318349445bdb709f503d467c7db9e18a7f9682a93b6555abc8b391",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "1f3da0bd36e34ec3b9f1ea5764427111"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_12/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "faa88b6503282821d5687504bc3425296829087e3266505636ac4e8c9859ea93",
+          "fold": 12,
+          "component": "probe",
+          "run_id": "1f3da0bd36e34ec3b9f1ea5764427111"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_13/parent.pt",
+          "bytes": 4223360,
+          "sha256": "b2d0f383f3b40b6eee6af5701e7a34200e88470ad53ee16d4680a9907835ae7e",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "82a2cd98bbe949709a2535e78d2e324b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_13/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "852c7f868eb2b2043b162a6a515f1c14e814dda24c21cdf83c3dbd6997b671d5",
+          "fold": 13,
+          "component": "probe",
+          "run_id": "82a2cd98bbe949709a2535e78d2e324b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_14/parent.pt",
+          "bytes": 4223360,
+          "sha256": "bf7283f08f2ca4103a927dac221fc680d29cba33a01f6d5b998e662d0113aa36",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "bd6bd6e404bc4cf3be1883f7656d294b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_14/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "6933d60b19d2a6374e62942c4aba04df9138c2df462ff60354234eb636b769d4",
+          "fold": 14,
+          "component": "probe",
+          "run_id": "bd6bd6e404bc4cf3be1883f7656d294b"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_15/parent.pt",
+          "bytes": 4223360,
+          "sha256": "eecd3d6154fa0e81f14653ba7fa24c571eeec91f3d34f007c6f97857c06c6487",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "6071acd2fda04e688e1b7689913dc1aa"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_15/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "dcbb18b154ae307067a328be5c24983832a279a9a5962a656a9e2489df95fa70",
+          "fold": 15,
+          "component": "probe",
+          "run_id": "6071acd2fda04e688e1b7689913dc1aa"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_16/parent.pt",
+          "bytes": 4223360,
+          "sha256": "0222d8b431eb2b211f18b56c9b7541565f7b87a5fd444d24e6fb3dfa57b618c8",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "308d35307dc94ac7ba6f56c47679530a"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_16/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "93a2475f7f17d1baf1fd8cff56fa83c6f5612bef33e2503353b5894d7c5d0939",
+          "fold": 16,
+          "component": "probe",
+          "run_id": "308d35307dc94ac7ba6f56c47679530a"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_17/parent.pt",
+          "bytes": 4223360,
+          "sha256": "9731be5423dca7ea44a294fa65766dde45e30ca70aec6c7b0711cc94747e1b79",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "d8e80472648c476a8fed68a0f817fb24"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_17/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "ee895662347aa3f914644fd069924c42e5f1eb9b52b09481e0ce1143b2cf6d9d",
+          "fold": 17,
+          "component": "probe",
+          "run_id": "d8e80472648c476a8fed68a0f817fb24"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_18/parent.pt",
+          "bytes": 4223360,
+          "sha256": "eeb94bd839faf791320bdfb23d7c4ee4e778c8e9253700feec53d2c5bac4c8d1",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "c1d1400df77045d893bc3c62db149bdd"
+        },
+        {
+          "path": "FINAL_MODEL/seed_53/split_18/background_probe.pt",
+          "bytes": 1359991,
+          "sha256": "459d59e1536178cbeb5c2c59f21f875f6b20d3cac1ccd096129d29494c308026",
+          "fold": 18,
+          "component": "probe",
+          "run_id": "c1d1400df77045d893bc3c62db149bdd"
+        }
+      ]
+    },
+    {
+      "method": "VIDEO_ONLY",
+      "seed": 41,
+      "asset": "wear-v2-video_only-seed-41.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-video_only-seed-41.tar.gz",
+      "bytes": 44891625,
+      "sha256": "f8cdb43ef6e2828daa811d5b2c86072605e36c9dcc3a24f957f94118d6f770b8",
+      "files": [
+        {
+          "path": "VIDEO_ONLY/seed_41/split_01/parent.pt",
+          "bytes": 2713033,
+          "sha256": "1f22d882fbb9539155802688b06b8719d1161d87c04bfaf142d0af0dabaa790b",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "7ba5f1f6f49f4bf78ea8948308d21846"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_02/parent.pt",
+          "bytes": 2713033,
+          "sha256": "0ca35c32feb9f3670fb61b77edeaff7e353ee78b94cd2d113eff4b521d45c0a7",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "7333bdcc083245eab9a6e8d8b6dc191a"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_03/parent.pt",
+          "bytes": 2713033,
+          "sha256": "fdca9cef58c62c132f90cc6398f4fbf0a11869303f274d3c4620f876f7ecf513",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "837a439e9f574bdbb0a12a30e18b7e57"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_04/parent.pt",
+          "bytes": 2713033,
+          "sha256": "2f8bc7fba5313702725a7cf80746c79756e004dd376d1c386c34620d067a49b1",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "4d6e6fd85b534c64847e22d1fcd2eaca"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_05/parent.pt",
+          "bytes": 2713033,
+          "sha256": "20526ed599ea7f0ffddc1da4d447022d0ec18c4f7a12be1c27dc099afe8581f0",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "66a83e97799f4da2a1fad8812295e175"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_06/parent.pt",
+          "bytes": 2713033,
+          "sha256": "38804fc63db300f22b07c20485bcfeeb7286415575d2f7a24d21276391a08674",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "f69c718cb35a46a2a97ca4e15c34c62d"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_07/parent.pt",
+          "bytes": 2713033,
+          "sha256": "74f7afe43f76c3cfd34e91969d4a45db47f3dd7b463229dfe4052c8355e1bf46",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "cbd40e02f42843e0be3e468fca505323"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_08/parent.pt",
+          "bytes": 2713033,
+          "sha256": "ea12a6388c982b4237051aba400f8b5d3b623130fb5602cb8de266aba8cc6bdc",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "92605167ce9046389e56a6c2c8dc9103"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_09/parent.pt",
+          "bytes": 2713033,
+          "sha256": "290a98528ba6f1118cda3461d427e461f5dd8ad963aa09b991de2b0f99b41c54",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "d6545e4d38454cba81310242c56f0485"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_10/parent.pt",
+          "bytes": 2713033,
+          "sha256": "6d2805a77c61f0b59ff7b0d2acd9a9ed85575d701692039bfbfd6e85d5430473",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "4d4e88cd5b674a0598c4a6b391371a82"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_11/parent.pt",
+          "bytes": 2713033,
+          "sha256": "ee757be037d14ffc9286319285b797df5bd5a6d40edfd923bd7b6d47a0ea5d07",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "8590bbf0f7ce46ceb996b78d6f98a9d3"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_12/parent.pt",
+          "bytes": 2713033,
+          "sha256": "94e5ab7dfa8a091cf2ec592408e57e73bb0fb4731bde3b4e8de76b970f4daaa5",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "8d9986149d284d2c8086d56ddb3e72a3"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_13/parent.pt",
+          "bytes": 2713033,
+          "sha256": "9dc030fdc073f55507bb4ef1527b4bb72e865180a10eec07ab5bd2e581d308d8",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "65d9256a498e42ed90d6bcc25ff67adc"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_14/parent.pt",
+          "bytes": 2713033,
+          "sha256": "d762626553a67dc2944d63e742110e5b958b0e6d661d602b4ec8d9a5c1a96104",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "4ecdf404bdaf4595bea3531cc74edb48"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_15/parent.pt",
+          "bytes": 2713033,
+          "sha256": "dcacc886b8613a8d273e7ef62ccca1101ae45a8ed7633119add962e81f67b690",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "e739881a76ab488ca1c0e1b9d3de9fb9"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_16/parent.pt",
+          "bytes": 2713033,
+          "sha256": "e7789c6b45e2e1f66212f043629543a66c5613470c27d535f7a2bf04320627e9",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "078ebcadd4254660bd9f5fc5a3ddddfb"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_17/parent.pt",
+          "bytes": 2713033,
+          "sha256": "38389f1745b7975bd40aab5081a674e1b40fc39742037f49be1f9ede4112ba7d",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "841ea7ae2f4244d8942c184e083f4c77"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_41/split_18/parent.pt",
+          "bytes": 2713033,
+          "sha256": "92116d7a412ee839b20c1419334af40fe8be2f597a47bfdacb6a6da1ac3215bd",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "8546b42cab3b4f0cbc6e089b33db6952"
+        }
+      ]
+    },
+    {
+      "method": "VIDEO_ONLY",
+      "seed": 47,
+      "asset": "wear-v2-video_only-seed-47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-video_only-seed-47.tar.gz",
+      "bytes": 44925356,
+      "sha256": "120ed3fb79d795984cbe8b55aceddd6852968c005fc59abf598124f909a823dc",
+      "files": [
+        {
+          "path": "VIDEO_ONLY/seed_47/split_01/parent.pt",
+          "bytes": 2713033,
+          "sha256": "4a37430b9f1f88418e83c867c5dce4bac84322a29ac4535966ba42c99c4e47e7",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "9d610f50255d4549b7d42b7ed1f43063"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_02/parent.pt",
+          "bytes": 2713033,
+          "sha256": "102706f7f3b8cdc5ed54d625709424c8e8fb8c1c9808e3eb931e69c9c6a125d6",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "cc183918a0694f8f8e1c9488950fbcdc"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_03/parent.pt",
+          "bytes": 2713033,
+          "sha256": "9ff825829131d9a7fb62ec3aa74de264061a63a6105c29cf8cf48925b2c38c02",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "560f0ee7cff24c8182967b06552627d7"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_04/parent.pt",
+          "bytes": 2713033,
+          "sha256": "415a14c5e396f6d23ffaea57bda376b23b7b9238a08167dd1e163a693c8a0fca",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "986df59b1dd4401188075209ee31d77b"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_05/parent.pt",
+          "bytes": 2713033,
+          "sha256": "37067a10a514201d9711c4cb1d03af847081d73390090c8de5782f56d8f183a2",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "8455b79f2744452a8fecb48e43b3e78e"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_06/parent.pt",
+          "bytes": 2713033,
+          "sha256": "ed63b4b8b6c591b60e7564f6fa670c34b6eefbca628e075a349a6f58ec410118",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "96d623fe836c465fb34bf043eab63011"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_07/parent.pt",
+          "bytes": 2713033,
+          "sha256": "ada315338a1e8d02582363634169f843a96e10c3736fd09ee934bf89c9ceeb94",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "2cc02f534f6343edbceba2d069b820e7"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_08/parent.pt",
+          "bytes": 2713033,
+          "sha256": "c986701122fff975b649eb6f70ba9e0d11f8cab180b776e46361b35f02d7aeb9",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "2070a15be3a444e8b6ba8ce40bdb09b3"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_09/parent.pt",
+          "bytes": 2713033,
+          "sha256": "017f151feacaa58c23d1c0c2442285a56d9c04f4daeab25a47427286a647bb4e",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "b0de76f6ef254359b7420627ea84581e"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_10/parent.pt",
+          "bytes": 2713033,
+          "sha256": "cba8ef9a2e503d2a853bd0e117a759123b053281f693fad952418515330cf337",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "24c03725b24a4972b567c9bd322096ca"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_11/parent.pt",
+          "bytes": 2713033,
+          "sha256": "c3dd1d22fdd02592173b5b59ff2c1769e0a9de5ee9b8b711de870b08c62dcb17",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "4e7f138f0521471ba2b1e081a927abc4"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_12/parent.pt",
+          "bytes": 2713033,
+          "sha256": "17175f3ea3c5ff094b522ce2dcdd629aa2ea853923a8ae4db693a93425191782",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "322efa9cb5a64a4d80fe3b62b17dd5d6"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_13/parent.pt",
+          "bytes": 2713033,
+          "sha256": "1e192a6cf425b352a4af014ae0d9300d09a6a53f5beef8592e438596589d12d7",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "3748ef7f90174d3c97ef47de85a45e88"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_14/parent.pt",
+          "bytes": 2713033,
+          "sha256": "409479c347baf2049441f85c536d78ae0754d26e264f92d81c43a47244c201c1",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "084db997743f4cc69ec60d74e550ca22"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_15/parent.pt",
+          "bytes": 2713033,
+          "sha256": "105dc73f0e64a83a3742a55b0340ca924442da4ab623e37eb984e1ec05b47a7b",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "cc97335cf84c45ec82b88dedf786e5fb"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_16/parent.pt",
+          "bytes": 2713033,
+          "sha256": "b74acf38e5c3af3fdd13c466e4796f11921a2a1e4882875062b498b320cae70c",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "6c99d9dd48dd47e9af71c5baa17a641f"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_17/parent.pt",
+          "bytes": 2713033,
+          "sha256": "8970c372bd04f07a1f4f598258f23d09809d01e77781d417122b7f8bb4b918b8",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "80a76d78307f4ac69fa81687a37d3690"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_47/split_18/parent.pt",
+          "bytes": 2713033,
+          "sha256": "22303be03da60745b850ec6855be7f173d5dfe6eb9b4374d11e676b510e32db6",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "38064d1edd8341e6a7e2ec8ab6542da3"
+        }
+      ]
+    },
+    {
+      "method": "VIDEO_ONLY",
+      "seed": 53,
+      "asset": "wear-v2-video_only-seed-53.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-video_only-seed-53.tar.gz",
+      "bytes": 44920512,
+      "sha256": "0ed77f6332aea65d28f290bdb1b0f17ffa0922f52e1f515b4a2043ee895ea9ab",
+      "files": [
+        {
+          "path": "VIDEO_ONLY/seed_53/split_01/parent.pt",
+          "bytes": 2713033,
+          "sha256": "66f12e2bc3cc0a67389a754b7cb8d86f96cabeb2c60b7387e447b324acf4a22b",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "26aec29c0267454d96b06df3937fce71"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_02/parent.pt",
+          "bytes": 2713033,
+          "sha256": "4a5e07c9bdc192ee49e20d3ae885d28465bd48e68e2c0489448593b9fb8d09a3",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "8f94cad335c7435f9187372b636a72d0"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_03/parent.pt",
+          "bytes": 2713033,
+          "sha256": "b41c73fefeb042516df83581947729657f9dfc4adc3fd84da1326bcbed41595b",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "174caf7cc4ae4f5fa5d6762f870d9d83"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_04/parent.pt",
+          "bytes": 2713033,
+          "sha256": "9f5b64eb438354e3eb015dafd47468645162285559c2ef268c463d71fbb84e24",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "5a901986f7914f96a203054d5ffe2197"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_05/parent.pt",
+          "bytes": 2713033,
+          "sha256": "79dac22e0c984d1973972b48336d540f7a0f2773b2f1f3d4e8abf18a47e90abc",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "e3465dedf4314e83b6b2c6b5598c7e28"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_06/parent.pt",
+          "bytes": 2713033,
+          "sha256": "dd1ece26a4263826d9a9c4a36e7c356cde902ec8c47e905c9083fd59b093c530",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "8fbb4b77aeab48eea556fd7818272996"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_07/parent.pt",
+          "bytes": 2713033,
+          "sha256": "87a02e0a5476527dc987c15ec1a3e5b5891b4c6faee5f4cb1fc2bc7071e15e45",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "46bfe86843724abba5295df8f6824ac7"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_08/parent.pt",
+          "bytes": 2713033,
+          "sha256": "f6af0bb0871d04a7d4367c04338f962aa28ed751eab37c4a75a5a0860a46654d",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "442ce350b29445f2989d3f6cf8c6bb04"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_09/parent.pt",
+          "bytes": 2713033,
+          "sha256": "ab40e03df65641ad907d96b787c5b63d74e720d5e37763c4be59f29da903cad5",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "dfa4fc3b54594b9ab3194bb345fb87e2"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_10/parent.pt",
+          "bytes": 2713033,
+          "sha256": "0982ca7300b4c8152d43d9e83ab1b9e12edc1b37b258902da534ed78fdc8c7b7",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "81b8bf802540440a91bba2f0b3f46844"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_11/parent.pt",
+          "bytes": 2713033,
+          "sha256": "bd4bcd5b343a583ac2ffce9bac2e559de8d853c59b6201db72be27ae24ad88c8",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "b152fbf3a4894602b872047991a0689f"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_12/parent.pt",
+          "bytes": 2713033,
+          "sha256": "191c810b3420ded99b20a2ca3954031fbb4156c9f3235713aca275fcc3243d25",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "0e47c838298848d78969a7efd0976baf"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_13/parent.pt",
+          "bytes": 2713033,
+          "sha256": "20d7c0d967cadc50c10afefa1d664f7e8d8693216077b6f7812a24c2bf74d239",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "6bcf1193813940018fe35dcba99653a6"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_14/parent.pt",
+          "bytes": 2713033,
+          "sha256": "120b3463d5d5f82025fa2d7cb406db3cf4f7cbc097ace7f3c8ede6420604b3d1",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "d27382f0d85945de95943815cbec1de4"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_15/parent.pt",
+          "bytes": 2713033,
+          "sha256": "39fa62b26aafd6c6f825e2c6874dd2704ea00a9149d70064e2a84e64bea07bdc",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "46b85c2b3d9047bf9c1bb41d37e746ce"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_16/parent.pt",
+          "bytes": 2713033,
+          "sha256": "4275778373efb0c9b3a050a29b36e9fca5848842f118fa7858bfa9233d4e4613",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "82886a4156054bd88f7d09d4414d8fba"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_17/parent.pt",
+          "bytes": 2713033,
+          "sha256": "34c7e94b40e19a9896da70288b5e4da392bbe71c3101cecc7a33a8fd4d3f65d6",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "897834fb25f14381a7f3c9af7ae80877"
+        },
+        {
+          "path": "VIDEO_ONLY/seed_53/split_18/parent.pt",
+          "bytes": 2713033,
+          "sha256": "85804728d19cd38250e6cc8e405da92ca48fb934d2a884945ab18d112c88dbad",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "05963cbe954647fba43336d53fd4252f"
+        }
+      ]
+    },
+    {
+      "method": "EARLY_CONCAT",
+      "seed": 41,
+      "asset": "wear-v2-early_concat-seed-41.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-early_concat-seed-41.tar.gz",
+      "bytes": 47429813,
+      "sha256": "78a7ffad15e118b4f9a10e9a51acf699e21a9d82a703f8d93ead974b4abf2d11",
+      "files": [
+        {
+          "path": "EARLY_CONCAT/seed_41/split_01/parent.pt",
+          "bytes": 2866633,
+          "sha256": "08f63908ebfe8b407dcc192fcabaf109a15d8d3340cdf64ad2392502d5335b82",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "363129484cba446c9c056032fb0e4bcd"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_02/parent.pt",
+          "bytes": 2866633,
+          "sha256": "ab49605e27628ffb638e52a668e873da96911e727af3662514bbdfc21bfa602b",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "e3801d70e0e04600985459a39898f18e"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_03/parent.pt",
+          "bytes": 2866633,
+          "sha256": "4b62aacd4763fdf18fd04c69ba95dea58549d0598b10334bd1896b52c7ba7b89",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "32f0a93aad584483aa0f37201ea3bf2b"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_04/parent.pt",
+          "bytes": 2866633,
+          "sha256": "39a30af7916f666e174967a393d762cb39e785d68c4b64f531daaa0453914149",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "f6d21750209a4ea79542f36d26402a94"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_05/parent.pt",
+          "bytes": 2866633,
+          "sha256": "4a8474581b0813d504da8d4807391014a51cdee8e2e6e33270834ffc603568d6",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "6cc6758c62bc4e6381070747420a13a3"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_06/parent.pt",
+          "bytes": 2866633,
+          "sha256": "17fce2cdac4a3c29f76fc05407f68a2c29d98725a3629a68dc2796338a08b780",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "8e4ec20b92604a24bb5982f27d9aad5a"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_07/parent.pt",
+          "bytes": 2866633,
+          "sha256": "98a35f6eedc993883cc388a322ce2e20c9d8ed8531f07c3ecb93ec91930850f4",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "d12207f2b27f4f139b85e9a0bed434e0"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_08/parent.pt",
+          "bytes": 2866633,
+          "sha256": "3710c0a5e95d592af3c9cbe59282a2879a6e03277a60070125f44d5d2950c30a",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "dbb9457a4cb7484c96ac41dd2fbf4e38"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_09/parent.pt",
+          "bytes": 2866633,
+          "sha256": "629b685828249db00d21f179f5b036649b1cad1afb7d2097ec0192a953c75b27",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "05126e86d7454f8bbdcc4ba9453560bb"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_10/parent.pt",
+          "bytes": 2866633,
+          "sha256": "5262416ed194e34c541b7cf46392d0e1d1df106ca0eae051c260f90ff6764f81",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "9de0402a415147ab9f53428d6779e8c6"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_11/parent.pt",
+          "bytes": 2866633,
+          "sha256": "c74cae4ecac41ae580688f539ce7e33962d37713e9a39edcb45d670c869ac1f2",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "8cdb0901283744958e7161705130c605"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_12/parent.pt",
+          "bytes": 2866633,
+          "sha256": "06404974bb5b11c5d12161b06430b498cc2af860fe6e66e7985d4c98aededc5f",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "243612fd431d4cc18305c54f8f9673e3"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_13/parent.pt",
+          "bytes": 2866633,
+          "sha256": "888784df46349d1d9c0e2bd71663bcd79fdbd65b9482a3bfe1abe918e326da46",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "dffc509b2f674139ad329cc43c571458"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_14/parent.pt",
+          "bytes": 2866633,
+          "sha256": "bcc73a0560c2ba337a9a2c7782dbe77ea951d29860a3ee6395e70485cb29ded7",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "fefbde8de347478b9f2ac35d10808a4e"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_15/parent.pt",
+          "bytes": 2866633,
+          "sha256": "01abc8997932775c5e0cd85121246fd723e5a2ab0c7313f10a94a384591484c1",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "36e48b35562f4d808499c4268cfcc342"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_16/parent.pt",
+          "bytes": 2866633,
+          "sha256": "f5ededd4fbded731f2a68c741cfa7f406e2822b98138c35386f25bc32f0b52ab",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "d497048567134e00a9d2e6db694f00ed"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_17/parent.pt",
+          "bytes": 2866633,
+          "sha256": "b5c84fd277785fd2b787f43e8fc04d53335dbc9e06767a6142a9c070d4e49035",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "d8d77bf9df6b4b969a93c67954c12afe"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_41/split_18/parent.pt",
+          "bytes": 2866633,
+          "sha256": "44f53dfe7715118399a4beca5fa2520966fbb372bfd4e2b1db49541f0361882f",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "09fae1acd15f4d768e2f3ee756ac8e04"
+        }
+      ]
+    },
+    {
+      "method": "EARLY_CONCAT",
+      "seed": 47,
+      "asset": "wear-v2-early_concat-seed-47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-early_concat-seed-47.tar.gz",
+      "bytes": 47420747,
+      "sha256": "be52c7ebfe57247ada5b4af7e7ede81da11fd2b84e76c9231345bd9c4aaff88a",
+      "files": [
+        {
+          "path": "EARLY_CONCAT/seed_47/split_01/parent.pt",
+          "bytes": 2866633,
+          "sha256": "2e78a7dfe642f34138493aaa3d25e4765224be35743ad801ae1f873b63851a8f",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "bdcab2ec3e1a4c3c9cd28d3c3b1c6995"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_02/parent.pt",
+          "bytes": 2866633,
+          "sha256": "91fd6e2d5fbb134d4496bed7d4245a4ffe55380d63e85e5eda62b33324876399",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "ac87243ee1c547e79748c61523488197"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_03/parent.pt",
+          "bytes": 2866633,
+          "sha256": "ff36b2eafd304f8b919dbc31f9c74093fbe730db272a49d14cc4499a1815d038",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "2a0832d1007148c8a359d59da3408f07"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_04/parent.pt",
+          "bytes": 2866633,
+          "sha256": "d297aca518bded9efadf48d1159ecb136619052e81ad8fcbc359a591324e8c41",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "c4b30dd25e1548bea91c50c987f24ff2"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_05/parent.pt",
+          "bytes": 2866633,
+          "sha256": "689bb54a8590f302363639551a852f010feccf4ef79aec595fdbb75a57e0c057",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "370f6da20958448c8157ef62eb14b3ac"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_06/parent.pt",
+          "bytes": 2866633,
+          "sha256": "1d954521d2a4b9bd4e50c2d127486e9bce699325c53a7bd8c66f2b626a25858c",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "2c323bb6e8214f28b635d09317138586"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_07/parent.pt",
+          "bytes": 2866633,
+          "sha256": "a522ab26b7f6765430462790cd3f8bfca5f0b39e9272a2d6137fd55081fede90",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "b09f3717181e47f2a3ade08d35603f38"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_08/parent.pt",
+          "bytes": 2866633,
+          "sha256": "9ad9dc631d2a159d4fac90252503b2c0ead79d754d0892b4fe3534a1a3fdc5d6",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "9059ca06bbc8491ebdb47598d3f09f9a"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_09/parent.pt",
+          "bytes": 2866633,
+          "sha256": "e4cfc21fceab6b40e8be62d0c1a38bba86b786d578e5d545b72a725d4b9400de",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "65257708a06b458a8e0c4f97e677e77f"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_10/parent.pt",
+          "bytes": 2866633,
+          "sha256": "c6df1c96dcd653c25e8ccdfc65bc2ee6fcbe471ccbdeb2ec66e91c48e2bc7dcc",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "2d4487f63a6b4de984949f4856fd2ad7"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_11/parent.pt",
+          "bytes": 2866633,
+          "sha256": "9e5bc9c5f542468dac395fd7f7bd43241fba95f1858d587abc9ca4b47b7414fa",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "51dad480eab64b3e9dd3fa5c7b416c65"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_12/parent.pt",
+          "bytes": 2866633,
+          "sha256": "4aa6d415a81ca8c847502cae94bea7ffff38a9b8d6c92707fc2b647fa78643ad",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "99f270b8fb1f4d118e01f6bb57366bde"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_13/parent.pt",
+          "bytes": 2866633,
+          "sha256": "9aebd782e24948d5b8a31b1cfbf882e49f6a335c942f919b4f48b4d9cc2630f1",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "bafed9c09c4046baae3d64ebca795b21"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_14/parent.pt",
+          "bytes": 2866633,
+          "sha256": "19607c18c562f43ea1efeaf080875fd5c47a871082ef9b46ed0b6f106e6f01f9",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "45468fc2150e4472ad5711430be8156f"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_15/parent.pt",
+          "bytes": 2866633,
+          "sha256": "4f9c4ff21fd87b6900be83ab3ab7f74c24f44c135cdfe5ba097ee822988303e2",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "f56a6f55a6444ed896da9db7c81a41be"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_16/parent.pt",
+          "bytes": 2866633,
+          "sha256": "c82b236823c7856f4e00e166e16709debbc36b7f7bc9c11c9ca9be3b60236b42",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "6cbc751d2bb94e43b5109ad2ee326356"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_17/parent.pt",
+          "bytes": 2866633,
+          "sha256": "dbda0d60df8fb511c098838c279e60a8efa4daf544505f7538a31c1a3395f803",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "b2bd8ac07017457abc09d90c8eb44fd8"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_47/split_18/parent.pt",
+          "bytes": 2866633,
+          "sha256": "d219b0241c192014e892a913fcadd845a87761ed4822eecb01b9b55888599dcd",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "34822143a26847ac8fa033f140a99b9e"
+        }
+      ]
+    },
+    {
+      "method": "EARLY_CONCAT",
+      "seed": 53,
+      "asset": "wear-v2-early_concat-seed-53.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-early_concat-seed-53.tar.gz",
+      "bytes": 47390677,
+      "sha256": "5b60bfdb0338245e953b9721a42f2cd93b0a75b692ac94753653bacd9770be09",
+      "files": [
+        {
+          "path": "EARLY_CONCAT/seed_53/split_01/parent.pt",
+          "bytes": 2866633,
+          "sha256": "c69bd0b3e680d82e697bb3baa40907d324407e342385519370cdc2d1dc4c10d9",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "a04805bd94e0457391fb2a2a3ae0c1df"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_02/parent.pt",
+          "bytes": 2866633,
+          "sha256": "d5cb172e5e502c783910691ae2f0699f28c35b66c6b32a058e04066842508d0a",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "f1b86c79e1ee470db1924c15e2b3f5ed"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_03/parent.pt",
+          "bytes": 2866633,
+          "sha256": "e5de31ce1cdaeb1841693f9f0d52d338d682619c640deeaddcc6372a760773fd",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "e4d9dc39f9344a14993c6959aa62ffac"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_04/parent.pt",
+          "bytes": 2866633,
+          "sha256": "42e71a95dc288a3ecbc4b44b28ac43a8b97f96ca7da7ccde6516d0baf08d3890",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "fd3ed95ac59b4f1d976071a2f7d959df"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_05/parent.pt",
+          "bytes": 2866633,
+          "sha256": "763f7d7176acf9bc4d167ce2ec3c1836dbb2e49b671b9ac0d057a795d2a0ec89",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "0c53ff42bd5742ba895376fa58a7f2a1"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_06/parent.pt",
+          "bytes": 2866633,
+          "sha256": "6df9859f39732a38488c8c621e58329585e15f7ca6772ce751eaf9a5f61928c6",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "398e324c96d342c3821aa0e8a2bb4dcc"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_07/parent.pt",
+          "bytes": 2866633,
+          "sha256": "a181603ef861107d3195d425dd5706fbf9efdf56a92da44a0b45eda31104fb9b",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "753dff43ce014daf93c62a7eff2ce3eb"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_08/parent.pt",
+          "bytes": 2866633,
+          "sha256": "87a20df6f3626cf98780475fc17ef2f8d45c094ca77499119ac83b7671ea3f3f",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "2f59fdec89df41928b51f47cf99fc64c"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_09/parent.pt",
+          "bytes": 2866633,
+          "sha256": "e6f5897a97d295ae89be0a561de263e54360e2ca5319ba6ed6c156f2fd94ed4f",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "6a9de500862f4dde9112c52aefab0366"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_10/parent.pt",
+          "bytes": 2866633,
+          "sha256": "c32b3bf852cce00760e87ca30041f058167e268a81af7e394d2adce7119d6176",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "103e97a49f4447f49caa2bf070a263da"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_11/parent.pt",
+          "bytes": 2866633,
+          "sha256": "d0ce76f20b7ed9c5cae53652ebe02f001cb6211d2f1394f44384cb19dba793f3",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "8df6ab415e364859be57a4393d9a58b8"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_12/parent.pt",
+          "bytes": 2866633,
+          "sha256": "3bdb3143634a463feba84e620f3252ee162bc16aa7da48cc3612c7854fcb16ed",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "d3a2fb429c47490e8e0846e35aca4162"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_13/parent.pt",
+          "bytes": 2866633,
+          "sha256": "6f555660c841ad3a03e3b75045ed2bbaaf086f165aa58074e09b99a09de815f7",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "7a26d79c5f434cc59d0c5410ced0a84f"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_14/parent.pt",
+          "bytes": 2866633,
+          "sha256": "2803fc0884872c22ceb5203ff85a4b946d0786cdd78dcac6043f3db1883d9315",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "2444c8a710914fecbfce4136335722a9"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_15/parent.pt",
+          "bytes": 2866633,
+          "sha256": "75aff36f4d2de2d694fa570b24623b0dc1e2741238d5c1b1cc866611e3344f62",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "ddaf18e1b7f44464a9536f1ea2a501b1"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_16/parent.pt",
+          "bytes": 2866633,
+          "sha256": "f4a1be11acc302aba599aae95c49b900e5c15b234846aeac847d9f44c10c9511",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "6357f4991dae4646ad733f6737e344af"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_17/parent.pt",
+          "bytes": 2866633,
+          "sha256": "330b54a7d09a7ec3b6e287c10b528546e7a3fa53de9b30bdec355f81184cd8d4",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "9ab9ed521f194daba11d5630b2208096"
+        },
+        {
+          "path": "EARLY_CONCAT/seed_53/split_18/parent.pt",
+          "bytes": 2866633,
+          "sha256": "0b4c0b70c0f450e4cd0cc3f4682f0dfa251e41118146ed39c619f6fcc3a600a0",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "0bf6d505a3ad40579bf3109434948e2b"
+        }
+      ]
+    },
+    {
+      "method": "FIXED_WINDOW_ATTENTION",
+      "seed": 41,
+      "asset": "wear-v2-fixed_window_attention-seed-41.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-fixed_window_attention-seed-41.tar.gz",
+      "bytes": 69983200,
+      "sha256": "cc74f352b30a1bf43fc5648515ebe6ea1d6ad91902ce431b324f580dc1f6cb46",
+      "files": [
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_01/parent.pt",
+          "bytes": 4224064,
+          "sha256": "24e3546cf2e0cbc1e8d1e2bb906cc44aaf80426cfa84a124bb3e45802b4e6690",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "7a7179211aa1420db8c08df5fc66a92f"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_02/parent.pt",
+          "bytes": 4224064,
+          "sha256": "f1a21380d63a5724ba7edc0529401b1de3d255401341b6a11a0b6a71b5294f15",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "3aba68120e9a415c936e7a9ac41f8a10"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_03/parent.pt",
+          "bytes": 4224064,
+          "sha256": "82ed2f10fbaf3c67cb0ccefb26ceda84a66e3df99a804fe5397352643d829df5",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "462d17cfece24af3805cb3fa37dc43ac"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_04/parent.pt",
+          "bytes": 4224064,
+          "sha256": "b9609197bcb5ea19dbb303984f0c6cae8bf75164fabde3bda7a5f7105bac109c",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "56b2011cdf884623bfe192356f559337"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_05/parent.pt",
+          "bytes": 4224064,
+          "sha256": "05b2a8e9a84be7b1dc3bd547fea32cf115af70202797e0c5ef6bb5383d4e0f3a",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "2c8b7d262e764fa78dafd1f354947988"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_06/parent.pt",
+          "bytes": 4224064,
+          "sha256": "84f0ab9a8ee3625ef0ec2cb4302a40c19126d89e4b4552830e5ab01b0a45e616",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "a0b84a3def0c4fccb1df4b6522bc51aa"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_07/parent.pt",
+          "bytes": 4224064,
+          "sha256": "a8023a88a26198885067106d393fe258a5f0b7ca0b0e52d451b3a6ecbeeb48af",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "ac4a9e2e478441ac8f0d37edf9f49987"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_08/parent.pt",
+          "bytes": 4224064,
+          "sha256": "3a6730e7361b17ef2ad3d6b1ca7fdcb6ad5bdeb733507e12dd13c8393d7a36cd",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "63f9dec3ef774028b5539cdfab55923f"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_09/parent.pt",
+          "bytes": 4224064,
+          "sha256": "a77fe54f351e1eb5a1714e7e4eec047bed36ddef3c35238ad2f28d84a1c71955",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "122aa9c91774475d9176e14a8aa6d7bc"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_10/parent.pt",
+          "bytes": 4224064,
+          "sha256": "86f86c98fcb59e1953049992b69c9059e84c2eadd92795766490452e17d9fa54",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "4146e73ccd4c4c91b16a1f0ca47ecff7"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_11/parent.pt",
+          "bytes": 4224064,
+          "sha256": "a293ddb4286c6eaaf6b16465dcdbe9b0002f90fcdf347d1c65a9e17f473a8db7",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "0b1aec094ceb4ae9873fc5bf571a73b5"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_12/parent.pt",
+          "bytes": 4224064,
+          "sha256": "d2734e93714daeda59c31b1eea48996424901891c08e3ca88a53b02e229ee80d",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "08935a3fc6054522a1e531df2f09d52c"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_13/parent.pt",
+          "bytes": 4224064,
+          "sha256": "6ee33ebc0f457b77d9a16e82fa955ea747e06699212c0d02c7537e110cd589ac",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "479bb9d749964415b82f05071fba25df"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_14/parent.pt",
+          "bytes": 4224064,
+          "sha256": "9846291acb0b503d574dd8c4826152cafd54f9a7be94fbaff7caca8dc5dd9a9e",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "42887c7d5e2f4cc780a0e2a8e82807c6"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_15/parent.pt",
+          "bytes": 4224064,
+          "sha256": "f99fa048febd80d17e540938c18f9b5093435be21bb16cefecf980f543197c36",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "95963ae136ec43409aa63457381f439a"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_16/parent.pt",
+          "bytes": 4224064,
+          "sha256": "e16d02c312294565b0205c8e37648c1e982f4dc510e1658be9cf5474b931b35a",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "7244c6797c0a4621a334de9b1c2ae28d"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_17/parent.pt",
+          "bytes": 4224064,
+          "sha256": "4814a99ac1402694ad0faebfdfd540c772bb8c3753c804e8a7b7b2fb43bbade8",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "4511e61224364d4a96be40500dc147ce"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_41/split_18/parent.pt",
+          "bytes": 4224064,
+          "sha256": "07c74c005cfeeab56ee0a0aa2f893b73f91e39cf830b82ec36cc4806589fd012",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "3720b5d3b9264290b59298fff896a4a0"
+        }
+      ]
+    },
+    {
+      "method": "FIXED_WINDOW_ATTENTION",
+      "seed": 47,
+      "asset": "wear-v2-fixed_window_attention-seed-47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-fixed_window_attention-seed-47.tar.gz",
+      "bytes": 69984470,
+      "sha256": "5ae12a9f5575d0f96df0452565e8713c6d9ccd14a9ea6a2aa93f09a1dd4567b8",
+      "files": [
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_01/parent.pt",
+          "bytes": 4224064,
+          "sha256": "7012516961320da3323e7ee55d3315fa935422e4f763914a506657122fd3fe23",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "4b1ef59840a34f5d91523963c542363d"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_02/parent.pt",
+          "bytes": 4224064,
+          "sha256": "05bf1b7e05bd77327a2fffdc92eac673b5ce7704d7309a6af2a95d1adea239d8",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "d74f7e97610b4357a0f92b30e8243a97"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_03/parent.pt",
+          "bytes": 4224064,
+          "sha256": "caabaa5add909991b33a7a764e7eef3042a5b2f70af55177969406bfd8cf8456",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "ac689b60fb4c4531ab1a2e79c8747a00"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_04/parent.pt",
+          "bytes": 4224064,
+          "sha256": "01c01b75955bdec89232c0f782e6c2356a1f1963efee11cebc0cfcb1c777af34",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "7111608e83e640808475706807bab468"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_05/parent.pt",
+          "bytes": 4224064,
+          "sha256": "784aef77bfbd67645e0d2b42976f5feaace8d2b7be0a34cb49000c2c81b561be",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "f01dcace68d2486db82f952cabc4ce2b"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_06/parent.pt",
+          "bytes": 4224064,
+          "sha256": "0ac2d120c118302761a0edbd98772abf9288870d7ba16e7d901d9bb2e667b79c",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "9a4ec533bc33469895f9abe967497bd4"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_07/parent.pt",
+          "bytes": 4224064,
+          "sha256": "3fd92328e4cd2f96b9de3940a8a4dd9904b897b58f4aa9e32626e080ca1fde2b",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "9f7ea43b6c964c99bd5bc916fcfdc029"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_08/parent.pt",
+          "bytes": 4224064,
+          "sha256": "3e756cd6fee3a5b9434f6a94a01a662b91a66acb0ad35827519eac51f0f9e7e9",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "920c0f5a638b4080a12451b151efa7d9"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_09/parent.pt",
+          "bytes": 4224064,
+          "sha256": "ab4b6f6bd7ec14293843995a6d4e1b71c14302b953935b2fe6814dcfaf55dcaf",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "9b5a6c3159bb4043b2435fbe4f4a3af3"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_10/parent.pt",
+          "bytes": 4224064,
+          "sha256": "5ed210954fde61fd7f9356d7dd12635a00d3fb1fe3a0a4f975bc309bd51222ff",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "305594b2c2b84e3faf6cbf2225a9741c"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_11/parent.pt",
+          "bytes": 4224064,
+          "sha256": "66cd5ba33fa41fd812d32ee9e7f9ce4ce02f95acddc5efd6f4758731a9e17f30",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "c8e2991db7ce4d56ac59118a596a6d4a"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_12/parent.pt",
+          "bytes": 4224064,
+          "sha256": "d7c02b1530532886e2bcba62448feab6e4fb557236fac0ae849e9dd0e9a3157e",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "1a2aead65a754cc69ce857122483aa1b"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_13/parent.pt",
+          "bytes": 4224064,
+          "sha256": "2aa32826748c982e579e1489a16be00ea3529e47485e1e5647d74812ef555bd2",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "da7001c467a8480a9acf80954b8d4c05"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_14/parent.pt",
+          "bytes": 4224064,
+          "sha256": "af30a94e8408bb0979896a6c0fe3f4efc51ab74ed38c99b6fe1fbdee4d50bfd7",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "0a9b2d22aaae4c79a2a1d066919f5be2"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_15/parent.pt",
+          "bytes": 4224064,
+          "sha256": "389dbf70ac2b6911a3989abb8fef83aff987c8fd5d02cf0bfb3c6ba58f628e80",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "f457d54e28b94c028d642bc2ead92058"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_16/parent.pt",
+          "bytes": 4224064,
+          "sha256": "9225d6290b915964f1b54a0b8dee2f8986897d04c904faa0e08fbc0601aa5160",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "5c487453e28842d9996235d38bb23a92"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_17/parent.pt",
+          "bytes": 4224064,
+          "sha256": "9882fc4487ec8d6c1d7681a306d12d8cf7c51cc93e52a6b50e6d5dc4aae0ccc1",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "e11c5fc5b9a64d0c94b8447f4e98f8a9"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_47/split_18/parent.pt",
+          "bytes": 4224064,
+          "sha256": "1aad7389582a598a44167b2ea92869d26175cc1bfc505717b0051b634fb0a436",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "09380e6ad1704b949a498a96247ef900"
+        }
+      ]
+    },
+    {
+      "method": "FIXED_WINDOW_ATTENTION",
+      "seed": 53,
+      "asset": "wear-v2-fixed_window_attention-seed-53.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-v2-pretrained-20261006/wear-v2-fixed_window_attention-seed-53.tar.gz",
+      "bytes": 70002242,
+      "sha256": "b5634fea8dcbd29ef5a204353b00b0801a1ad2905034e0bf1958f96edb36a959",
+      "files": [
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_01/parent.pt",
+          "bytes": 4224064,
+          "sha256": "87b05c4ac87b3693060ca8605ec165868cf47a4852063ee52d85f8e89e84fc16",
+          "fold": 1,
+          "component": "parent",
+          "run_id": "1185be42812d4ba9b3d7e75a9ff2fa74"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_02/parent.pt",
+          "bytes": 4224064,
+          "sha256": "7a0904ffa1a5ade5196348d65a5a8f4153b00b1471ca6afb2aa2a24f083062f9",
+          "fold": 2,
+          "component": "parent",
+          "run_id": "00a928d3fc6741ef91ca6b0f7742a2b5"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_03/parent.pt",
+          "bytes": 4224064,
+          "sha256": "20944b0d188eba77fe1254dab5f32f9c44dbd02e89558b22c1c31aec5734784a",
+          "fold": 3,
+          "component": "parent",
+          "run_id": "89d83ae6504448f287b65404c933b06d"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_04/parent.pt",
+          "bytes": 4224064,
+          "sha256": "2c1e19efbc81679aec7da92bb9e67d7e2730fceeae999f7af7a84c9f03cf5fd3",
+          "fold": 4,
+          "component": "parent",
+          "run_id": "4868b9fe55334a04a458e3d589774292"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_05/parent.pt",
+          "bytes": 4224064,
+          "sha256": "b708691adeb6373a021be2b48d937e6e03bb8bb3cb59f17a320c64a46eef87ad",
+          "fold": 5,
+          "component": "parent",
+          "run_id": "c0a16f4198044bb78415964b1ac01b00"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_06/parent.pt",
+          "bytes": 4224064,
+          "sha256": "b12fe4448836e42e5fb4bb3a9c440b4490f909358246337b0b729943baf1eaaa",
+          "fold": 6,
+          "component": "parent",
+          "run_id": "4041c98ea7c04e54a3564668aee16dc3"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_07/parent.pt",
+          "bytes": 4224064,
+          "sha256": "ad6aeb78448b9f6eb777e7df294302565d7474025efad1e631616b416bfae8fa",
+          "fold": 7,
+          "component": "parent",
+          "run_id": "e850c8b1f11c437eaf032476081bc9b6"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_08/parent.pt",
+          "bytes": 4224064,
+          "sha256": "2aeb2c6e02c47b7325b6706bcadaf469371093da4d9daa9d68fbb5ace747797c",
+          "fold": 8,
+          "component": "parent",
+          "run_id": "ab0968a96d8645e38daccc3e65c56f60"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_09/parent.pt",
+          "bytes": 4224064,
+          "sha256": "8dea2a21ccc8839c96dfb99b1683fbb259d77864202ba07c10049b32463ac38f",
+          "fold": 9,
+          "component": "parent",
+          "run_id": "4ce1259f38f54398a388826bdb627dd9"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_10/parent.pt",
+          "bytes": 4224064,
+          "sha256": "35f0067ed991a14c6738d7b73a782bc83d98faf943028dfda211842a7d48ff47",
+          "fold": 10,
+          "component": "parent",
+          "run_id": "e9ae5c275e77459caa40b00491b6e496"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_11/parent.pt",
+          "bytes": 4224064,
+          "sha256": "308026cecdad66ccc736cd927338a91fe7addaa428332d4893a04fdbe45983d0",
+          "fold": 11,
+          "component": "parent",
+          "run_id": "790979c2fb784628b9814ac7a9b8a451"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_12/parent.pt",
+          "bytes": 4224064,
+          "sha256": "4ed9b67a043d3813c707fd36e15a8a3eec09624423b655ecabc78ace3d3c595a",
+          "fold": 12,
+          "component": "parent",
+          "run_id": "43159af9500d44bca2f1e885a710fd72"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_13/parent.pt",
+          "bytes": 4224064,
+          "sha256": "249bd72dcfc49bec4afc7ed63970d0f1fd16eb927792b9b7b726941b6d15d6b6",
+          "fold": 13,
+          "component": "parent",
+          "run_id": "d68d208cd86742d1842eda545480b93a"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_14/parent.pt",
+          "bytes": 4224064,
+          "sha256": "06b0c484a49873b09abd39d18c7aec0a7e6654b401dce3c78b3dc35d1bce20ed",
+          "fold": 14,
+          "component": "parent",
+          "run_id": "02892cb4962544478f02d86453218d8c"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_15/parent.pt",
+          "bytes": 4224064,
+          "sha256": "8d83c0e8fbf4f0d38aa35df6fc40908a253ae6abc9159d4e3310db140cd689ec",
+          "fold": 15,
+          "component": "parent",
+          "run_id": "4279ad3ef4f34ed891a2ddb51660cc56"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_16/parent.pt",
+          "bytes": 4224064,
+          "sha256": "b0f33df726b166f4e7cd14d116c4d4a6ced19cae42e21b16a1cfdecb4b18a694",
+          "fold": 16,
+          "component": "parent",
+          "run_id": "95c6b4a58ecf424cb21035119964a7e1"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_17/parent.pt",
+          "bytes": 4224064,
+          "sha256": "79fc8ef5b5b5f4b4103ddb87028ece7e94fb9fca64b5c44374c4173cd39678e2",
+          "fold": 17,
+          "component": "parent",
+          "run_id": "aa97ce881166487982a0f1808135f847"
+        },
+        {
+          "path": "FIXED_WINDOW_ATTENTION/seed_53/split_18/parent.pt",
+          "bytes": 4224064,
+          "sha256": "f4f617a6ec32835e2b3257ce91fa42b8405b0d9e0bf47dbc7cc8200d9866e979",
+          "fold": 18,
+          "component": "parent",
+          "run_id": "9cf411b4a86140a3b7c5aa286bbe09c5"
+        }
+      ]
+    }
+  ]
+}
