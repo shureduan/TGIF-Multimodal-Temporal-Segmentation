@@ -70,7 +70,7 @@ contiguous predicted segments then define the sensor support for Round 1.
   <img src="assets/dwa_pipeline.svg" width="100%" alt="Two-round DWA: fixed-window attention, detached predicted segments, prediction-guided attention, and concatenation with video before the shared MS-TCN">
 </p>
 
-*Maintained WEAR inference configuration: Round 0 uses a ±2-second window;
+*Maintained WEAR training and inference configuration: Round 0 uses a ±2-second window;
 Round 1 uses the predicted segment plus a ±1-second margin, with temporal
 priors of 1.0 in the segment and 0.5 in the margin. Both rounds run within one
 forward pass and share the query/key projections and MS-TCN.*
@@ -78,11 +78,11 @@ forward pass and share the query/key projections and MS-TCN.*
 The window determines **which temporal positions can be read**; one-way local
 attention determines **how those permitted sensor positions are weighted** by
 the video query. The resulting sensor context is fused with the video
-representation by concatenation for temporal segmentation. The WEAR training
-script uses segment-only Round-1 support; the final inference wrapper adds the
-fixed boundary margin and a separately trained background prior. Equations,
-tensor dimensions, training/inference behavior, and WEAR
-background calibration are documented in [docs/method.md](docs/method.md).
+representation by concatenation for temporal segmentation. WEAR training and
+inference use the same segment-plus-margin support and temporal priors. The
+final model additionally applies a separately trained background probe.
+Equations, tensor dimensions, and background calibration are documented in
+[docs/method.md](docs/method.md).
 
 ## TGIF results
 
@@ -110,42 +110,54 @@ changing their values. The full six-metric table is in
 
 ## WEAR results
 
-The comparison uses the first 18 WEAR subjects, leave-one-subject-out folds,
-seed 47, and the 2 Hz feature grid. Concatenated Macro-F1 evaluates the combined
-held-out-subject predictions over all 19 classes, including background.
+The current results use `fixed_epoch_loso_v2`: the first 18 WEAR subjects,
+leave-one-subject-out folds, seeds 41/47/53, and the 2 Hz feature grid. Parent
+and probe training use fixed budgets of 30 and 15 epochs and save the final
+epoch. Held-out subjects are evaluated after training; their scores are not
+used for checkpoint selection.
 
 <p align="center">
-  <img src="assets/wear_main_results.png" width="100%" alt="WEAR aggregate, cross-subject, and temporal localization results">
+  <img src="assets/wear_main_results.png" width="100%" alt="WEAR three-seed aggregate, cross-subject, and temporal localization results">
 </p>
 
 *Aggregate performance, paired cross-subject changes in mAP@0.5, and temporal
 localization performance from tIoU 0.3 to 0.7.*
 
-| Method | Mean fold Macro-F1 | Concatenated Macro-F1 | Accuracy | mAP@0.5 | Avg mAP |
+| Method | Subject Macro-F1 (mean ± SD) | Concatenated Macro-F1 | Accuracy | mAP@0.5 | Avg mAP |
 |---|---:|---:|---:|---:|---:|
-| Video-only MS-TCN | 0.7292 ± 0.0861 | 0.7573 | 0.7929 | 0.6755 | 0.6814 |
-| Final multimodal model | **0.7998 ± 0.1621** | **0.8109** | **0.8284** | **0.7756** | **0.7640** |
+| Video-only MS-TCN | 0.6419 ± 0.1246 | 0.6903 | 0.7461 | 0.6057 | 0.6061 |
+| Early concatenation | 0.7048 ± 0.2110 | 0.7443 | 0.7734 | 0.6811 | 0.6776 |
+| Fixed-window attention | 0.7246 ± 0.2071 | 0.7635 | 0.7843 | 0.6880 | 0.6880 |
+| Final multimodal model | 0.7500 ± 0.1892 | 0.7748 | 0.8008 | 0.7154 | 0.7148 |
+
+Subject scores first average the three seeds, then report the mean and sample
+SD across 18 subjects. Concatenated Macro-F1 pools the 18 subject sequences
+within each seed, then averages the three scores; this is the F1 used in the
+figure. F1 includes all 19 classes. Accuracy and mAP average subjects and seeds
+equally. The final model has higher mean scores in this run; superiority over
+fixed attention is not established by the paired statistical comparisons.
 
 <p align="center">
-  <img src="assets/wear_ablation_robustness.png" width="100%" alt="WEAR component ablation, boundary robustness, and support allocation">
+  <img src="assets/wear_ablation_robustness.png" width="100%" alt="WEAR frozen-parent component outputs, boundary robustness, and support allocation">
 </p>
 
-*Incremental component results, boundary-jitter robustness, and the learned
-attention mass within the prediction-guided support.*
+*Inference interventions on the same 54 frozen parents, boundary-jitter
+robustness, and attention mass within the prediction-guided support. These
+component outputs are not independently retrained ablations.*
 
 <p align="center">
-  <img src="assets/wear_temporal_segmentation.png" width="100%" alt="WEAR temporal segmentation comparison across four methods">
+  <img src="assets/wear_temporal_segmentation.png" width="100%" alt="WEAR temporal segmentation comparison across four methods for subject 1 and seed 47">
 </p>
 
-*WEAR median-baseline qualitative example over 2,776 seconds. The tracks show
-Ground truth, Video-only, Early concatenation, Fixed attention, and the Final
-model using a shared class-color mapping.*
+*Subject `sbj_1`, seed 47: Ground truth, Video-only, Early concatenation, Fixed
+attention, and the Final model with a shared class-color mapping. The subject
+and seed are retained from the previous example, without selection on the new
+scores.*
 
-The held-out subject in each fold was also used for best-epoch selection, so
-these are validation-selected LOSO results. Record metrics use the 2 Hz feature
-grid; TAL values are derived from contiguous MS-TCN predictions. Metric
-definitions, the four-method comparison, and scope limits are in
-[docs/results.md](docs/results.md).
+Record metrics use the 2 Hz feature grid; TAL values are derived from contiguous
+MS-TCN predictions. Metric definitions, source tables, component results and
+scope limits are in [docs/results.md](docs/results.md). The full training and
+figure reproduction commands are in [docs/reproduction.md](docs/reproduction.md).
 
 ## Quick start
 
@@ -158,29 +170,38 @@ python -m unittest discover -s tests -v
 ```
 
 After preparing the WEAR feature-grid inputs described in
-[docs/data.md](docs/data.md) and obtaining the matching parent/probe weights:
+[docs/data.md](docs/data.md), train and evaluate one fold:
 
 ```bash
-python scripts/verify_model_files.py --fold 1
+python scripts/check_wear_data.py --data-root /path/to/WEAR_prepared
+
+OMP_NUM_THREADS=1 python scripts/train_wear.py \
+  --data-root /path/to/WEAR_prepared \
+  --fold 1 --seed 47 --method FINAL_MODEL \
+  --parent-epochs 30 --probe-epochs 15 \
+  --device cpu --output outputs/wear_training
 
 python scripts/infer_wear.py \
-  --data-root /path/to/WEAR_prepared \
-  --subject sbj_0 \
-  --parent models/wear_final/split_01/parent.pt \
-  --probe models/wear_final/split_01/background_probe.pt \
-  --output outputs/wear_split_01.npz
+  --data-root /path/to/WEAR_prepared --subject sbj_0 \
+  --parent outputs/wear_training/FINAL_MODEL/seed_47/split_01/parent.pt \
+  --probe outputs/wear_training/FINAL_MODEL/seed_47/split_01/background_probe.pt \
+  --device cpu --output outputs/wear_split_01.npz
 
 python scripts/evaluate_wear.py \
-  outputs/wear_split_01.npz \
-  --output outputs/wear_split_01_metrics.json
+  outputs/wear_split_01.npz --output outputs/wear_split_01_metrics.json
 ```
 
-For fold training, configuration details, and result comparison, see
-[docs/reproduction.md](docs/reproduction.md). The maintained code has been
-checked for independent import, all 18 private WEAR checkpoint-pair loads,
-full-sequence inference, and metric recomputation; the executed checks are
-recorded in [VERIFICATION.md](VERIFICATION.md). Historical result presentation
-and current release-code validation are reported separately.
+To redraw the four WEAR figures from the committed numerical inputs, without
+training or private data:
+
+```bash
+python -m pip install -e '.[plot]'
+python scripts/plot_wear_results.py --output outputs/wear_figures
+```
+
+This writes four PNGs and a combined PDF. For the complete 18-fold, three-seed
+benchmark and regenerating figure inputs from trained checkpoints, see
+[docs/reproduction.md](docs/reproduction.md).
 
 ## Data and models
 
@@ -188,9 +209,10 @@ and current release-code validation are reported separately.
   laboratory assets and are not distributed by this repository.
 - WEAR data and third-party features must be obtained under their own terms
   from the [WEAR project](https://mariusbock.github.io/wear/).
-- The 18 WEAR parent/probe pairs total 95.90 MiB. Their verified
-  [manifest](models/wear_final/manifest.json) is included, but the weights have
-  not yet been uploaded and no download URL is currently available.
+- Current WEAR v2 checkpoints are not bundled; the commands above train them
+  from prepared inputs. The [legacy manifest](models/wear_final/manifest.json)
+  describes an older 18-pair, 95.90 MiB bundle and does not match the current
+  results. No public checkpoint download is currently available.
 
 ## Repository structure
 
@@ -199,8 +221,8 @@ assets/              overall method, DWA, and confirmed result figures
 configs/             model, protocol, and label metadata
 docs/                method, data, results, models, and reproduction details
 models/wear_final/   weight manifest; checkpoints remain external
-results/             frozen TGIF and WEAR result tables
-scripts/             WEAR training, inference, evaluation, and hash checks
+results/             TGIF tables, WEAR v2 metrics, and figure inputs
+scripts/             WEAR training, inference, evaluation, and plotting
 src/tgif_dwa/        self-contained DWA and MS-TCN implementation
 tests/               synthetic interfaces plus optional private-weight loading
 ```

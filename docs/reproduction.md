@@ -1,10 +1,11 @@
 # Reproducing the WEAR v2 code
 
 The current training protocol is `fixed_epoch_loso_v2`. It trains from prepared
-WEAR features and saves the final epoch of each component. The existing WEAR
-figures in the README, WEAR tables in `results/`, and
-`models/wear_final/manifest.json` describe an older WEAR experiment; they are
-not numerical targets for this training protocol.
+WEAR features and saves the final epoch of each component. The WEAR figures in
+the README and tables in `results/` use the completed 18-fold, three-seed run
+under this protocol. Metric definitions and scope are in [results.md](results.md).
+The checkpoint manifest at `models/wear_final/manifest.json` belongs to an older
+bundle and does not reproduce these current scores.
 
 ## 1. Install and check inputs
 
@@ -122,6 +123,19 @@ paired_statistics.json     matched subject-level comparisons
 logs/                      training, inference and evaluation logs
 ```
 
+To export the complete subject/seed CSV and the aggregate JSON/CSV tables:
+
+```bash
+python scripts/summarize_wear_results.py \
+  --benchmark outputs/wear_v2_benchmark --output outputs/wear_tables
+```
+
+This reads the evaluation summaries and checks frame-level F1, accuracy and
+concatenated F1 against all saved prediction sequences. It also derives
+background/action F1 and averages seed scores within subjects before computing
+subject means and sample SDs. The three exported files have the same schemas
+as the published `results/wear_*.csv` and `results/wear_aggregate.json`.
+
 To recompute the statistics from the 12 evaluation summaries:
 
 ```bash
@@ -140,6 +154,41 @@ first, then compute the mean and sample SD (`ddof=1`) over the 18 subjects.
 Statistics average matched seed differences within each subject, then use
 18 paired subject differences and Holm correction across three comparators ×
 two metrics. They are exploratory because LOSO training sets overlap.
+
+### Redraw the published figures
+
+The four figures can be reproduced directly from their committed numerical
+inputs, independently of dataset access or training:
+
+```bash
+python -m pip install -e '.[plot]'
+python scripts/plot_wear_results.py --output outputs/wear_figures
+```
+
+The renderer validates `results/wear_figure_data/manifest.json` and writes four
+PNGs, individual PDFs and `WEAR_new_results_figures.pdf`. Numerical inputs are
+fixed; font/rendering differences across platforms can change pixels. The
+plotting extra pins pandas 2.3.3 and Matplotlib 3.10.9.
+
+To regenerate those inputs from a completed benchmark, including the frozen-
+parent component and jitter diagnostics:
+
+```bash
+python scripts/prepare_wear_figures.py \
+  --benchmark outputs/wear_v2_benchmark \
+  --output outputs/wear_figure_inputs --cpu-workers 2
+python scripts/plot_wear_results.py \
+  --data-root outputs/wear_figure_inputs/source_data \
+  --output outputs/wear_figures_from_run
+```
+
+This verifies source, input and checkpoint hashes and performs inference with
+the saved device assignment and weights. It does not train or select models.
+The reference figure recipe requires all 18 folds and seeds 41/47/53; it retains
+`sbj_1` and `sbj_9` with seed 47 for the qualitative examples. Reuse the same
+command to resume completed diagnostics; changed inputs require a new output
+folder. Runtime depends on sequence length and hardware. The local output also
+contains computation metadata and per-pair diagnostic intermediates.
 
 ## 4. Protocol and checkpoint compatibility
 

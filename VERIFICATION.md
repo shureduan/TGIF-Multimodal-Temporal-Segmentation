@@ -1,5 +1,10 @@
 # Release-candidate verification
 
+> Historical record for the legacy WEAR final-v1 bundle. The WEAR values and
+> checks below predate `fixed_epoch_loso_v2`; current results and reproduction
+> commands are in [docs/results.md](docs/results.md) and
+> [docs/reproduction.md](docs/reproduction.md).
+
 Verification date: 2026-09-12. Environment: Python 3.10.20, PyTorch 2.12.0,
 NumPy 2.2.6, SciPy 1.15.3, and scikit-learn 1.7.2.
 

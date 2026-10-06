@@ -1,0 +1,5 @@
+method,jitter_seconds,context_l2
+Boundary uncertainty,0.5,0.4164995440730342
+Boundary uncertainty,1.0,0.7425912568966547
+Hard segment,0.5,0.4782361760735512
+Hard segment,1.0,0.8437184851478647

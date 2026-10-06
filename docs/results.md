@@ -33,45 +33,125 @@ model code is reported separately and does not alter these confirmed results.
 
 ## WEAR
 
-The WEAR results are from the first 18 subjects (`sbj_0`–`sbj_17`), leave-one-
-subject-out folds, and seed 47. Inputs are the 2 Hz official-style feature grid:
-2048-D I3D video features and 600-D raw inertial windows. Fold-specific IMU
-normalization uses the 17 training subjects only.
+The current results use `fixed_epoch_loso_v2` on `sbj_0`–`sbj_17`, with 18
+leave-one-subject-out folds and seeds 41, 47 and 53. There are 216 training runs:
+18 subjects × 3 seeds × 4 methods. Inputs are 2048-D I3D video features and
+600-D raw inertial windows on the 2 Hz feature grid. IMU normalization uses
+only the 17 training subjects in each fold.
 
-| Method | Macro-F1 mean ± std | Concatenated 19-class Macro-F1 | Background F1 | Action Macro-F1 | Accuracy | mAP@0.5 | Avg mAP |
+The parent is trained for 30 epochs and the background probe for 15; both use
+the final epoch. Training and inference share the ±2-second Round-0 support
+and predicted-segment-plus-±1-second Round-1 support with priors 1.0/0.5.
+Held-out subjects are not loaded during training or used for checkpoint
+selection. All training finishes before outer-test evaluation.
+
+| Method | Subject Macro-F1 (mean ± SD) | Concatenated Macro-F1 | Background F1 | Action Macro-F1 | Accuracy | mAP@0.5 | Avg mAP |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Video only | 0.7292 ± 0.0861 | 0.7573 | 0.8328 | 0.7234 | 0.7929 | 0.6755 | 0.6814 |
-| Early concatenation | 0.7820 ± 0.1888 | 0.7976 | 0.8272 | 0.7795 | 0.8092 | 0.7546 | 0.7506 |
-| Fixed-window attention | 0.7911 ± 0.1818 | 0.8092 | 0.8435 | 0.7882 | 0.8238 | 0.7635 | 0.7568 |
-| Final model | 0.7998 ± 0.1621 | 0.8109 | 0.8509 | 0.7970 | 0.8284 | 0.7756 | 0.7640 |
+| Video-only MS-TCN | 0.6419 ± 0.1246 | 0.6903 | 0.8171 | 0.6322 | 0.7461 | 0.6057 | 0.6061 |
+| Early concatenation | 0.7048 ± 0.2110 | 0.7443 | 0.8153 | 0.6987 | 0.7734 | 0.6811 | 0.6776 |
+| Fixed-window attention | 0.7246 ± 0.2071 | 0.7635 | 0.8133 | 0.7197 | 0.7843 | 0.6880 | 0.6880 |
+| Final multimodal model | 0.7500 ± 0.1892 | 0.7748 | 0.8327 | 0.7454 | 0.8008 | 0.7154 | 0.7148 |
 
-The mean and population standard deviation are computed across the 18 folds.
-“Concatenated” scores the concatenated fold predictions over the fixed 19-class
-space, including background. The per-fold source table is
-`results/wear_18fold_metrics.csv`; the frozen aggregate is
-`results/wear_aggregate.json`.
+### Metric aggregation
 
-Important scope limits:
+- **Subject mean ± SD:** average the three seed scores within each subject,
+  then compute the mean and sample SD (`ddof=1`) across the 18 subject means.
+  The SD describes between-subject variation, not a confidence interval.
+- **Concatenated Macro-F1:** concatenate all 18 held-out sequences within each
+  seed, compute Macro-F1 over the fixed 19-class space, then average the three
+  seed scores. The main and component figures use this definition. It differs
+  from the subject-mean F1 because F1 is nonlinear and sequence lengths vary.
+- Background F1, action Macro-F1, accuracy, mAP@0.5 and Avg mAP average subjects
+  and seeds equally. Macro-F1 includes background (class 18); action Macro-F1
+  covers classes 0–17. Per-subject scoring uses F1 = 0 for an absent class.
+  The concatenated evaluator retains the official `zero_division=1` setting;
+  all 19 classes occur in each pooled seed, so this does not affect these
+  concatenated scores.
+- TAL scoring converts contiguous frame predictions into segments. Avg mAP is
+  the arithmetic mean over tIoU 0.3, 0.4, 0.5, 0.6 and 0.7.
 
-- The held-out subject in each fold is also used for best-epoch selection, so
-  these are validation-selected LOSO results rather than untouched test scores.
-- The record results are aligned with the official 19-class mapping but operate
-  on the 2 Hz feature grid. They are not a reproduction of the official 50 Hz
-  record evaluator.
-- The TAL mAP converts contiguous MS-TCN labels into segments and averages over
-  tIoU 0.3–0.7. It is not an evaluation of official ActionFormer or TriDet
-  detector outputs.
-- One training seed is available; no multi-seed WEAR claim is made.
+The complete 216-row source is
+[`wear_18fold_metrics.csv`](../results/wear_18fold_metrics.csv). The compact
+[`wear_summary.csv`](../results/wear_summary.csv) and schema-v2
+[`wear_aggregate.json`](../results/wear_aggregate.json) provide method means,
+subject SDs, seed means and concatenated F1. Regenerate the tables with
+`scripts/summarize_wear_results.py` from a completed benchmark. These files and
+the figures describe the current protocol; older WEAR scores are retained in
+Git history.
 
-The README uses three approved result figures:
+### Interpretation and scope
 
-- `assets/wear_main_results.png` summarizes aggregate performance,
-  subject-level paired changes in mAP@0.5, and localization performance across
-  tIoU thresholds.
-- `assets/wear_ablation_robustness.png` shows incremental components,
-  boundary-jitter robustness, and soft support allocation.
-- `assets/wear_temporal_segmentation.png` is a qualitative 2,776-second trace
-  with Ground truth, Video-only, Early concatenation, Fixed attention, and the
-  Final model under a shared class-color mapping.
+The final model has higher descriptive means than all three baselines. Relative
+to fixed attention, subject-mean Macro-F1 is higher by 2.54 percentage points
+and mAP@0.5 by 2.74 points. These differences do not establish statistical
+superiority over fixed attention in the matched subject-level comparisons.
+The provided statistics script averages seed differences within each subject
+and applies Holm correction across three baselines × two metrics. These are
+exploratory comparisons: LOSO training sets overlap and there are only 18
+subjects and three seeds. Reproduction commands are in
+[reproduction.md](reproduction.md).
 
-The frozen tables above remain the source for the exact values quoted in text.
+Baselines use one round and no background probe, while the final recipe uses
+two rounds and a probe. The main comparison therefore measures the whole
+recipe rather than an isolated DWA window effect. These are 2 Hz feature-grid
+results, not official 50 Hz record scores or official ActionFormer/TriDet
+output evaluation. Fixed epoch selection removes held-out checkpoint selection
+from this run; it does not create a new dataset independent of prior method
+development. Differences from historical results also reflect changed training
+and attention settings and should not be attributed to a single change.
+
+### Component and boundary diagnostics
+
+The component figure evaluates the same 54 frozen, margin-trained parents.
+Only inference changes; no component is retrained or selected by its test score.
+
+| Output | Concatenated Macro-F1 | Subject-mean Macro-F1 |
+|---|---:|---:|
+| Round 0 | 0.7680 | 0.7395 |
+| Round 1, segment only (zero margin) | 0.7724 | 0.7463 |
+| Round 1, margin and prior (DWA parent) | 0.7729 | 0.7471 |
+| Final, with background probe | 0.7748 | 0.7500 |
+
+The small increases are descriptive outputs of shared weights. In particular,
+zero-margin inference changes the support of a model trained with a margin;
+this is not a separately trained zero-margin baseline or a causal ablation.
+
+Boundary perturbations shift every internal Round-0 boundary by −1, +1, −2 or
++2 feature steps (0.5 seconds per step), clamping the boundaries to preserve
+nonempty segments. Context L2 change is averaged across frames, signed shifts,
+seeds and subjects. Lower values mean less context change, not necessarily
+better segmentation accuracy under jitter.
+
+| Support | ±0.5-second jitter | ±1.0-second jitter |
+|---|---:|---:|
+| Hard segment | 0.4782 | 0.8437 |
+| Boundary uncertainty | 0.4165 | 0.7426 |
+
+| Region | Support prior | Mean attention mass |
+|---|---:|---:|
+| Left margin | 0.5 | 0.010753 |
+| Core | 1.0 | 0.978635 |
+| Right margin | 0.5 | 0.010611 |
+| Outside | 0.0 | 0.000000 |
+
+Attention mass averages frames within each sequence, then subjects and seeds
+equally. Most mass remains in the predicted core; the support prior is a
+multiplicative attention weight, not a prescribed mass fraction.
+
+### Figures and numerical inputs
+
+All four PNGs have corresponding committed CSV inputs and a hash manifest in
+[`results/wear_figure_data/`](../results/wear_figure_data/). Redraw them with
+`scripts/plot_wear_results.py`; no checkpoints or dataset access are needed.
+
+- [`wear_main_results.png`](../assets/wear_main_results.png): concatenated F1,
+  mean mAP, paired subject-level mAP changes and the tIoU sweep.
+- [`wear_ablation_robustness.png`](../assets/wear_ablation_robustness.png):
+  frozen-parent component outputs, boundary jitter and support mass.
+- [`wear_temporal_segmentation.png`](../assets/wear_temporal_segmentation.png):
+  `sbj_1`, fold 2, seed 47; ground truth and all four models.
+- [`wear_gt_vs_final.png`](../assets/wear_gt_vs_final.png): `sbj_9`, fold 10,
+  seed 47; ground truth and final-model class IDs (18 is background).
+
+Both qualitative subjects and seed 47 are retained from the previous figures.
+They are not selected or described as median cases under the new results.

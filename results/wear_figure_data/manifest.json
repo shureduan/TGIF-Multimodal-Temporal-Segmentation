@@ -1,0 +1,48 @@
+{
+  "protocol": "fixed_epoch_loso_v2",
+  "seeds": [
+    41,
+    47,
+    53
+  ],
+  "n_subjects": 18,
+  "metric_definitions": {
+    "mean": "average three seeds within each subject, then average 18 subjects",
+    "std": "sample SD (ddof=1) of the 18 subject means, not a confidence interval",
+    "concatenated_macro_f1": "concatenate 18 held-out sequences within each seed, then average the three scores"
+  },
+  "attention": {
+    "round0_radius_seconds": 2.0,
+    "round1_margin_seconds": 1.0,
+    "margin_prior": 0.5,
+    "probe_beta": 0.5
+  },
+  "diagnostic_scope": "Frozen-parent inference interventions, not separately retrained ablations.",
+  "boundary_jitter": "Shift all internal Round-0 boundaries by +/-1 and +/-2 feature-grid steps; clamp to preserve nonempty segments. Average frame L2, signed shifts, seeds, then subjects.",
+  "qualitative_examples": {
+    "timeline": {
+      "subject": "sbj_1",
+      "fold": 2,
+      "seed": 47
+    },
+    "gt_final": {
+      "subject": "sbj_9",
+      "fold": 10,
+      "seed": 47
+    }
+  },
+  "example_selection": "Retain the subjects and seed from the previous displayed examples; no selection from new final-model performance.",
+  "sha256": {
+    "ablation.csv": "af8309527bd06b0016ba1f26bfa51c0d37287f3c68e25b56a658324d569c53d3",
+    "ablation_per_subject_seed.csv": "0d17723c9eaf2b7b80ba4968368f77d3e5d7750ccefc86e9b421c8b650d7a446",
+    "boundary_jitter_per_subject_seed_shift.csv": "a9e23c6e4129e0937123aa905a08734080fd29bd16e529f133c3dd8cbe19c7a5",
+    "boundary_robustness.csv": "e18703b5810ce5b464a025b8ebcb130afb091d8680cdbd8adc9d9fdcae2bcc57",
+    "gt_final_sbj_9_seed47.csv": "8a2e7539096766516fa3d60a56bde5ecdab9da6f09dc66162807e49fdd329bac",
+    "main_aggregate.csv": "a7bcc1e1b42b545aafa6515a8a3df6182f84f1dec30c659091aef4440da59742",
+    "map_by_tiou.csv": "32c9b2e54c708e7ed7742c4424d8018ee30b5446b2af0a82d2804fad9dc62195",
+    "primary_subject_means.csv": "bd046a864acb76a9dc9704429ae1873f5b4eece9e01a06e947e89cb0b19319af",
+    "support.csv": "7a67cfac8ddfb1506583f65449854c82822921ba93de4e65df9ebd857b88374c",
+    "support_per_subject_seed.csv": "3392bca7e5161d336858f5dcab659b007119a3dfb0ba7f0a6ee84b87e206a4b4",
+    "temporal_example_sbj_1_seed47.csv": "dc5b3799ba59acedb4e7747b602158b043aee704371af6417123f83e3e0981b6"
+  }
+}
