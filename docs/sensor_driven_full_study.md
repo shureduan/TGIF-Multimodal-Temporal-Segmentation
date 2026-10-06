@@ -91,7 +91,7 @@ python scripts/run_signal_benchmark.py \
   --data-root /path/to/WEAR_prepared \
   --baseline /path/to/complete_wear_v2_benchmark \
   --output outputs/sensor_dwa_full \
-  --cpu-workers 3 --mps-workers 2
+  --cpu-workers 2 --mps-workers 1
 ```
 
 The same command resumes completed jobs after verifying identities and file
