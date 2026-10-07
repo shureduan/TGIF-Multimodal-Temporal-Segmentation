@@ -1,9 +1,11 @@
-# Sensor-driven DWA: full matched study
+# Sensor-driven DWA: extended matched study
 
 This study freezes the existing sensor-driven candidate and evaluates **18 LOSO
 folds x seeds 41, 47, 53**, with 30 parent epochs and 15 probe epochs. Checkpoints
-are always the final epoch. All new training must complete before test metrics
-are computed. Normalization and sensor thresholds use only the 17 training
+are always the final epoch. The extended runner computes test metrics after all 270 new runs complete.
+The current published release uses a separately recorded completed-run cohort:
+54 full DWA runs and 27 runs per released control, selected before its test
+evaluation. See [results.md](results.md) and the result manifest for that scope. Normalization and sensor thresholds use only the 17 training
 subjects in each fold. TGIF is outside this study.
 
 ## Separately trained models
@@ -22,7 +24,8 @@ loss, training budget and independently trained probe recipe. Uniform pooling
 leaves Q/K and temperature unused. Variant settings are saved and validated in
 both checkpoints; different variants cannot silently exchange checkpoint pairs.
 
-There are **270 newly trained parent/probe pairs**. The full model is retrained
+The extended plan schedules **270 new parent/probe pairs**; this is not a claim
+that all 270 are included in the current release. The full model is retrained
 for all 54 runs, including the pilot's fold/seed. The addition of ablation
 switches preserves all 27 stored full-model pilot output arrays exactly.
 
@@ -69,15 +72,13 @@ full run. LOSO training sets overlap, so these nominal statistics remain
 exploratory. Figures retain sbj_1 and sbj_9 at seed 47 from the old examples,
 rather than selecting new examples by performance.
 
-The numerical comparison with the published model is declared in advance:
-both mean-subject Macro-F1 and mAP@0.5 must be higher. Significance and the
-sensor-resize component contrast are assessed separately. All negative and
-non-significant comparisons remain in the report. Nothing is pushed or
-published automatically.
+All comparison families and source values are retained in the numerical outputs.
+The release describes observed means and identifies the cohort used for each
+table. Future completed variants can be reported as an extended result set.
 
 ## Running or resuming
 
-Install the candidate checkout with plotting dependencies:
+Install the repository with plotting dependencies:
 
 ```bash
 python -m pip install -e '.[plot]'
@@ -101,9 +102,9 @@ study directory. Each worker trains in a separate process; MPS and primary
 non-MPS devices have separate worker queues. Keep the machine awake and avoid
 running another copy of the same study at the same time.
 
-For a fresh reproduction, first run `scripts/run_wear_benchmark.py` to generate
+For a fresh extended-study reproduction, first run `scripts/run_wear_benchmark.py` to generate
 the complete v2 baselines. Use `--workers 3 --mps-folds 2 4 6 8 10 12 14 16 18`
-for this Mac's original mixed CPU/MPS assignment; omit `--mps-folds` for a
+for the reference mixed CPU/MPS assignment; omit `--mps-folds` for a
 CPU-only study. New methods inherit the baseline study's fold-device mapping.
 
 The runner writes `status.json`, per-job logs and `进度.txt`. Once training is

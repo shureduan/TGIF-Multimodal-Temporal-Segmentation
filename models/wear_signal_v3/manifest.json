@@ -1,0 +1,1311 @@
+{
+  "schema_version": 1,
+  "protocol": "signal_adaptive_loso_v3_candidate",
+  "release_tag": "wear-signal-v3-20261007",
+  "parent_epochs": 30,
+  "probe_epochs": 15,
+  "feature_stride_seconds": 0.5,
+  "seeds": [
+    41,
+    47,
+    53
+  ],
+  "archives": [
+    {
+      "method": "SIGNAL_ADAPTIVE_DWA",
+      "seed": 41,
+      "folds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "asset": "wear-signal-v3-signal_adaptive_dwa-seed41.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-signal_adaptive_dwa-seed41.tar.gz",
+      "bytes": 92660554,
+      "sha256": "b456177d06dc0a66e5cbf1810ea9fecd8b7a080a18538be2b1333acdf7a4e999",
+      "files": [
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "d105c44beaac3bcbbd45eefe34f9c6908a4d79cc2d397f07375ad3392385bbb1"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_01/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "629dd61dbd16782baf5f4c0f35709779e30c68ee524b3cdb89c70431333fe965"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_02/parent.pt",
+          "bytes": 4225588,
+          "sha256": "51c1b3b726cc048b6320759c6ec50856030b2a086f94ab59c19f156d5c539a0e"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_02/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "4edecd8474b31c0e114bd75229033f07efbe0637a6fd915eeb502e15ef8033b7"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "0549d0a18bad838ca8b5050175344ed896f013696e079f948ae44f0f8c5e22c5"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "2bb02488367ea71d231351940dc0d695dff2348ff2fda0f8e7f82e1601ab1e11"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_04/parent.pt",
+          "bytes": 4225588,
+          "sha256": "5aace498a990609c39dd6ba938653066ae4cf8d914089f94b05074ed785f3062"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_04/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "ff3744c8141e4e84725edac6c4ce13ce2180da7ac94008871cd8173b1868e503"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "858829f401e9688b0a2d1836cc2f45b0a9c592c55a451053518aad91c46da265"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "638bdb0fcb584902f12074b23ab6a919a1c04ae0425396812b05221d123538c6"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_06/parent.pt",
+          "bytes": 4225588,
+          "sha256": "f0e7ceedf228da78ed41cc41e5b1720aaccddb693ea9ecfd86770a9e72379020"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_06/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "fd0876726528d8855e7b795ffe0945b26c99a9ef328596a6440d0e7c640a3963"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "c3b265e035a1215eb4f2969b04c84ea5e46112ad0063d7b3b08beac3e922a8e2"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "df587d5bfd6d5b46e7f7f0f9d8a68bcd12e3d23faff6805fe2d12d710cd1ce07"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_08/parent.pt",
+          "bytes": 4225588,
+          "sha256": "2d5a1516f6e206731525195a696cbc62f22cd64019a3a27cae4a8bb016098ad3"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_08/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "44831330cf007a2983628e498bc401867d23f361795204707bd5de17d98d5678"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "0558c94e58973dee84f20a451d452fce8530c492ed7be3377b5c3a6109b2f963"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a0e447e504d0631e32135e41d6f1c34857e89ae2272dc21b901f6f0028f58b37"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_10/parent.pt",
+          "bytes": 4225652,
+          "sha256": "9485a89e9431c95f0bc8770536c7d1c29a08cd6368f7babf5eaf53c9d754e2e2"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_10/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "f3437d0afd501aba083423bcaaa277f74c720e2a06ab899b017d3c00a6a3ba78"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "6f7d3facf678264c39f58f3d7d6d210f7c1b547b33cb516c2dd23e87300b674f"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "c50ea9d19cf8ba2e42781f84aa1c8c8a9da49aaa5928c9dcde394d6ded38697d"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_12/parent.pt",
+          "bytes": 4225588,
+          "sha256": "819fd365288dd3c010d5343be8074f50d1d462ee070a7f5e268dbd37e83e46ae"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_12/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "69907a2cf223373863e41c71bf367deec6cb1454ca5bd07e6f53b5346194a4ac"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "5a5dfd513aaffcbcfbbccf12bf43ae7521e675dad9cb34d1b0becbd11e339447"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "34b1452904857cad70395726f3db7c705ebd356231ba4ee207cda92d7a32a8b8"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_14/parent.pt",
+          "bytes": 4225588,
+          "sha256": "a93f40471e9f4cfe09be95fe6c5842cf02848c95e38b385492dc3a4852397ba0"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_14/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "e7320593750e5f8b13df1167e3de94c4d6554afcc984d12a1fe45218d0786c47"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_15/parent.pt",
+          "bytes": 4225652,
+          "sha256": "c3edf64142d8d3b535f5b89571218a85bd7e7953f7827917903c515ef3dc51bc"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "9abbb61202990244cf07d337b0d834ab1521460e094602411f826f159f8b71e6"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_16/parent.pt",
+          "bytes": 4225588,
+          "sha256": "77e19da27576b64629c0eb4bd0f77078baf6295041dac534cd137c14b99a9efe"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_16/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "dd7bed9047e455a4ec7f7141f950af172e0682f16ae715c86dd81e24cd18e17f"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_17/parent.pt",
+          "bytes": 4225652,
+          "sha256": "fe1321431ac46801fe13b3b353006de9d2a5e498243b88a5ce5a9637775cbeee"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "27b0227e50c6c0bf84ffd82412e9a3ac56f61f47d4450dfb8be8f05552ad35a6"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_18/parent.pt",
+          "bytes": 4225588,
+          "sha256": "1af986e38975897906735b4348f5089410101da3268a188bdca9181b302e82bf"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_41/split_18/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "c8bc3c03dbddda5b797b587d496306783c8b3414e21b51db1581cf64875ad3fb"
+        }
+      ]
+    },
+    {
+      "method": "SIGNAL_ADAPTIVE_DWA",
+      "seed": 47,
+      "folds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "asset": "wear-signal-v3-signal_adaptive_dwa-seed47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-signal_adaptive_dwa-seed47.tar.gz",
+      "bytes": 92650158,
+      "sha256": "301dd5d703ce2ae96ed86892734be128a8dcebd740cdbdcac0fdb3e3bef9cda4",
+      "files": [
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "540367173de24d98f8f3603c3e2f5428687d2e6af6b1f5393d5c3fd4840a7bd5"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_01/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "57d598da6ff37d45ba1e9121e6caf2c9d1c322b8d2e9b1fc596e8d90b29a23db"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_02/parent.pt",
+          "bytes": 4225588,
+          "sha256": "b1e835160104e57375a9b7d8176ff09a0848a8aa247af796d799bc243e9e5e44"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_02/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "3da46983f2906891842ff3a5abe7c9ddb425e4d7b7a21bf3cd8ed49ea6aa158e"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "ed40fb3b462d4514ab9c82ba9e87aa6fd5197ad57310e4315afe806e018f8dbd"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "4e6ceae811a3d980cf70399c7cf747b5e6420ee4f216c0e5eb7ee08e9eb89df8"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_04/parent.pt",
+          "bytes": 4225588,
+          "sha256": "3a6fd6111a6ee841b63a49cc736b828b8a8a3ee705fab4d2e73e4467ec437751"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_04/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "0e70312d75fdcc3d75a32f253f48f2bf0e58bebccc29c95b938c7cec746a241a"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "a790d5e94629916e64d37c20318197b0d880b46728aaa2641fcdd6b2ee03c557"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "b37a431edb297683366c2b229cefc632b1f1dd60f1d17df952f34ca38782520d"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_06/parent.pt",
+          "bytes": 4225588,
+          "sha256": "d85b1c957c7909745c06979469bae6e49b4077da4d6fe9664dc12dd904dfb8b6"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_06/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "ab358a9c6ad1fd7baf0f1392adac5f373f878b201c84fd08c35d97b20625380d"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "2f996db186b6203c5e22a98318836bb6e58a616d4d0c99456633a9b43db9a15e"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "714502a37f751c1d95424501401a1cd0f2d82c65d1a2009f73f82eb097165495"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_08/parent.pt",
+          "bytes": 4225588,
+          "sha256": "cf4608d2695b7ae32ac36b75446fa300f65b1ec2567d06654bd7e7e84d4c529b"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_08/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "494060d9febf6912e64c65e34a7ad1f6b0a9a3b482f0f53d5f876939eed0945f"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "f4469e6523f61488f1b5122e28121aa4284c0ea447d2ad03095e9458be4de002"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "9e4e5045b1aa9278ba96ccbcf24b211eaec71b7c1d8b2fe984ceb2a88b344536"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_10/parent.pt",
+          "bytes": 4225652,
+          "sha256": "4984620cd655a777b4ce26b3995b992725e326a271a399b07008c49e24cbbd5c"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_10/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "80f797f9b5ee3a678f13f11a221d816b5cd8b28bbac152a04e4ba688f636de41"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "129080c272d40c62bea2a41ebe3f7984f692aa2c5de95e66f59131c3a2048b52"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "1363517e940eceb40674240a8dc39f62b2b719934541ac0eb18aa0c3e5e5d342"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_12/parent.pt",
+          "bytes": 4225588,
+          "sha256": "349497c3358b2ce7a8a683ca6a5d1e20715a1017ce03098db898495ce120ff0a"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_12/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "c11860cab901b80897e04966358be2167524bafdd3ff184b5ade565d1ced7144"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "a259e74e5caf822fcd5262c345dd8acaee0f6aa0ad76298c2ce98177bf5c17e7"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "0dfc40436bc5235e7051ac3d1de09f3cf8cde410504752103b04dfaeb9d6d6c3"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_14/parent.pt",
+          "bytes": 4225588,
+          "sha256": "5c8730ab2f357372b3c11b9fb2c5ba18551257cee35a1e5f26b00d504857a506"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_14/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "14a98131e001a0eb066050bae13694ec3f6e391942a4560f624644ddba227441"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_15/parent.pt",
+          "bytes": 4225652,
+          "sha256": "e496312fc8ca4f69b0a39325066f233d7a8016662f04c7097ecac6cd8635ed40"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a84393a15ea81270f38715fb66f4aa0bcb31b66bfbe87265646614bfe7495131"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_16/parent.pt",
+          "bytes": 4225588,
+          "sha256": "38be4b6d99ba4981370588278d8a8e2182ed741473752430dd775c9a469993f6"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_16/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "f9c1bb0b7e35403e7cad285cf79f2f254fab5e7a2c3ce4a686f7cf2701379143"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_17/parent.pt",
+          "bytes": 4225652,
+          "sha256": "22fd1edbfcf3ea1210011ac7c232a1379db3a66c640e77540ac6f4b10fb9a945"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "deee4b9ead9b3d1cb3178d6635a7ab59e84f5a21094563424dea561a17f4d56d"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_18/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e7a48670500d24a44960411779f62dcc4c667b2f69b22c6bb3f256c6777f1348"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_47/split_18/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "1937d9e5c614ff463d5b5f1abea52dc88d74e10c0e5b07c6a3a3fcc2ea1b3ad6"
+        }
+      ]
+    },
+    {
+      "method": "SIGNAL_ADAPTIVE_DWA",
+      "seed": 53,
+      "folds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "asset": "wear-signal-v3-signal_adaptive_dwa-seed53.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-signal_adaptive_dwa-seed53.tar.gz",
+      "bytes": 92669196,
+      "sha256": "125c8f109435a767cde5e270b04c0e713ed59fe7e146126003c7ff5ac753e8fc",
+      "files": [
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "c236b5e1f20868fe164c905b14096ebdbf92a6a3e802d3bb888fb5900fc339e7"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_01/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "6a3055eb571ad3d08ccc96a9c0904f4d5d67fa5b19bec3994cbb59f1f13de5a5"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_02/parent.pt",
+          "bytes": 4225588,
+          "sha256": "0883a2bd23f95e10514449026cf5cab3ea2311fe8f1a769744481738ee97f901"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_02/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "83652ca77dc763868e7678cd538c8adff50fcfec53447838075407ebd1ea8dc6"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e1828ae0d8d35898abde1379ad67f0ab87d4afd9e7a92985bd9f940922349d0e"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "9d3d87ed1d6a14d2d33c7017ba799d92c22349e46c30a3646f238c6f7daf1257"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_04/parent.pt",
+          "bytes": 4225588,
+          "sha256": "ff55044a4dcebb9fc2e6b445c018f1f074016796e08d1251635b884d7eb3560b"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_04/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "9e8bb0d92bdeae86d60baef9bf9557fb3de696b29642756b4afb5abe7b96f153"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "82a804b28cb523c8286222d950a0ec9f1612057dbab6b2d765c7c8fa6324e88b"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a59c3efd9b285b223180d99abf758b91766271887d5fc252f62eea6b8fa0fae5"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_06/parent.pt",
+          "bytes": 4225588,
+          "sha256": "1cf47bef83a48ce295bfb6ea3d6bfae23fc85b546b12edae04213cabf8e58d6c"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_06/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "4a2a0cdffb34d2c4925104e9e6c4ac6aaf01e6763e689c4c922e9e01d9342509"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "00ad58f7911bba5d0ef683ab9bcfa4e89a165fd0948ebb7218f3534dcd444825"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "941a3e697241461bd67b15b787def174e666e5dd095bef45ef84f511782ccfbb"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_08/parent.pt",
+          "bytes": 4225588,
+          "sha256": "63b8e8fb0abc9a6d6211dde510b3a9da2cd082de70c8bc7724dfdf944a8b26e3"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_08/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "12c60f370f861d4cb8f92cff50a62aea0a8bea223b1f89378f114d3bd5b1be6b"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "a50fe20642ef4e41b0548fb1c42c9677f5c3a75d04af370d429d0769880b513b"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "3a13c47793b8983a98f6bb212d31e45077b0184991172889e777febe51c0b72c"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_10/parent.pt",
+          "bytes": 4225652,
+          "sha256": "784bf60350ddd99f61ba3e4c058bede92b4490fc95da7d9f676d38fcd8e28dd6"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_10/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "6498e943c363b561476d4be0b9bd1ddc77c49083c06892d06474a3205dbeb859"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "23e1bdf073c148fc756729f5d0db54d66b572d1b071a2b4f465321001acd86ad"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "b45c18b48064563195f3656065709d8b64cc99f06f69d9c9189365ebfd789170"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_12/parent.pt",
+          "bytes": 4225588,
+          "sha256": "bb08392a928ca0584b1564b13b6402e028350ee9dd4baadb7737a42cc8073bb9"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_12/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "310df2c2346f58fb323216716b7fbd212c20ef7599bdbc147d28f921e93bb919"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "4a5def428c92337017b38cc933677dcd1c11c11a1d55542b9a91f008db66f967"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "356f81d8a99021dfd119dd0ba4f3031f0587d058752a45a2b979d8eea98ed248"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_14/parent.pt",
+          "bytes": 4225588,
+          "sha256": "8d0f84db11840400ca5fb88c995a62f1e8e6b41de43a8a3372652529c12a1077"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_14/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "df85964f934e5e88df9a5bee245694838689a1dd8c22503c974931de8514e14f"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_15/parent.pt",
+          "bytes": 4225652,
+          "sha256": "2925184fdac43da092dd5f9ae82249125d2392b1c1a6f49dddb1b56df661422a"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "9bc067890bf67b2a1e17b57483a8929704523aa0c3d31e82999c3968ca4920a5"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_16/parent.pt",
+          "bytes": 4225588,
+          "sha256": "b95bd5c24200091c83813196dabb330d529c1a6f70b42968fb2bf34ff05c203b"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_16/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "8baf1dbbb85456c17eca98479e361bde02f02deab99c899b927e4acd25303ed7"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_17/parent.pt",
+          "bytes": 4225652,
+          "sha256": "2e60f0f412c157c5ea77c2334f305f5f86e3b017f9ff31d31315fa23e10a7059"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "e70181aa76d6271f1353cad7eefee84443c92c3ef0c85ce6c02de5b80ed6e755"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_18/parent.pt",
+          "bytes": 4225588,
+          "sha256": "dfdfb32cf85f65c07608715c7a4ae87844075ea2e56ca97c54a01a116803cb4b"
+        },
+        {
+          "path": "SIGNAL_ADAPTIVE_DWA/seed_53/split_18/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "c06e5b665409c7b4e16e958ce7bf95ca209f1167e5212029804637e8fcb63935"
+        }
+      ]
+    },
+    {
+      "method": "NO_SENSOR_RESIZE",
+      "seed": 41,
+      "folds": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ],
+      "asset": "wear-signal-v3-no_sensor_resize-seed41.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-no_sensor_resize-seed41.tar.gz",
+      "bytes": 46323154,
+      "sha256": "f798e337a5de131f44c0eaecc3802c4abf90a1f57cede9dbd0ae2c7275c653de",
+      "files": [
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "2577e1ddae6d26dceb1db938d9883001498bffd9a2db7b2a8e8dfd4a9b0b8b76"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_01/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "ef1354f86d8862051c476e4ec531f0a2fa8f0d4695c1763264feea2dcb05e6ed"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "42f6f7485312db898720b19cae0288c0d999805196360f665c432e729157d129"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "254f4dfd6d94a98a101146d3a1ce95c6a3e41bb883eee69eb9e82c5ba940281b"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "0ae2520084700865a992b2fb89829349ebea17cb4df8091947b8c06f1f4cd546"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "268ef42851074f5a6201469ecb018568b7bc6459b3151604f45975397fd42f42"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "8ca55a4878f6119444f3e37eb9df6dc7a1e7dbfb5ba193546c59ad1782187ca3"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "f708f63c2fd50f6d9143d6c7e7ca8f34817b924aabb051226d3cbbcf80f2d7d7"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "34fcf862c0aeb21112219ad9d6f092945f87335dd7d47d2ec4cb8a0575573c11"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "d5aa3db259af0ca760542495a6a411004c80690ead63da4b693d457f059c2826"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "48d1080cb86f3baf0b0c0db2413aae3e594f3999722d01637622db675af2fdd7"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "4f6fe94060d449826cd32da07173f2149da859d6430c88722cb07b57645dcf9a"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "dd36724065f37712e0e626ba437c4a75d7d87c20e8ae6dafa14eb1383671eeb4"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "0afc9d4479b3f0fd61f875ffcff0572eef767ecd4192463fdeb9656dabfa55f0"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_15/parent.pt",
+          "bytes": 4225588,
+          "sha256": "b4fa3149a0bcb0579ca3b837ab389bd71bbb295c14606427e91b14c3ac19ced1"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "0e357543fc28620d2847f646ecbd3261d63e8593df4083a4cb4d06e56eb89f7c"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_17/parent.pt",
+          "bytes": 4225588,
+          "sha256": "8aef56b0a630354027349f48ab8cc407bb20949e5f56cfaa3075799b9341b889"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_41/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a1a477c3e23bc3a83d6634d47448649e51ea9e47cb478e9c5d7d763b5adcbc65"
+        }
+      ]
+    },
+    {
+      "method": "NO_SENSOR_RESIZE",
+      "seed": 47,
+      "folds": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ],
+      "asset": "wear-signal-v3-no_sensor_resize-seed47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-no_sensor_resize-seed47.tar.gz",
+      "bytes": 46322812,
+      "sha256": "b85a8db31e6c7a2b8e11e5ef785845e230602d7b81bbf1b730ada38cf6f07b69",
+      "files": [
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "c4a6a38a415b241c00ca5a3fca4fb7a3c5984ea9320f60c509ea65d58135bd12"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_01/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "14a8485b169433901197b4b5805edf7f1ba76637db414097cdefcafdc13ba307"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e0f1b4b184e2083bec848b3fb3a6854872ee20511dba2549d9c05948881ab723"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "518c1d1ebb7747a3ad4e2aa5c052d10548d80b8fd1c97e825622c87769ea58de"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e073d91d3bbade6b6f709d532efad1db2db07ee9030fca94de6b70a2492df9ed"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "1c939da37ac81487f5660d34dbfdde0215d23385a1b2a9873ec1d2d6b79db5b2"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e7a4b7a7ee2a8c1807457ab9e05390ea21c58f839bedd921b193423a77baa7f7"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "b8e5f1fb131c2a5e478cb13a438290ce524c3229a2a1677ac8658312df297f0a"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "8a5e8eae3ae03c446b774ba58ac6e7b7c49435767070f21b9f117bf15e2f2b36"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "c102e29bb9967d1f288db02c186aa84041748f00de83ab5a4a30a4f108542838"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "a14971a5b7e25c55da04d088678c3011e5ebc401cda0bdd8ee8698d56b1a81fe"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "8988cfc033d5d0f79179e40d4c36bf6953856c9939080e83cb0e60f6025713d0"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "d6a43fe2786419d13df8f3e280e64ff51b710bbb781913e8c07b825f083aede2"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "33522a58bc98874c599da4a400afbbb86554fa6f9e03c74d4517bebd13ee68e1"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_15/parent.pt",
+          "bytes": 4225588,
+          "sha256": "b4218bc83406b6d4c5eb5da14fc84b269cad8ebcd3973edc68a684bacea4c930"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "887e5517f0d2de139c709dd328cb4fed9c0870213db4daaff9ffab8bc4a27f09"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_17/parent.pt",
+          "bytes": 4225588,
+          "sha256": "95fd452e6956bf21e4a6503ae116cc438d7afdba7ce50ba63977f3b02713141a"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_47/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "b61b11c094e2baba01181214eaf702b55b00981975669851f68b64d2effa4eb6"
+        }
+      ]
+    },
+    {
+      "method": "NO_SENSOR_RESIZE",
+      "seed": 53,
+      "folds": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ],
+      "asset": "wear-signal-v3-no_sensor_resize-seed53.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-no_sensor_resize-seed53.tar.gz",
+      "bytes": 46335715,
+      "sha256": "e5d48f89d38fa97b4742aec92e98e71741b137d8d82c65d3cd0df50b02ff1ee8",
+      "files": [
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "a4ce9bd1b21f11f351bb4ad9aebbbda26777b83f31428a55f38d2b2f7724d9b4"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_01/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a1c47e82fdb8ca72dae1499445473fa8261f946248619f1a1dcdfc8140f36daa"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e129c3fa2b61d2f9b50bdcfea3acf6444fc615ab8e62611c62fb512120b1c384"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "92fb7717b68a5756c1380d3db63bc9578328ccc54a5132fa6826ea7b6bf40c14"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "409296454d676080e5ea201a42578189b882009f812d39e54b2af26d33f9c28e"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "00398a7420a8787e677e86e782bb39b1c25a0944c599303120b9a2b9f2a2a087"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "87823fcfe6bebc6fa5819eb61e5c50a3ca14d9c223923826dec3496bfbad078e"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "3f6b27263519b8d750ec768c962e9a45d0cd4d4cdffc9260520ca1e37e646ed1"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "7cc8d4107d389cb78468a3810d009257f3e16df8eec0224a27fcbe65c68176de"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "dc3b0c842edbca3e88c54ee5c648aac43ba5c9ad67172a64eed7774a128244d2"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "307a4b333f876ceab620f1933c5a01c184175aa54abdbd581faf2a5c85c38055"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "cc909f854bad0e01f8912c905cef112ac2f1d370a9a48b8a47c39a1c0e181c76"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "21b778b0e2b5f92f724b9a84a7f002d7dd61c0f60e068f026d38cbb159cf690e"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "151e7c4108f6f58f9324ab97f526927986b623fd000e6819bd54bfc4ed6ebebd"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_15/parent.pt",
+          "bytes": 4225588,
+          "sha256": "a2a36c4321de224a945976131c65c13f272b4eb1c1cdfdd95d16d54fe9e81ee3"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "2dbb1083e0e40bce5f0452dbfce14565eb9a49bc6481b333bc77c748348307fb"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_17/parent.pt",
+          "bytes": 4225588,
+          "sha256": "83e127642644cbd7a9f2c29a595d6fc7799f5163140aefe48325725cb938fb4c"
+        },
+        {
+          "path": "NO_SENSOR_RESIZE/seed_53/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "cfec964019e31d00ad35c8b55dd0ab31720bc8c4b72b8954cedb218dbb2fe19e"
+        }
+      ]
+    },
+    {
+      "method": "NO_CONTRACTION",
+      "seed": 41,
+      "folds": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ],
+      "asset": "wear-signal-v3-no_contraction-seed41.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-no_contraction-seed41.tar.gz",
+      "bytes": 46323022,
+      "sha256": "1778947b69afbc310857af0e5280fde8e74a384b505f7c41ff2c68a785b81550",
+      "files": [
+        {
+          "path": "NO_CONTRACTION/seed_41/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "ced426930644446db341b2cf39c9c4d0f40a2dc0a92a735bb7f9e5f576764676"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_01/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "6a147a8bd5379b456492fb5fb3a64efe70c8102c9f908a404b3e1862a2e408fd"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "3075327fff41d92e02414687f7efca9796a79474879a24e5a8e5912ad0594cd5"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "cdddf9bd21ee82cf3e2529dc8fa58933b79f969ad44a721a0b845395abc9340a"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "9ef30d11249c6fa12453ad8273bbc9cf79c47ff9be367709bea494ed8ad4ed1d"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "9acda0439224018e2c4ec4c19651ca8d9719af9a1050ddf3afcfe002f247af6b"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "6fd4e62bffe9d85cfad221b680a6b2b4bf8fbd081fae45de1257677ad93cca9a"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "f1957bd3a998797aae4caa69020d875af01c3a53c360e550aa6c5e1a4cbcce45"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "4921db4b749501990068be0af421e2273c6ce669c8163327532ea929803a554a"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "0fe8230e70ec59ae84d891958510e51bc16efbe0eefbc50b9b01ef984558f7d0"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "1e8cb0b9ce1610f18341ffddf9aa14f3570bf1f5cdad5f2327da019219dc8c83"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "7a80616b2ff826cac606f0c0ca5025bf5a2a75cf664a707c0272aae9611fcf1c"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "42031bb8fb6701036210b1c95023ca83d75f6a803f47e9f5068c8532f0f1defe"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "7a36d7378c7d155fd2b727cc16f77a746db7c951a6c4e6e50b9eb8d46dec141d"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_15/parent.pt",
+          "bytes": 4225588,
+          "sha256": "75446dd18a1a7dd9d32e1a5df532273d5b28e307a97a6dddad65f0530b0f8843"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "cd691202ee65778218c094dda75dcd3f1149b89f76f37df1513d58d07b81ebcd"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_17/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e7bbe9bd126dba7a828f186a0d9122a71312dd4e2a3184c817a0812cd6b62ae0"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_41/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a6d23bdf7c93f99dceacbaee728e5dba9a552f36eedebe04f70171e6a0bbbcf4"
+        }
+      ]
+    },
+    {
+      "method": "NO_CONTRACTION",
+      "seed": 47,
+      "folds": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ],
+      "asset": "wear-signal-v3-no_contraction-seed47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-no_contraction-seed47.tar.gz",
+      "bytes": 46321999,
+      "sha256": "7934f8c10b9cc482e648a4dbfb7f44ccbde84e3d498cfc95c3ff25d5b727aa6d",
+      "files": [
+        {
+          "path": "NO_CONTRACTION/seed_47/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "136a1d7eb1ad04661eef2daa12a10b221819a302e2216e1e6e08160fdd46d947"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_01/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "57762753565fe84713f5a25a367988cf505e89d8d1b5936937fddd1d19c633f5"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "8a521dc17fe3319c9fd45388eb87661d71c6fdb7c9776cb052ce22c34ad332d5"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "8c24a3955b5b25b18f6e9a9926dd373d993f3e1c501090f418f387df4c4eff5c"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "2cd9dcf6506348da38d390c4146057703ce124284fecb8f8062f7781b51509cc"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "e09c2ecd1896ffc3faf822c60daf4c6be5fbf2b5484be325532917155d48bbd5"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "21efdbcd83546cab0dfa788f787f3811c8a496d6d91e7694a99fb6cd64e28204"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "d0680d008a0bfc25a91c3c1fee969bd98578a67a30d4757ec1bce22f5a9ed20f"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "5a3dc131b3590a69fdc67190080c1fa8952b7d565aa1e62c56cb29399653a6fe"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "89b164a497c945e84ff88cfbcefde45afe2e9fe4805c3a7ed75ebcc431f880ff"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "ce3c5293b569e236527ea4431fef3be571da3062ff7c444ac81de842153098bf"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a906dc0f65e1b58b2f9361e1e3d0034050f6881ac44644cf3e26c68064a6364e"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e0916ca44e59854c67b7b3999e8eb0aaf921e2e88816dd801f2dd6de86310d91"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "fbc687b9346f0c11dcb80ac177613b9ef1d4a94aa6e1246301bf57944a3857ec"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_15/parent.pt",
+          "bytes": 4225588,
+          "sha256": "c1cafd215996016ec58d4c9ebf7ff4d924682f837274e502b9fc55a4550c9c7b"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "7ed16ba7d3bd94b25512136f268ef9a2d00e410053bbbf8cd69b0785901fbaad"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_17/parent.pt",
+          "bytes": 4225588,
+          "sha256": "e9b50c4da03d0972c0da6913f41f82f519b037846568b6f7270f9ba365d08ec6"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_47/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "cf5d0619a6ff4dc27b7fcb3448fb6b5d1212d8f59883c8130b4122cb11e143ef"
+        }
+      ]
+    },
+    {
+      "method": "NO_CONTRACTION",
+      "seed": 53,
+      "folds": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ],
+      "asset": "wear-signal-v3-no_contraction-seed53.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-signal-v3-20261007/wear-signal-v3-no_contraction-seed53.tar.gz",
+      "bytes": 46337894,
+      "sha256": "9d9e7e17722120efbd3db792f4c55813d36e79704c71bbb37ee69461be344dd8",
+      "files": [
+        {
+          "path": "NO_CONTRACTION/seed_53/split_01/parent.pt",
+          "bytes": 4225588,
+          "sha256": "0eb1947d7690eb0813480403666abc6a83343da5fe893b3bf8ec6798a626e610"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_01/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "3b51f7fc57ba34ad81c480f8ad3cf2cc5bc64a558d095297dfd85441ed70801d"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_03/parent.pt",
+          "bytes": 4225588,
+          "sha256": "314313412ec0d415f716bd6320b969aaa330793819eca23899af83893d47816e"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_03/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "6e5b09e1b0bd3650f795d092cf1f709c95c7643eeb6cbecfde9cfb6a6cbda6f6"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_05/parent.pt",
+          "bytes": 4225588,
+          "sha256": "1cb0dc0275d87185386de0027df68822c0a14c4d063dcd8cb6b3d21e52e8bc3d"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_05/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "eb37b0dcc964510c80427ab6086bbbba1701bd198fbd91fd8535ec6315da95dc"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_07/parent.pt",
+          "bytes": 4225588,
+          "sha256": "dd8cb49ef830a02eb9f58575ee88768efff9cf24a5c0b779b97bd9b8878b7454"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_07/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "678946b7852e231c8547bd371127fc5061379144ed197f89c43095f860879639"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_09/parent.pt",
+          "bytes": 4225588,
+          "sha256": "c15330b60476cb36dc0326809140c04672968801533740207fcd5513f07752e9"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_09/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "d8752bb06cfb3f78289159560a61f70ef725949cfc822d4afd0654b39633dfb1"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_11/parent.pt",
+          "bytes": 4225588,
+          "sha256": "001806ed796a4f2f4ec1cc1fd1145a72fce42021ac54b9b4d4ae8467ab3b4b01"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_11/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "acec68bc393674ea4f8e40f663c6f4bbebedd0a6bbbe9ad2b09f1e8d2b507acc"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_13/parent.pt",
+          "bytes": 4225588,
+          "sha256": "7f878e9d61862e60626fa6898495db937d9daa631a22e9e17ddbd6f55a708e3c"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_13/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "6880cb34bc3949333725b02fd50ef7a918030152eead8954ef8459facc5749a2"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_15/parent.pt",
+          "bytes": 4225588,
+          "sha256": "9880ad030f1bd5b0e7b10e172465b7eb98ea8a9f52aab616f1adc6effad3bc13"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_15/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "77fc8f5874bfbc1c7b3c5e43b117b4c6fce20eeb8bfea5a13c3d6a43cbfec90b"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_17/parent.pt",
+          "bytes": 4225588,
+          "sha256": "7f94879eb949d012c88da83e354520d25b59722f049279e0dcbce53b49040fc6"
+        },
+        {
+          "path": "NO_CONTRACTION/seed_53/split_17/background_probe.pt",
+          "bytes": 1360375,
+          "sha256": "a7f0c82452fa675c71b905c670d0d99e0e69be383c478a7868a4017eb971fad0"
+        }
+      ]
+    }
+  ]
+}

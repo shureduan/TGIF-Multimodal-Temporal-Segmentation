@@ -61,27 +61,33 @@ features with windowed IMU.
 
 ## DWA pipeline
 
-A fixed sensor window can cross action boundaries and include evidence from a
-different state. DWA first uses fixed-window video-to-sensor attention and the
-shared MS-TCN to obtain a preliminary multimodal prediction (Round 0). Its
-contiguous predicted segments then define the sensor support for Round 1.
+We study two window strategies for choosing the temporal extent of sensor
+attention: **Segment-guided Window Attention (SWA)** uses the predicted action
+segment plus a fixed margin; **Sensor-driven DWA** inspects the signal and
+adapts the support itself. Both retain the same two-round multimodal backbone
+and background probe and are compared side by side below.
+
+The current WEAR model uses **sensor-driven window resizing before one-way
+attention**. Round 0 starts with a ±2-second seed. Round 1 starts with the
+previous round's detached predicted segment. In both rounds, sensor statistics
+control contraction and expansion before the video query reads the selected
+sensor keys and values.
 
 <p align="center">
-  <img src="assets/dwa_pipeline.svg" width="100%" alt="Two-round DWA: fixed-window attention, detached predicted segments, prediction-guided attention, and concatenation with video before the shared MS-TCN">
+  <img src="assets/wear_signal_dwa.svg" width="100%" alt="Sensor-driven DWA: inspect sensor statistics, contract or expand support, then one-way video-to-sensor attention in both rounds">
 </p>
 
-*Maintained WEAR training and inference configuration: Round 0 uses a ±2-second window;
-Round 1 uses the predicted segment plus a ±1-second margin, with temporal
-priors of 1.0 in the segment and 0.5 in the margin. Both rounds run within one
-forward pass and share the query/key projections and MS-TCN.*
+The controller detects sensor changes, trims redundant support and expands
+unstable or undersampled windows. Its mean, energy and spectral descriptors
+are calibrated using the training subjects only. Attention uses **Video Q →
+Sensor K/V**; its weighted RAW600 context is concatenated with video and passed
+to the shared MS-TCN. A separate background probe adjusts the final logits.
+Training and inference use the same controller and attention path.
 
-The window determines **which temporal positions can be read**; one-way local
-attention determines **how those permitted sensor positions are weighted** by
-the video query. The resulting sensor context is fused with the video
-representation by concatenation for temporal segmentation. WEAR training and
-inference use the same segment-plus-margin support and temporal priors. The
-final model additionally applies a separately trained background probe.
-Equations, tensor dimensions, and background calibration are documented in
+SWA retains the original v2 checkpoint identifier `FINAL_MODEL`. The
+new DWA has no fixed margin or core/margin prior. Its serialized protocol ID
+remains `signal_adaptive_loso_v3_candidate` for checkpoint compatibility.
+Algorithm details, equations and code entry points are in
 [docs/method.md](docs/method.md).
 
 ## TGIF results
@@ -110,14 +116,14 @@ changing their values. The full six-metric table is in
 
 ## WEAR results
 
-The current results use `fixed_epoch_loso_v2`: the first 18 WEAR subjects,
-leave-one-subject-out folds, seeds 41/47/53, and the 2 Hz feature grid. Parent
-and probe training use fixed budgets of 30 and 15 epochs and save the final
-epoch. Held-out subjects are evaluated after training; their scores are not
-used for checkpoint selection.
+The main comparison covers **18 LOSO subjects × 3 seeds (41/47/53)** on the
+2 Hz feature grid. All parents use 30 fixed epochs; the two-round models also
+use a 15-epoch background probe. Both components save the final epoch.
+Normalization and sensor-controller calibration use the 17 training subjects
+of each fold; held-out scores do not select checkpoints.
 
 <p align="center">
-  <img src="assets/wear_main_results.png" width="100%" alt="WEAR three-seed aggregate, cross-subject, and temporal localization results">
+  <img src="assets/wear_main_results.png" width="100%" alt="WEAR five-model aggregate, paired cross-subject differences, and temporal localization comparison including sensor-driven DWA">
 </p>
 
 *Aggregate performance, paired cross-subject changes in mAP@0.5, and temporal
@@ -128,36 +134,47 @@ localization performance from tIoU 0.3 to 0.7.*
 | Video-only MS-TCN | 0.6419 ± 0.1246 | 0.6903 | 0.7461 | 0.6057 | 0.6061 |
 | Early concatenation | 0.7048 ± 0.2110 | 0.7443 | 0.7734 | 0.6811 | 0.6776 |
 | Fixed-window attention | 0.7246 ± 0.2071 | 0.7635 | 0.7843 | 0.6880 | 0.6880 |
-| Final multimodal model | 0.7500 ± 0.1892 | 0.7748 | 0.8008 | 0.7154 | 0.7148 |
+| Segment-guided Window Attention (SWA) | 0.7500 ± 0.1892 | 0.7748 | 0.8008 | 0.7154 | **0.7148** |
+| **Sensor-driven DWA (final)** | **0.7520 ± 0.1782** | **0.7811** | **0.8040** | **0.7188** | 0.7147 |
 
-Subject scores first average the three seeds, then report the mean and sample
-SD across 18 subjects. Concatenated Macro-F1 pools the 18 subject sequences
-within each seed, then averages the three scores; this is the F1 used in the
-figure. F1 includes all 19 classes. Accuracy and mAP average subjects and seeds
-equally. The final model has higher mean scores in this run; superiority over
-fixed attention is not established by the paired statistical comparisons.
+**DWA delivers the best overall performance in this comparison, with the highest
+mean subject Macro-F1 (0.7520), concatenated Macro-F1 (0.7811), accuracy (0.8040)
+and mAP@0.5 (0.7188).** Relative to fixed-window attention, its mean Macro-F1 rises
+by **2.74 percentage points** and mAP@0.5 by **3.08 points**. Relative to the
+SWA reference, those mean gains are 0.20 and 0.34 points.
+These comparisons describe the complete model recipes; the component study
+below isolates window resizing with matched retraining.
+
+Bold numbers mark the highest mean in each column. Subject scores average the
+three seeds first, then report mean ± sample SD across 18 subjects.
+Concatenated Macro-F1 pools the 18 sequences within each seed, then averages
+three scores. F1 includes all 19 classes; accuracy and mAP weight subjects and
+seeds equally. Complete numerical comparisons, including paired statistics,
+are in [results/wear_signal_v3/](results/wear_signal_v3/).
 
 <p align="center">
-  <img src="assets/wear_ablation_robustness.png" width="100%" alt="WEAR frozen-parent component outputs, boundary robustness, and support allocation">
+  <img src="assets/wear_ablation_robustness.png" width="100%" alt="Matched retrained DWA controls on nine subjects, frozen-model outputs on eighteen subjects, and measured window shrinking and expansion">
 </p>
 
-*Inference interventions on the same 54 frozen parents, boundary-jitter
-robustness, and attention mass within the prediction-guided support. These
-component outputs are not independently retrained ablations.*
+*Component study: full DWA, no resizing and no contraction are independently
+trained on the same 9 held-out subjects (`sbj_0,2,...,16`) × 3 seeds. Full DWA
+reaches 0.7672 Macro-F1 versus 0.7598 without resizing. Frozen Round-0/parent/probe
+outputs and window measurements use all 18 subjects. Each panel labels its
+cohort; the component subset is not the 18-subject main result.*
 
 <p align="center">
-  <img src="assets/wear_temporal_segmentation.png" width="100%" alt="WEAR temporal segmentation comparison across four methods for subject 1 and seed 47">
+  <img src="assets/wear_temporal_segmentation.png" width="100%" alt="Ground truth and five WEAR models for sbj_1, seed 47, including the new DWA">
 </p>
 
-*Subject `sbj_1`, seed 47: Ground truth, Video-only, Early concatenation, Fixed
-attention, and the Final model with a shared class-color mapping. The subject
-and seed are retained from the previous example, without selection on the new
-scores.*
+*The original `sbj_1`, seed 47 example and class-color mapping are retained;
+the new DWA prediction is added. The second original example (`sbj_9`) and
+all 12 metrics, class scores and seed comparisons are in the
+[figure gallery](docs/results.md#wear-figures).*
 
-Record metrics use the 2 Hz feature grid; TAL values are derived from contiguous
-MS-TCN predictions. Metric definitions, source tables, component results and
-scope limits are in [docs/results.md](docs/results.md). The full training and
-figure reproduction commands are in [docs/reproduction.md](docs/reproduction.md).
+Record metrics use the 2 Hz feature grid; TAL values come from contiguous
+MS-TCN predictions. [Results and metric definitions](docs/results.md),
+[method](docs/method.md), and [reproduction commands](docs/reproduction.md)
+provide the full path from inputs and weights to tables and figures.
 
 ## Quick start
 
@@ -169,44 +186,40 @@ conda activate tgif-temporal
 python -m unittest discover -s tests -v
 ```
 
-Pretrained WEAR v2 weights are available in the
-[model release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-v2-pretrained-20261006). After preparing the I3D/RAW600 inputs described in
-[docs/data.md](docs/data.md), download the seed-47 Final model and run inference
-without training:
+Download the [sensor-driven DWA weights](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-signal-v3-20261007),
+then infer without training. Prepare I3D/RAW600 inputs as described in
+[docs/data.md](docs/data.md).
 
 ```bash
-# Downloads all 18 fold-specific parent/probe pairs for seed 47 (~88 MiB).
-# Archive and checkpoint SHA-256 checks run automatically.
-python scripts/download_wear_weights.py
+# Default: all 18 DWA parent/probe pairs for seed 47 (~88 MiB).
+# Archive and individual checkpoint SHA-256 checks run automatically.
+python scripts/download_signal_weights.py
 
-python scripts/infer_wear.py \
+python scripts/infer_wear_signal.py \
   --data-root /path/to/WEAR_prepared --subject sbj_0 \
-  --parent models/wear_v2/FINAL_MODEL/seed_47/split_01/parent.pt \
-  --probe models/wear_v2/FINAL_MODEL/seed_47/split_01/background_probe.pt \
-  --device cpu --output outputs/wear_split_01.npz
+  --parent models/wear_signal_v3/SIGNAL_ADAPTIVE_DWA/seed_47/split_01/parent.pt \
+  --probe models/wear_signal_v3/SIGNAL_ADAPTIVE_DWA/seed_47/split_01/background_probe.pt \
+  --device cpu --output outputs/wear_signal_split_01.npz
 
 python scripts/evaluate_wear.py \
-  outputs/wear_split_01.npz --output outputs/wear_split_01_metrics.json
+  outputs/wear_signal_split_01.npz --output outputs/wear_signal_split_01_metrics.json
 ```
 
-Fold 1 is for held-out `sbj_0`; fold `f` is for `sbj_{f-1}`. Keep parent and
-probe from the same fold and seed. One fold is a quick check; the published
-aggregate uses all 18 folds and three seeds. Use
-`python scripts/download_wear_weights.py --all` for all four methods and seeds
-41/47/53 (729 MiB compressed). Download options and pretrained evaluation
-are in [docs/models.md](docs/models.md); training from scratch remains in
-[docs/reproduction.md](docs/reproduction.md).
+Fold `f` holds out `sbj_{f-1}`. Keep the parent and probe from the same fold,
+seed and method. One fold is a quick check; the aggregate uses all 18 folds
+and three seeds. [docs/models.md](docs/models.md) covers all weights, including
+the matching baselines and nine-subject controls.
 
-To redraw the four WEAR figures from the committed numerical inputs, without
-training or private data:
+Redraw the figures directly from committed numerical inputs, without data,
+weights or training:
 
 ```bash
 python -m pip install -e '.[plot]'
-python scripts/plot_wear_results.py --output outputs/wear_figures
+python scripts/plot_signal_results.py --output outputs/wear_signal_figures
 ```
 
-This writes four PNGs and a combined PDF. For the complete 18-fold, three-seed
-benchmark and regenerating figure inputs from trained checkpoints, see
+This creates six PNGs, individual PDFs and `WEAR_sensor_DWA_results.pdf`.
+To regenerate scores from pretrained checkpoints or retrain the models, follow
 [docs/reproduction.md](docs/reproduction.md).
 
 ## Data and models
@@ -215,12 +228,12 @@ benchmark and regenerating figure inputs from trained checkpoints, see
   laboratory assets and are not distributed by this repository.
 - WEAR data and third-party features must be obtained under their own terms
   from the [WEAR project](https://mariusbock.github.io/wear/).
-- The [WEAR v2 release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-v2-pretrained-20261006) provides all 54 Final parent/probe pairs and 162 baseline checkpoints,
-  matching the current result tables. Their hashes are recorded in
-  [models/wear_v2/manifest.json](models/wear_v2/manifest.json). These are
-  downstream segmentation weights; I3D extraction weights and data are not
-  included. The [legacy manifest](models/wear_final/manifest.json) describes an
-  older experiment.
+- The [sensor-driven DWA release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-signal-v3-20261007)
+  provides 54 full-model parent/probe pairs plus 27 pairs for each published
+  control. The [v2 release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-v2-pretrained-20261006)
+  provides the four reference models. Their immutable manifests are under
+  `models/`. These are downstream segmentation weights; feature extraction
+  weights and dataset files are obtained separately.
 
 ## Repository structure
 
@@ -228,9 +241,11 @@ benchmark and regenerating figure inputs from trained checkpoints, see
 assets/              overall method, DWA, and confirmed result figures
 configs/             model, protocol, and label metadata
 docs/                method, data, results, models, and reproduction details
-models/wear_v2/      release manifest; downloaded checkpoints stay outside Git
+models/wear_signal_v3/ current DWA and control checkpoint manifest
+models/wear_v2/       reference-model checkpoint manifest
 models/wear_final/   historical checkpoint manifest
-results/             TGIF tables, WEAR v2 metrics, and figure inputs
+results/wear_signal_v3/ current WEAR scores, statistics and figure inputs
+results/             TGIF tables and archived WEAR v2 inputs
 scripts/             WEAR training, inference, evaluation, and plotting
 src/tgif_dwa/        self-contained DWA and MS-TCN implementation
 tests/               synthetic interfaces plus optional private-weight loading

@@ -1,9 +1,10 @@
-# Remaining release work after the presentation update
+# Distribution roadmap
 
-The repository now treats the maintained final DWA model as the code baseline
-and the confirmed TGIF figures as the result record. Before public release:
+The current WEAR release provides sensor-driven DWA, reference baselines,
+versioned checkpoints and reproducible numerical figures. Follow-up work:
 
-1. WEAR v2 checkpoints are published in the
+1. Preserve the sensor-driven DWA release and its checkpoint manifest under
+   `models/wear_signal_v3/`. WEAR v2 checkpoints remain in the
    [pretrained release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-v2-pretrained-20261006): 54 Final parent/probe pairs and 162 baseline parents. Keep its assets
    immutable; use a new version and manifest for future experiments.
 2. Document how users obtain or prepare the exact WEAR feature-grid inputs, then

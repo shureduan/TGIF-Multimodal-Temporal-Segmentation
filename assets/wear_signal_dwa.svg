@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="510" viewBox="0 0 1440 510" role="img" aria-labelledby="title desc">
+<title id="title">Sensor-driven Dynamic Window Attention for WEAR</title>
+<desc id="desc">In each of two rounds, initialize a window, inspect sensor statistics, contract or expand support, apply one-way video-query sensor-key/value attention, and concatenate the sensor context with video for a shared MS-TCN. The detached Round-0 prediction seeds Round 1. A separately trained background probe calibrates the final logits.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#475569"/></marker></defs>
+<rect width="1440" height="510" rx="16" fill="#f8fafc"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#172033" text-anchor="middle">
+<text x="720" y="47" font-size="26" font-weight="bold">Inspect sensor information → resize support → one-way attention</text>
+<text x="720" y="80" font-size="17" fill="#526174">The same controller and attention path run in training and inference, in both rounds.</text>
+<g stroke="#475569" stroke-width="2" marker-end="url(#arrow)"><path d="M260 235H292"/><path d="M538 235H570"/><path d="M816 235H848"/><path d="M1094 235H1126"/></g>
+<rect x="22" y="140" width="238" height="190" rx="12" fill="#e9effb" stroke="#7695c8"/>
+<text x="141" y="178" font-size="20" font-weight="bold">1. Seed window</text>
+<text x="141" y="220" font-size="17">Round 0: ±2 seconds</text>
+<text x="141" y="255" font-size="17">Round 1: detached</text><text x="141" y="281" font-size="17">predicted segment</text>
+<rect x="298" y="140" width="240" height="190" rx="12" fill="#edf6ed" stroke="#76a875"/>
+<text x="418" y="178" font-size="20" font-weight="bold">2. Inspect sensors</text>
+<text x="418" y="220" font-size="17">Mean · energy · spectrum</text><text x="418" y="255" font-size="17">Change barriers</text><text x="418" y="281" font-size="17">Window moment stability</text>
+<rect x="576" y="140" width="240" height="190" rx="12" fill="#fcebea" stroke="#d1495b" stroke-width="2"/>
+<text x="696" y="178" font-size="20" font-weight="bold">3. Resize support</text>
+<text x="696" y="214" font-size="17">Clip state changes</text><text x="696" y="238" font-size="17">Trim redundant support</text><text x="696" y="262" font-size="17">Expand unstable support</text><text x="696" y="288" font-size="17">Respect barriers and limits</text>
+<rect x="854" y="140" width="240" height="190" rx="12" fill="#fff3dd" stroke="#d4a243"/>
+<text x="974" y="178" font-size="20" font-weight="bold">4. One-way attention</text>
+<text x="974" y="220" font-size="17">Video Q → Sensor K/V</text><text x="974" y="255" font-size="17">Selected positions only</text><text x="974" y="281" font-size="17">Values remain RAW600</text>
+<rect x="1132" y="140" width="286" height="190" rx="12" fill="#eeeafa" stroke="#9480ba"/>
+<text x="1275" y="178" font-size="20" font-weight="bold">5. Fuse and segment</text>
+<text x="1275" y="220" font-size="17">[video, sensor context]</text><text x="1275" y="255" font-size="17">Shared MS-TCN</text><text x="1275" y="281" font-size="17">Round 1 → background probe</text>
+<path d="M1275 334V377H141V337" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="430" y="358" width="580" height="39" rx="7" fill="#f8fafc"/>
+<text x="720" y="384" font-size="17">Round-0 prediction seeds Round 1; controller runs again</text>
+<text x="720" y="449" font-size="17" fill="#526174">Calibration uses only the 17 training subjects. Parent: 30 epochs. Probe: 15 epochs. Final-epoch checkpoints.</text>
+<text x="720" y="479" font-size="16" fill="#526174">WEAR at 2 Hz · two rounds · no fixed margin or core/margin prior · one-way refers to modality direction</text>
+</g></svg>

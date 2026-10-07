@@ -1,125 +1,158 @@
-# Dynamic Window Attention
+# Sensor-driven Dynamic Window Attention (WEAR)
 
-## Motivation
-
-Vibration and IMU features describe activity over a temporal interval. A fixed
-window can include unrelated states near a boundary, while a short window can
-miss the stable pattern needed by the sensor branch. DWA uses its own
-preliminary multimodal segmentation from fixed-window attention and MS-TCN to
-choose the sensor support for a second pass.
-The prediction supplies boundaries only; the predicted class is not inserted
-into the sensor feature.
-
-## Current WEAR algorithm
-
-The diagram in [the README](../README.md#dwa-pipeline) follows this inference
-path. Round 0 and Round 1 are successive computations within one forward pass.
-
-Let the aligned video and sensor sequences be
-`V ∈ R^(T×Dv)` and `S ∈ R^(T×Ds)`. The WEAR release uses `Dv=2048`, `Ds=600`,
-and a 0.5-second feature stride.
-
-For video frame `t` and candidate sensor position `i`:
+The current WEAR model implements the following order:
 
 ```text
-q_t = normalize(W_q V_t)
-k_i = normalize(W_k S_i)
-score(t,i) = temperature × q_tᵀ k_i + log(prior(t,i) + 1e-6)
-a(t,i) = softmax over valid i in the current support
-c_t = Σ_i a(t,i) S_i
+initial window
+  -> inspect sensor statistics
+  -> contract / expand the window
+  -> video-query, sensor-key/value attention on the selected support
+  -> concatenate video and raw sensor context
+  -> shared MS-TCN
 ```
 
-The projections produce 128-D query/key vectors and are used only to calculate
-cosine scores. The value remains the normalized RAW600 sensor row; there is no
-value projection. The attended context is concatenated with the unchanged
-video feature, giving a 2648-D MS-TCN input: `[V_t, c_t]`. Feature normalization
-prepares the sensor input and query/key scores; fusion itself is concatenation.
+The released `fixed_epoch_loso_v2` weights and figures describe the earlier
+prediction-segment-plus-fixed-margin method. The current sensor-driven results are in [results.md](results.md). The serialized
+protocol remains `signal_adaptive_loso_v3_candidate` to load the released weights.
 
-### Round 0
+## Window control before attention
 
-Each query attends to a fixed ±2-second neighborhood. At a 0.5-second stride,
-this is at most nine sensor tokens. The shared four-stage, eight-layer-per-stage
-MS-TCN produces the preliminary per-frame logits and labels.
-The temporal prior is uniform in this round, so its constant log term is
-omitted in the implementation.
+The initial Round-0 window is +/-2 seconds. Round 1 starts from the previous
+round's detached predicted segment. **Both rounds resize their initial window
+before computing Q/K scores.** Predictions initialize geometry only; the resize
+controller accepts sensor values, sensor validity and seed endpoints. It has
+no video, class-label, attention-context or test-score input.
 
-### Round 1
+The inherited entry-point name `fixed_window_attention` refers to the initial
+fixed seed; this class overrides it and resizes that seed before attention.
+Likewise, the inherited `max_escape_seconds=0` disables the old attention-context
+saturation search only. Actual sensor-driven growth is controlled separately
+by `SignalWindowConfig.max_expansion_steps=12` and is exercised in both rounds.
 
-Preliminary labels are detached and converted into contiguous predicted
-segments. If `t` lies in `[l_t,u_t]`, Round 1 attends to that full segment plus a
-one-second margin on both sides. Candidate logits receive a fixed temporal
-prior: 1.0 inside the predicted segment and 0.5 in the margin. Positions outside
-this support are excluded. Query/key projections and the MS-TCN are shared with
-Round 0. Support is clipped to the sequence endpoints, and invalid sensor
-positions are masked. The margin size is fixed; the support is dynamic because
-the predicted segment boundaries and durations vary with the input.
+The operational definition of sensor information uses six statistics
+per raw channel: mean, log mean-square energy, and log squared-DFT band
+magnitudes in four frequency bands. At 50 Hz these bands are (0,2], (2,5],
+(5,12] and (12,25] Hz. These descriptors control the window only. The attention
+value remains the full normalized RAW600 row, not the descriptor vector.
+Descriptors are centered by their training median and scaled by training IQR
+with a 0.05 floor. Up to 512 equally spaced rows per training subject enter
+calibration. No held-out subject is used to fit these quantities.
 
-This means one query normally has multiple key/value tokens. The softmax
-distributes mass among those candidates. It should not be described as an
-automatic sensor-trust or reliability estimator: no learned reliability gate is
-present in the released final model.
+For a window W, R(W) concatenates the temporal mean and standard deviation of
+the standardized descriptors. The distance between two R vectors is root mean
+squared coordinate difference. This is a statistical proxy, not a measurement
+of semantic information or a guarantee that an action has been identified.
 
-### Final WEAR background prior
+1. **Inspect state changes.** Compare descriptor moments over two tokens on
+   either side of each candidate cut. Local maxima above the training 98th
+   percentile create sensor-derived barriers. Invalid sensor rows also create
+   barriers. A seed crossing a barrier contracts to the region containing its
+   query. This offline boundary calculation uses neighboring sensor tokens;
+   it is not a causal streaming algorithm.
+2. **Remove redundancy.** Try halving each side of the current window toward
+   the query. Accept a smaller candidate only if it has at least three tokens,
+   its moments remain close to the original barrier-clipped reference window,
+   and its two temporal halves have consistent moments. Repeat until a further
+   halving fails. The reference is fixed during this search to prevent drift.
+3. **Expand insufficient or unstable support.** If fewer than three tokens
+   remain, or the two halves still differ too much, extend each available side
+   by one 0.5-second feature step and reevaluate. Stop on stability, a sensor
+   barrier, a sequence endpoint, or the twelve-step expansion budget. A window
+   that reaches a limit without stability stays explicitly flagged as unstable.
 
-A separately trained probe consumes `[video, normalized RAW600]` and estimates
-`p_bg(t)`. It adjusts only the final Round-1 logits:
+The stability threshold is the training median half-to-half distance in local
+nine-token windows. The redundancy threshold is the training median distance
+between local nine-token and five-token windows. These are frozen controller
+rules, not hyperparameters selected by held-out accuracy. Windows near missing
+data or endpoints may contain fewer than three valid tokens.
+
+The search can contract or expand the same seed depending on the sensor
+content. It is deterministic and discrete; gradients do not train its boundary
+decisions. Q/K projections, temperature and MS-TCN train through the selected
+context. Changing the video or Q/K weights while keeping the seed and sensor
+fixed leaves the selected support unchanged.
+
+## One-way attention and training
+
+After support selection, attention computes `softmax(temperature * cosine(q,k))`
+over valid sensor keys in that support. Video produces Q, sensor produces K,
+and the original normalized RAW600 supplies V. There is no reverse attention
+and no fixed core/margin prior in this model. "One-way" describes the
+cross-modal direction, not temporal causality.
+
+The two rounds share Q/K and MS-TCN. The parent loss remains
+`0.5 * L_round0 + L_round1`, with the same stage losses and optimizer as v2.
+The separate background probe also retains the original training recipe.
+Parent/probe budgets are fixed at 30/15 epochs; normalization and signal
+calibration use only the 17 training subjects. Both components save their last
+epoch and carry matching versioned run metadata. The new loader rejects v2
+checkpoints and mismatched pairs.
+
+## Attention, fusion and background calibration
+
+For a video query at t and sensor token i in its selected window W(t):
 
 ```text
-z_action(t) += 0.5 × log(1 - p_bg(t) + 1e-6)
-z_background(t) += 0.5 × log(p_bg(t) + 1e-6)
+q_t = normalize(W_q video_t)          # 2048 -> 128
+k_i = normalize(W_k sensor_i)         # 600 -> 128
+a_ti = softmax_i(temperature * q_t^T k_i), i in W(t)
+c_t = sum_i a_ti * sensor_i           # original normalized RAW600 values
+x_t = concat(video_t, c_t)            # 2648 dimensions
 ```
 
-The final probabilities are the softmax of these adjusted 19-class logits.
+A four-stage MS-TCN with eight layers per stage and 64 channels produces each
+round's logits. Invalid sensor tokens receive no attention. An empty valid
+support returns zero context; the probe contributes a neutral prior at invalid
+queries. The CLI expects complete input arrays; an explicit validity mask is
+available through the model API.
 
-## Training and inference
+The separate probe predicts background probability `p_bg` from video and RAW600.
+The final Round-1 action logits receive `0.5 * log(1-p_bg+1e-6)` and the
+background logit receives `0.5 * log(p_bg+1e-6)`, followed by softmax.
 
-The current `fixed_epoch_loso_v2` protocol uses the same
-`build_wear_parent()` factory for training and final inference. Both use
-`BoundaryUncertaintyDWA`: fixed ±2-second support in Round 0, then the predicted
-segment plus a ±1-second margin and 1.0/0.5 core/margin prior in Round 1.
-The parent is trained jointly in two rounds:
+The parent uses Adam (learning rate 5e-4, weight decay 1e-4, gradient clipping 5).
+Each round's loss sums stage cross entropy and 0.15 times truncated temporal
+smoothing. The probe uses Adam (1e-3, weight decay 1e-4) and binary cross entropy.
+Neither component selects an epoch using the held-out subject.
 
-```text
-total loss = 0.5 × L_round0 + 1.0 × L_round1
-L_round = sum over MS-TCN stages [cross entropy + 0.15 × truncated TMSE]
-```
+## Model variants and evaluation
 
-Both paths derive windows from current, detached predictions. Ground-truth
-labels provide training supervision; they do not define attention windows.
-The background probe is trained separately on the same 17 training subjects
-and frozen for final prediction. Parent and probe save the last epoch of fixed
-30/15-epoch budgets; the held-out subject is not read during training or used
-for checkpoint selection. See [the runnable protocol](reproduction.md).
+SWA and DWA are two strategies for the sensor-window length problem: prediction-
+guided support with a fixed margin, or sensor-driven adaptive support. Their
+whole-model comparison preserves the two-round MS-TCN and background probe.
+DWA additionally calibrates its signal controller on the training subjects and
+replaces the SWA margin/prior rule in both rounds. Checkpoint IDs stay unchanged.
 
-The base `IterativeRawDWA` retains optional context-saturation expansion for
-legacy experiments. The current fixed-margin model disables that branch and
-rejects a positive `max_escape_seconds`; setting its margin to zero means
-segment-only support. With an explicit invalid-sensor mask, empty support
-produces zero context and the probe contributes a neutral prior at invalid
-query positions. This is an API behavior; the CLI expects complete inputs.
+| Model | Support and fusion |
+|---|---|
+| Video-only | I3D to MS-TCN; one round, no probe |
+| Early concatenation | I3D plus aligned RAW600; one round, no probe |
+| Fixed-window attention | ±2-second support; one round, no probe |
+| Segment-guided Window Attention (SWA) | Fixed Round 0; predicted segment plus ±1-second margin and 1.0/0.5 prior in Round 1; probe |
+| Sensor-driven DWA | Sensor-controlled support in both rounds; learned one-way attention; probe |
+| No sensor resize | DWA recipe with seed support preserved; independently retrained parent and probe |
+| No contraction | DWA recipe with sensor clipping/trimming disabled; independently retrained parent and probe |
+
+The whole-model baselines and matched two-round controls answer different
+questions. See [results.md](results.md) for their respective evaluation cohorts.
+The original fixed-margin implementation remains reproducible through
+[wear_v2_method.md](wear_v2_method.md) and the unchanged v2 weights.
 
 ## Dataset adapters and result presentation
 
 - TGIF uses global/operator ROI VideoMAE features and aligned vibration. Its
   confirmed Video-only and Multimodal results are presented using the two
   project-owner-approved original figures.
-- WEAR uses the official-style 2 Hz I3D/RAW600 feature grid. The released model,
-  checkpoints, normalization, and inference/evaluation interfaces correspond to
-  this implementation.
-
-Historical result evidence and current release-code validation are recorded
-separately. The method definition above follows the maintained final-model code.
+- This sensor-driven release, its new weights and new experiments apply to WEAR.
 
 ## Code map
 
-- `src/tgif_dwa/iterative_dwa.py`: query/key scoring, fixed/segment support,
-  optional context-saturation expansion, prediction detachment, context
-  computation, and shared MS-TCN calls.
-- `src/tgif_dwa/boundary_dwa.py`: Round-1 segment support and 1.0/0.5 prior.
-- `src/tgif_dwa/mstcn.py`: checkpoint-compatible MS-TCN blocks.
-- `src/tgif_dwa/wear_model.py`: parent/probe composition and final logit update.
-- `src/tgif_dwa/wear_training.py`: fixed-epoch training, loss, fold normalization,
-  probe training, and checkpoint output.
-- `scripts/train_wear.py`: single-fold training entry point.
-- `scripts/run_wear_benchmark.py`: frozen multi-seed LOSO schedule and evaluation.
-- `scripts/infer_wear.py` and `scripts/evaluate_wear.py`: public run interfaces.
+- `src/tgif_dwa/signal_dwa.py`: descriptor calibration, window controller and attention.
+- `src/tgif_dwa/signal_wear.py`: shared parent factory, probe composition and checkpoint pairing.
+- `src/tgif_dwa/signal_training.py`: train-only normalization/calibration and fixed-epoch fitting.
+- `scripts/train_wear_signal.py` / `scripts/infer_wear_signal.py`: train and infer one fold.
+- `scripts/reproduce_signal_release.py`: verify weights/inputs, infer all released comparisons and score.
+- `scripts/analyze_signal_release.py`: aggregate predictions using explicit matched cohorts.
+- `scripts/plot_signal_results.py`: redraw all current WEAR figures from verified tables.
+
+Commands are in [reproduction.md](reproduction.md).

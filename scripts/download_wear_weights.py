@@ -47,9 +47,14 @@ def validate_archive_record(archive):
         for fold in range(1, 19)
         for name in (["parent.pt", "background_probe.pt"] if method == "FINAL_MODEL" else ["parent.pt"])
     }
+    return validate_file_records(archive, expected)
+
+
+def validate_file_records(archive, expected):
+    """Check an exact, caller-declared set of checkpoint members."""
     names = [row["path"] for row in archive["files"]]
     if len(names) != len(expected) or set(names) != expected:
-        raise ValueError("Manifest must contain the complete 18-fold checkpoint set")
+        raise ValueError("Manifest must contain the complete 18-fold checkpoint set (or declared release cohort)")
     if PurePosixPath(archive["asset"]).name != archive["asset"]:
         raise ValueError("Invalid archive filename")
     return {row["path"]: row for row in archive["files"]}
@@ -59,9 +64,9 @@ def check_file(path, record):
     return path.is_file() and path.stat().st_size == record["bytes"] and sha256(path) == record["sha256"]
 
 
-def unpack_verified_archive(archive_path, archive, staging):
+def unpack_verified_archive(archive_path, archive, staging, validator=validate_archive_record):
     """Validate every member before any checkpoint is installed."""
-    expected = validate_archive_record(archive)
+    expected = validator(archive)
     if not check_file(archive_path, archive):
         raise ValueError(f"Archive size/SHA-256 mismatch: {archive_path.name}")
     with tarfile.open(archive_path, "r:gz") as stream:
@@ -80,8 +85,8 @@ def unpack_verified_archive(archive_path, archive, staging):
                 raise ValueError(f"Checkpoint SHA-256 mismatch: {member.name}")
 
 
-def ensure_bundle(archive, root, archive_dir=None, verify_only=False):
-    expected = validate_archive_record(archive)
+def ensure_bundle(archive, root, archive_dir=None, verify_only=False, validator=validate_archive_record):
+    expected = validator(archive)
     missing = []
     for name, record in expected.items():
         path = safe_path(root, name)
@@ -110,7 +115,7 @@ def ensure_bundle(archive, root, archive_dir=None, verify_only=False):
             with urlopen(request, timeout=60) as response, archive_path.open("wb") as stream:
                 shutil.copyfileobj(response, stream)
         staging = temporary / "verified"
-        unpack_verified_archive(archive_path, archive, staging)
+        unpack_verified_archive(archive_path, archive, staging, validator)
         for name in missing:
             destination = safe_path(root, name)
             destination.parent.mkdir(parents=True, exist_ok=True)

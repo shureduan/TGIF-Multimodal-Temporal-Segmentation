@@ -20,7 +20,7 @@ from tgif_dwa.signal_study import BASELINES, DIAGNOSTICS, METRICS
 
 MAIN = [*BASELINES,METHOD]
 LABELS = {'VIDEO_ONLY':'Video only','EARLY_CONCAT':'Early concat.','FIXED_WINDOW_ATTENTION':'Fixed attention',
-          'FINAL_MODEL':'Published fixed margin',METHOD:'Sensor-driven DWA',
+          'FINAL_MODEL':'Segment-guided attention (SWA)',METHOD:'Sensor-driven DWA',
           'NO_SENSOR_RESIZE':'No sensor resize','NO_CONTRACTION':'No contraction','NO_EXPANSION':'No expansion',
           'UNIFORM_POOL':'Uniform pooling','PARENT_NO_PROBE':'Parent without probe','ROUND0':'Round 0 output'}
 COLORS = dict(zip(MAIN,['#4C78A8','#F28E2B','#59A14F','#8B79A9','#C84452']))
@@ -73,7 +73,7 @@ def main():
         fig,axes=plt.subplots(3,4,figsize=(15,10))
         for ax,key in zip(axes.flat,METRICS):
             ax.bar(range(5),aggregate.loc[MAIN,key],color=[COLORS[m] for m in MAIN])
-            ax.set(title=METRIC_LABELS[key],ylim=(0,1));ax.set_xticks(range(5),['Video','Concat','Fixed','Margin','DWA'],rotation=25)
+            ax.set(title=METRIC_LABELS[key],ylim=(0,1));ax.set_xticks(range(5),['Video','Concat','Fixed','SWA','DWA'],rotation=25)
             for i,m in enumerate(MAIN):ax.text(i,aggregate.loc[m,key]+.012,f'{aggregate.loc[m,key]:.3f}',ha='center',fontsize=7)
             ax.grid(axis='y',alpha=.15)
         save(fig,'02_all_metrics','All values are fractions on the 2 Hz feature grid. Background class 18; action F1 averages classes 0-17. TAL uses frame-derived segments.')
