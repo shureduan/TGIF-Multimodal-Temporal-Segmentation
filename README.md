@@ -250,3 +250,89 @@ scripts/             WEAR training, inference, evaluation, and plotting
 src/tgif_dwa/        self-contained DWA and MS-TCN implementation
 tests/               synthetic interfaces plus optional private-weight loading
 ```
+
+## New DWA: envelope-shape signal features (v4)
+
+The new DWA represents the sensor's local appearance using **AC-RMS envelopes
+and ordered slope histograms**. These features capture activity amplitude and
+coarse rising/flat/falling structure, helping the controller retain a contiguous
+region of similar signal and stop at changes in signal appearance. The selected
+window then supplies RAW600 keys/values to one-way video-to-sensor attention.
+The descriptor guides window selection; the original signal remains available
+for multimodal fusion. The two-round shared MS-TCN and background probe are retained.
+
+**On the matched 18-subject, seed-47 comparison, v4 improves mean Macro-F1 from
+0.7405 to 0.7514 (+1.10 percentage points) and mAP@0.5 from 0.6989 to 0.7144
+(+1.54 points). CPU forward time falls by 40.2%, corresponding to 1.67x speedup
+in the three measured sequences.** This new table uses one seed for every
+method; the preceding v3 table retains its separate three-seed evaluation.
+
+<p align="center">
+  <img src="assets/wear_shape_v4/wear_main_results.png" width="100%" alt="Envelope-shape DWA compared with five reference methods on 18 subjects and seed 47">
+</p>
+
+| Method | Subject Macro-F1 (mean +/- SD) | Concatenated Macro-F1 | Accuracy | mAP@0.5 | Avg mAP |
+|---|---:|---:|---:|---:|---:|
+| Video-only MS-TCN | 0.6305 +/- 0.1312 | 0.6844 | 0.7420 | 0.5996 | 0.5991 |
+| Early concatenation | 0.7085 +/- 0.2230 | 0.7438 | 0.7724 | 0.6922 | 0.6836 |
+| Fixed-window attention | 0.7233 +/- 0.2167 | 0.7663 | 0.7860 | 0.6750 | 0.6820 |
+| Segment-guided Window Attention (SWA) | 0.7396 +/- 0.1969 | 0.7636 | 0.7918 | 0.7112 | 0.7092 |
+| Sensor-driven DWA (v3) | 0.7405 +/- 0.1958 | 0.7739 | 0.7984 | 0.6989 | 0.6955 |
+| **Envelope-shape DWA (v4)** | **0.7514 +/- 0.1926** | **0.7782** | **0.7994** | **0.7144** | **0.7105** |
+
+Bold values mark the largest mean among the six complete-model methods. Subject
+scores weight the 18 subjects equally; SD is across subjects. All models use
+fixed final checkpoints (parent 30 epochs, probe 15 where applicable), with
+normalization and controller calibration fitted on the 17 training subjects.
+
+<p align="center">
+  <img src="assets/wear_shape_v4/wear_ablation_robustness.png" width="100%" alt="Matched nine-subject seed-47 controller comparison including v4, frozen v4 outputs, window lengths and CPU forward latency">
+</p>
+
+The component comparison adds v4 to the same **nine subjects and seed 47** as
+the no-resizing, no-contraction and v3-controller models. Frozen round/probe
+outputs and window summaries use all 18 subjects and are labeled separately.
+The controller comparison replaces the complete controller; it does not isolate
+individual envelope or histogram contributions. CPU measurements use one thread,
+one warm-up and five repeated forwards per subject (`sbj_0`, `sbj_9`, `sbj_17`),
+including both rounds and the probe, after feature extraction and normalization.
+They exclude disk I/O and do not measure training or GPU speed.
+
+### Run the new DWA
+
+```bash
+# Draw all six updated figures from committed tables; no dataset or weights needed.
+python -m pip install -e '.[plot]'
+python scripts/plot_shape_results.py --output outputs/wear_shape_figures
+
+# Download all 18 seed-47 parent/probe pairs, with archive and file SHA-256 checks.
+python scripts/download_shape_weights.py
+python scripts/infer_wear_shape.py \
+  --data-root /path/to/WEAR_prepared --subject sbj_0 \
+  --parent models/wear_shape_v4/ENVELOPE_SHAPE_DWA/seed_47/split_01/parent.pt \
+  --probe models/wear_shape_v4/ENVELOPE_SHAPE_DWA/seed_47/split_01/background_probe.pt \
+  --device cpu --output outputs/shape_split_01.npz
+python scripts/evaluate_wear.py outputs/shape_split_01.npz \
+  --output outputs/shape_split_01_metrics.json
+```
+
+To regenerate every comparison from weights, including the matching baselines
+and controller controls, run:
+
+```bash
+python scripts/reproduce_shape_release.py \
+  --data-root /path/to/WEAR_prepared --device cpu \
+  --output outputs/shape_reproduction
+```
+
+The script downloads/verifies the required seed-47 weights automatically. The
+published fold assignment is CPU on odd folds and Apple MPS on even folds;
+`--device reference` reproduces that assignment on an MPS host. CPU/CUDA are
+also supported; small numerical differences can arise across devices.
+
+The [six-figure gallery and numerical tables](results/wear_shape_v4/README.md),
+[algorithm and training/reproduction guide](docs/envelope_shape_pilot.md), and
+[pretrained v4 release](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/tag/wear-shape-v4-20261020)
+provide the complete path from prepared features to predictions and figures.
+This is the current single-seed v4 evaluation; the earlier three-seed results
+remain a separate reference.

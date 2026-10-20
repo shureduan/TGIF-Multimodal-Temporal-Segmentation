@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "protocol": "envelope_shape_loso_v4_pilot",
+  "release_tag": "wear-shape-v4-20261020",
+  "seeds": [
+    47
+  ],
+  "parent_epochs": 30,
+  "probe_epochs": 15,
+  "feature_stride_seconds": 0.5,
+  "archives": [
+    {
+      "method": "ENVELOPE_SHAPE_DWA",
+      "seed": 47,
+      "folds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "asset": "wear-shape-v4-envelope_shape_dwa-seed47.tar.gz",
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/wear-shape-v4-20261020/wear-shape-v4-envelope_shape_dwa-seed47.tar.gz",
+      "bytes": 92683511,
+      "sha256": "210e5fceb849b03818deebc4ad4fb59bc1cb03da457902e822a1f4612e80b122",
+      "files": [
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_01/parent.pt",
+          "bytes": 4225393,
+          "sha256": "2680abd21ab6a4573b7bf6b765934f97aaae1b9d5ed3034fb1757f028e7bb6ee"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_01/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "2a40561b502ed89bf0eb7ee747ea071d118791d0c71f062ff2317f5bfc4f7e8b"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_02/parent.pt",
+          "bytes": 4225393,
+          "sha256": "2fec46b5a416728f57eca7f12dabc80bc9b2609111f5c8545813e62a1d1a914d"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_02/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "aa15695140f2784a52d1d202126765700cef33b449f50d496df624063b387190"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_03/parent.pt",
+          "bytes": 4225393,
+          "sha256": "0b205b9d4dc3dc5d0ce98f8049ef9810f31a83c86e598470db66a4dbdab24edd"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_03/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "6c81559da4d1fbb2e9e7bd46faeeb776f659242ffdec6809ae5cbab4b62548bd"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_04/parent.pt",
+          "bytes": 4225393,
+          "sha256": "8f67645e53652a4029b852b513022d0cb4b4f5095b87bbb10b6668ca006e9a5d"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_04/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "c3cd13e337382347f6590ba086fb84865a01781df7de3d592aaff45e62108706"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_05/parent.pt",
+          "bytes": 4225393,
+          "sha256": "ab3788516607ddd9b1334b9c67141d4265503231f9b38af6984b6ffd9010e993"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_05/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "634a9f546d4c0bd9f0cf68ed68651c854ba498ca9c8cfc2680cade007ed0b694"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_06/parent.pt",
+          "bytes": 4225393,
+          "sha256": "3a8f7b695018a94ea64f214fc1f841743e8bb24f13acef73945ee41216826add"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_06/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "248248270d3c46c744fae4dabe9057bab6154c31b34f415b140c6cae04ba6789"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_07/parent.pt",
+          "bytes": 4225393,
+          "sha256": "dcea0ac75a39344c23d647a5a30fda0e22f18afdb0c561d9df8485357322ba7b"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_07/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "807d499c7d68a9c4ac42ace73011dd32da90329b2e76ef86615571da6f934b46"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_08/parent.pt",
+          "bytes": 4225393,
+          "sha256": "9f51a016a78edd3bf201ff70f499c64d93966f1ca3550c867f3586e832e33907"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_08/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "8d6883f2739135e1dc2ae46cbc4733d8780535e0acf6ea3446fe96c0216a6ea7"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_09/parent.pt",
+          "bytes": 4225393,
+          "sha256": "0e47763be896031bff7475d4d897065e0079a1f1a7c00e91a9bd51f7e5ddf190"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_09/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "5425d96473cce116af8cbe76ed87b9e01e5dccb26b7667ed9fd843c007b725b6"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_10/parent.pt",
+          "bytes": 4225393,
+          "sha256": "21d3e81d6d4fc71b1b35038bfb7a61e6c5c078440ec7ffa0acc392ed1b21195e"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_10/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "187035cf0da0eb99cc58bb5e8112a3557f27fb945aba4633f607a22e588d09d1"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_11/parent.pt",
+          "bytes": 4225393,
+          "sha256": "f54afed3ea201e598d7089146e73a6cdf5f9f2061dbdb21354649563677c1bdc"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_11/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "7700e94a039aa3ca2a2c2cc2f1ae167d096c200d4dd5cfde72eb7671e42ee8ba"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_12/parent.pt",
+          "bytes": 4225393,
+          "sha256": "9eab7f55e1401ebf25c82d3156bb654c552713ca6519a128b11dcf5f2b692e42"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_12/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "1d1a07a64e0378ccf8c0e01598152106c65ba2285839304d77b2c1b3ed8b8c6c"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_13/parent.pt",
+          "bytes": 4225393,
+          "sha256": "3804a5cf6c5fa5e1688418dce2e8b855e6b3ba64e5ee3464c9aeaee8fff91f72"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_13/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "d5051fecbc4e69978879693bc50bc08f4a7eec221b0a86aad686043e6bd5b2d3"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_14/parent.pt",
+          "bytes": 4225393,
+          "sha256": "f4695a5a372ff57e23fdabc8ba7ca53b1a6f69cbec91b8cc3e100be3d9dc62b3"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_14/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "30793f270cf6aef3b19dfa02c7c1c78675b238c659de959ac83c3a935dba518f"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_15/parent.pt",
+          "bytes": 4225393,
+          "sha256": "8fa0738b815902dfbe8fc8f125f2242e86a78baf88e3f7b75d739bf7c7c872c9"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_15/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "a5624fac2e7f8242ea2b4e17158c978af828eb557c5700a71ddef4708ed7fee9"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_16/parent.pt",
+          "bytes": 4225393,
+          "sha256": "d0c9b75174091a1a4417008c2b37567b858e77487acadec3f8c561eb0f88cdf0"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_16/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "13424d7d82f24fcd86d9add5757411958cc636059420933471c41e5db35bcf70"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_17/parent.pt",
+          "bytes": 4225393,
+          "sha256": "431857ccb1cf41f144ea3f2c1634c858db04ddf8228c47826205072ce93ed4be"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_17/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "9cab3d9f581ffe4d6a46c81f320a6fd2d9786b20544fb5c9233f96e71067c17a"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_18/parent.pt",
+          "bytes": 4225393,
+          "sha256": "58e2304993c578fdc70f5f50b62959c6037f2be23ca817f5984c731fed111af2"
+        },
+        {
+          "path": "ENVELOPE_SHAPE_DWA/seed_47/split_18/background_probe.pt",
+          "bytes": 1360311,
+          "sha256": "0c008bdba4f108e4b5d86d173bb7eae35e6a77e9d1fa3ee54c65fee23bb6ad6f"
+        }
+      ]
+    }
+  ]
+}
