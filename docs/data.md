@@ -69,14 +69,14 @@ vibration_features/
 └── recording_id_vib.npy     # per-frame vibration features before window pooling
 ```
 
-The historical pipeline used an effective video-feature rate of approximately
-7.4933 Hz and built vibration summaries from the aligned 500 Hz signal. The
-release must eventually freeze the exact VideoMAE revision, clip sampling,
-global/operator ROI coordinates, image preprocessing, vibration cleaning,
-dead-region masks, and train-only normalization statistics.
+The pipeline uses approximately 7.4933 video features per second and aligned
+500-Hz vibration. The [TGIF handoff](../handling_time_analysis/) now pins the
+VideoMAE revision, clip sampling, image processing and model statistics. Its
+three scripts extract global/operator features, produce four vibration features
+and classify activity intervals. Supply the recording-specific ROI and fixed
+clock offset. See that folder for CSV formats and missing-sensor behavior.
 
-TGIF raw videos, annotations, ROI metadata, vibration recordings, and derived
-features are laboratory assets and are not currently approved or packaged for
-public download. Their absence blocks both pretrained inference and result
-reproduction; a random-array model test would establish only tensor-interface
-correctness.
+TGIF raw videos, annotations, ROI calibrations, vibration recordings and derived
+feature arrays remain laboratory assets. The repository distributes code and
+trained segmentation-model bundles; the research group supplies recording data
+and recording-specific calibration separately.

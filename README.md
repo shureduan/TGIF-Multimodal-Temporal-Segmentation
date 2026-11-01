@@ -9,6 +9,16 @@ shared MS-TCN in two successive rounds to produce dense temporal predictions.
 The repository presents confirmed TGIF study results together with a maintained WEAR training,
 inference, and evaluation baseline.
 
+### TGIF code for handling-time analysis
+
+The three paper subsections now have independent runnable entry points in
+[handling_time_analysis/](handling_time_analysis/): **visual feature extraction**,
+**vibration feature extraction**, and **multimodal fusion/classification**.
+The folder includes pretrained-model setup, input/output contracts, and
+handling-duration outputs for use with laboratory recordings. The packaged TGIF
+head uses 256-D normalized residual fusion; the later WEAR models below have a
+separate two-round architecture.
+
 ### Why dynamic sensor windows?
 
 <p align="center">

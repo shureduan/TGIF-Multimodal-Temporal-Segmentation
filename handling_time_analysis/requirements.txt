@@ -1,0 +1,9 @@
+# Tested on Python 3.10; includes the frozen VideoMAE extraction dependencies.
+torch==2.12.0
+numpy==2.2.6
+scipy==1.15.3
+pandas==2.3.3
+scikit-learn==1.7.2
+transformers==5.9.0
+opencv-python==4.13.0.92
+Pillow==12.2.0

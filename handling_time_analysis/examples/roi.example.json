@@ -1,0 +1,4 @@
+{
+  "operator_roi": [20, 10, 140, 120],
+  "note": "Synthetic 160x120 demo only. Supply the calibrated ROI for your recording."
+}

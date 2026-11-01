@@ -158,8 +158,13 @@ Old v2 commands and checkpoint compatibility are retained in
 
 ## 6. TGIF result and runtime scope
 
-The two project-owner-confirmed original TGIF figures and their numeric
-annotations are preserved as release assets; their hashes are tested. TGIF data
-and weights are not part of the public runtime package at present, so current
-code validation is reported through the maintained final-model implementation
-without reinterpreting the confirmed TGIF results.
+[handling_time_analysis/](../handling_time_analysis/) contains the three TGIF
+runtime stages, pretrained-model downloads and a generated-data demonstration.
+It accepts lab-supplied recordings and produces per-timestep predictions,
+activity intervals and handling-duration summaries. Optional labels are used
+only for post-hoc metrics. The six model bundles include paired preprocessing
+statistics and are checked by archive/file SHA-256 and strict state loading.
+
+The original aggregate TGIF figures and their numerical annotations remain
+separate from these per-recording runtime outputs. Raw recordings, annotations,
+ROI calibrations and derived laboratory features are not public downloads.

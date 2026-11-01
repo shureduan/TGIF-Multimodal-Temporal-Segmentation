@@ -1,0 +1,37 @@
+{
+  "release": "tgif-handling-v1-20261101",
+  "schema": "tgif_handling_attention_v1",
+  "default_seed": 43,
+  "seeds": {
+    "41": {
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/tgif-handling-v1-20261101/tgif_handling_seed41.zip",
+      "sha256": "7f285532abdccd5c5ba32c275109a5498b7a005e4c3c230fbeac437dbf6e5d69",
+      "bytes": 4018075
+    },
+    "17": {
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/tgif-handling-v1-20261101/tgif_handling_seed17.zip",
+      "sha256": "2f7c64867263d467a042114fcca57b702bcbf66e46b6ea0ce925ed905e1d9e27",
+      "bytes": 4019014
+    },
+    "43": {
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/tgif-handling-v1-20261101/tgif_handling_seed43.zip",
+      "sha256": "1ff7f153b3746462ea835ff3aa222d2488598edd87edbce45f6d76f69c118956",
+      "bytes": 4018021
+    },
+    "5": {
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/tgif-handling-v1-20261101/tgif_handling_seed5.zip",
+      "sha256": "c2fd6bfe41d598a28e24714ef1cbca4b6703aacdeb4e01e783e09376d3034073",
+      "bytes": 4020599
+    },
+    "31": {
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/tgif-handling-v1-20261101/tgif_handling_seed31.zip",
+      "sha256": "1101e4f7299a6b58a7204e6f0acbd22f495ef1f24ce792654ae66d3cfff4a552",
+      "bytes": 4016253
+    },
+    "59": {
+      "url": "https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/releases/download/tgif-handling-v1-20261101/tgif_handling_seed59.zip",
+      "sha256": "a2ab233822ae4728dbdebdbe98fc5efa14ce161275d92449e0d6255953a5261e",
+      "bytes": 4018593
+    }
+  }
+}

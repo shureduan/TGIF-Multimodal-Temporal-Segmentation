@@ -1,0 +1,100 @@
+{
+  "pipeline/models/video_preclassifier.py": {
+    "source": "multimodal/dynamic_window_fusion/models/video_preclassifier.py",
+    "source_sha256": "01f6686e094b4ded9e8add2fd60b3861d138deaf1b602d015a02e46ca4de71f2",
+    "packaged_sha256": "01f6686e094b4ded9e8add2fd60b3861d138deaf1b602d015a02e46ca4de71f2"
+  },
+  "pipeline/models/vibration_token_encoder.py": {
+    "source": "multimodal/dynamic_window_fusion/models/vibration_token_encoder.py",
+    "source_sha256": "87d62dc30f34d91a6cb65be5a9c7d9e911e7c1f1cfd3233aa579b78b5171b9c8",
+    "packaged_sha256": "87d62dc30f34d91a6cb65be5a9c7d9e911e7c1f1cfd3233aa579b78b5171b9c8"
+  },
+  "pipeline/models/one_way_local_attention.py": {
+    "source": "multimodal/dynamic_window_fusion/models/one_way_local_attention.py",
+    "source_sha256": "3db1fe12215450355d369328a2bc28ea2d17e00d841c0cd6561551f5f18b9ef3",
+    "packaged_sha256": "3db1fe12215450355d369328a2bc28ea2d17e00d841c0cd6561551f5f18b9ef3"
+  },
+  "pipeline/models/machine_subspace.py": {
+    "source": "multimodal/dynamic_window_fusion/models/machine_subspace.py",
+    "source_sha256": "66a3d722639ae8ba8114b62acf0bc4bd05b1775191e5613a942d4347ebd9a528",
+    "packaged_sha256": "66a3d722639ae8ba8114b62acf0bc4bd05b1775191e5613a942d4347ebd9a528"
+  },
+  "pipeline/models/auxiliary_binary_heads.py": {
+    "source": "multimodal/dynamic_window_fusion/models/auxiliary_binary_heads.py",
+    "source_sha256": "1a0ecd29f92a53b7d961e14bff7012a38ba363c0382a85145f8b12d87d1356c4",
+    "packaged_sha256": "1a0ecd29f92a53b7d961e14bff7012a38ba363c0382a85145f8b12d87d1356c4"
+  },
+  "pipeline/models/js_conflict.py": {
+    "source": "multimodal/dynamic_window_fusion/models/js_conflict.py",
+    "source_sha256": "ea75cedfe67b165b7f7a3235bb8f760cd648dcb41fa433fad58b7c8c97f84151",
+    "adaptation": "Use a representable Bernoulli clamp at saturated float32 probabilities.",
+    "packaged_sha256": "6dcbfce73d1589899fbc943f778219b1cf56b2cd15ff763ea6c1bfd514f343a2"
+  },
+  "pipeline/models/risk_gate.py": {
+    "source": "multimodal/dynamic_window_fusion/models/risk_gate.py",
+    "source_sha256": "34c907e4ed54fe59ad0693358405335d7d6a42cac2fc2befcbc8ee00f106589a",
+    "adaptation": "Use a representable Bernoulli clamp at saturated float32 probabilities.",
+    "packaged_sha256": "bb401fc2f1fac4d19023771a7038dfca1186d8641b8deb6aba7cd8c62214d6a7"
+  },
+  "pipeline/models/dynamic_window_manager.py": {
+    "source": "multimodal/dynamic_window_fusion/models/dynamic_window_manager.py",
+    "source_sha256": "f375a3f8ff393d860d4af37988d8419ed1015cead6f160273c1f87e00f734688",
+    "packaged_sha256": "9006fe204cd0c6bd39dc0516b3757a230ee02666c9e238c3716650646c5bcace",
+    "adaptation": "Clarify that the historical smoothing helper implements a categorical majority vote."
+  },
+  "pipeline/models/vibration_normalizer.py": {
+    "source": "multimodal/dynamic_window_fusion/models/vibration_normalizer.py",
+    "source_sha256": "b26130b7fd3ca5a44f1e1605b9802a42e69759877937aef2d3162ff8649500db",
+    "packaged_sha256": "b26130b7fd3ca5a44f1e1605b9802a42e69759877937aef2d3162ff8649500db"
+  },
+  "pipeline/models/mstcn_core.py": {
+    "source": "multimodal/ablation_sensitivity_suite/ablation/models/mstcn_core.py",
+    "source_sha256": "f8b1c31a669188aa3fb7a5d214fd2facbaea1f80e3d848800d54140de0b52bdb",
+    "adaptation": "Only the three unchanged MS-TCN classes are retained; unused alternative model branches are omitted.",
+    "packaged_sha256": "f7b8120711ec35ab270572c46208818dd2c1a269eab94ad494a5631a937f46f5"
+  },
+  "pipeline/models/dynamic_window_multimodal_mstcn.py": {
+    "source": "multimodal/dynamic_window_fusion/models/dynamic_window_multimodal_mstcn.py",
+    "source_sha256": "c290d489e98d9309117aaa44b58f045e4c74b1bc7bb24e2e94aba31ecafdedf9",
+    "adaptation": "Restored the 256-D checkpoint architecture and normalized residual from the preserved training-era definition; verified against it during handoff review.",
+    "packaged_sha256": "81657320597e4be02cb37c0262402727c5fbc97ea39177046d9d24672e620dc6"
+  },
+  "pipeline/visual.py": {
+    "sources": [
+      {
+        "path": "videomae_pipeline/scripts/04_extract_global_operator.py",
+        "sha256": "005b1b065f5fb971fb052ed07d1c1c9606785254a247d35968204bf19bfaa373"
+      },
+      {
+        "path": "videomae_pipeline/scripts/utils/videomae_wrapper.py",
+        "sha256": "6995aae3f3fc2a7ad9c3021b010ba709f7feb0a77488c404a9a95d0bd56b01de"
+      }
+    ],
+    "adaptation": "Portable explicit paths, fixed encoder revision, explicit zero-bias cache compatibility, validated ROI/frame grid and no labels.",
+    "packaged_sha256": "3835a6841fb08689a1ed3901cca065e17dae04910ba762aad182c7c61c333fa9"
+  },
+  "pipeline/vibration.py": {
+    "sources": [
+      {
+        "path": "multimodal/fusion/scripts/build_vib_timestamp.py",
+        "sha256": "36875e6365a6584fd30565bd57fe5d680fd8293f05b721f9a1a3105c25bf34e8"
+      },
+      {
+        "path": "multimodal/video_prior_fusion/data/extract_vib_features_v2.py",
+        "sha256": "f1cbfbb23a4f916fd44f55f682b3eccbb887351f8c78b41e6c1f56f142358041"
+      }
+    ],
+    "adaptation": "Keep minute clock grid and four feature definitions; require fixed caller-supplied offset, retain validity flags and omit supervised alignment search.",
+    "packaged_sha256": "3debe255ce663148f2a093ef5680ac2a0c3889c80724185950171d8558babcf3"
+  },
+  "pipeline/inference.py": {
+    "sources": [
+      {
+        "path": "multimodal/dynamic_window_fusion/train/train_dynamic_window.py",
+        "sha256": "76147b1b189ab53e825c073a5eb8ff7be4b27ec87a09c1a4406fcc9fa243e9b5"
+      }
+    ],
+    "adaptation": "Use frozen paired statistics and predicted segment windows; no annotation mask in inference; classify tail chunk and fall back on missing sensor tokens.",
+    "packaged_sha256": "b5333ddae61720a6c850c88774a5e57254f130244ec73176e5e20eea5f8fb44a"
+  }
+}

@@ -78,14 +78,12 @@ instructions and legacy manifest details. The old unversioned manifest under
 
 ## TGIF model availability
 
-The confirmed TGIF figures and metrics are retained as the research result
-record. TGIF data and a public model bundle are not distributed in the current
-release candidate. This does not change the accepted result values; it only
-means that the present downloadable inference example is the maintained WEAR
-final-model path.
+The [TGIF handling-time handoff](../handling_time_analysis/) provides trained
+256-D adaptive-window attention models for split seeds 41, 17, 43, 5, 31 and 59.
+Each checksummed bundle pairs a model with its frozen video normalization and
+training-split vibration statistics. Use its `download_models.py`; these TGIF
+models have a different architecture and feature contract from WEAR.
 
-If a TGIF runnable bundle is published later, package its checkpoint together
-with the exact ROI/feature configuration, class mapping, vibration
-normalization, and input metadata. The bundle should use the same public DWA
-interfaces or a clearly versioned dataset adapter without relabeling the
-confirmed result experiment.
+Raw TGIF recordings, annotations and ROI calibration remain laboratory assets.
+The handoff computes predictions and handling durations for supplied recordings;
+the existing aggregate TGIF figures remain a separate result record.
