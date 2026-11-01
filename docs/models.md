@@ -80,8 +80,9 @@ instructions and legacy manifest details. The old unversioned manifest under
 
 The [TGIF handling-time handoff](../handling_time_analysis/) provides trained
 256-D adaptive-window attention models for split seeds 41, 17, 43, 5, 31 and 59.
-Each checksummed bundle pairs a model with its frozen video normalization and
-training-split vibration statistics. Use its `download_models.py`; these TGIF
+The model bundles are supplied within the laboratory. Each checksummed bundle
+pairs a model with its frozen video normalization and
+training-split vibration statistics. Install a laboratory-provided ZIP with `download_models.py --archive`; these TGIF
 models have a different architecture and feature contract from WEAR.
 
 Raw TGIF recordings, annotations and ROI calibration remain laboratory assets.

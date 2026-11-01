@@ -1,4 +1,4 @@
-"""Download a TGIF trained model together with its paired preprocessing statistics."""
+"""Install a TGIF model archive together with its paired preprocessing statistics."""
 import argparse,json,shutil,tempfile,urllib.request,zipfile
 from pathlib import Path
 from pipeline.common import sha256
@@ -17,7 +17,7 @@ def unpack(archive,output,seed):
         z.extractall(output)
     return Path(output)/f'seed_{seed}'
 
-def download(seed,output):
+def download(seed,output,archive_path=None):
     manifest=json.loads(Path(__file__).with_name('models.json').read_text())
     entry=manifest['seeds'][str(seed)]
     output=Path(output);output.mkdir(parents=True,exist_ok=True)
@@ -29,16 +29,22 @@ def download(seed,output):
         raise ValueError('Existing model bundle is incomplete or modified; choose a clean output directory')
     with tempfile.TemporaryDirectory(dir=output) as temp:
         temp=Path(temp);archive=temp/'weights.zip'
-        with urllib.request.urlopen(entry['url'],timeout=60) as r,open(archive,'wb') as f:
-            shutil.copyfileobj(r,f)
+        if archive_path is not None:
+            shutil.copyfile(archive_path,archive)
+        elif entry.get('url') and manifest.get('publication_status')=='public':
+            with urllib.request.urlopen(entry['url'],timeout=60) as r,open(archive,'wb') as f:
+                shutil.copyfileobj(r,f)
+        else:
+            raise ValueError('TGIF weights are supplied within the laboratory. Use --archive /path/to/'+entry['archive_name']+' or export_lab_bundles.py.')
         if sha256(archive)!=entry['sha256']:raise ValueError('Downloaded archive checksum mismatch')
         bundle=unpack(archive,temp,seed)
         sums=json.loads((bundle/'sha256.json').read_text())
         if not all(sha256(bundle/name)==value for name,value in sums.items()):raise ValueError('Extracted bundle checksum mismatch')
         shutil.move(str(bundle),str(target))
-    print('Downloaded and verified:',target);return target
+    print('Installed and verified:',target);return target
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--seed',type=int,choices=[41,17,43,5,31,59],default=43)
     p.add_argument('--output',default=str(Path(__file__).with_name('checkpoints')))
-    a=p.parse_args();download(a.seed,a.output)
+    p.add_argument('--archive',help='Install a checksummed model ZIP supplied by the research group')
+    a=p.parse_args();download(a.seed,a.output,a.archive)

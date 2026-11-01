@@ -77,6 +77,6 @@ and classify activity intervals. Supply the recording-specific ROI and fixed
 clock offset. See that folder for CSV formats and missing-sensor behavior.
 
 TGIF raw videos, annotations, ROI calibrations, vibration recordings and derived
-feature arrays remain laboratory assets. The repository distributes code and
-trained segmentation-model bundles; the research group supplies recording data
-and recording-specific calibration separately.
+feature arrays remain laboratory assets. The repository distributes code; the research group supplies trained
+segmentation-model bundles, recording data and recording-specific calibration
+separately.

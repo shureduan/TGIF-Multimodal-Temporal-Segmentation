@@ -159,7 +159,8 @@ Old v2 commands and checkpoint compatibility are retained in
 ## 6. TGIF result and runtime scope
 
 [handling_time_analysis/](../handling_time_analysis/) contains the three TGIF
-runtime stages, pretrained-model downloads and a generated-data demonstration.
+runtime stages, installation of laboratory model bundles and a generated-data
+demonstration.
 It accepts lab-supplied recordings and produces per-timestep predictions,
 activity intervals and handling-duration summaries. Optional labels are used
 only for post-hoc metrics. The six model bundles include paired preprocessing

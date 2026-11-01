@@ -3,3 +3,4 @@ checkpoints/
 outputs/
 __pycache__/
 *.pyc
+model_archives/

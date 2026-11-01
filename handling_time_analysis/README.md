@@ -24,18 +24,22 @@ python3.10 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
-python download_models.py --seed 43
+python download_models.py --seed 43 --archive /path/to/tgif_handling_seed43.zip
 ```
 
 The default model is the historical TGIF adaptive-window attention checkpoint
-for split seed 43. The download contains its model, frozen video normalization,
+for split seed 43. The laboratory-supplied ZIP contains its model, frozen video normalization,
 matching training-split vibration statistics, metadata, and checksums. Other
-available split seeds are `41 17 5 31 59`; download each with `--seed`.
-[models.json](models.json) pins the release archives and SHA-256 values.
+available split seeds are `41 17 5 31 59`; install the matching archive with `--seed`.
+[models.json](models.json) pins the archive names and SHA-256 values. The public
+repository contains the code; trained TGIF bundles are currently supplied
+within the research group. The private handoff ZIP already contains the six
+installed bundles under `checkpoints/`, so its recipients can skip this step.
 
 The first video extraction also downloads the frozen VideoMAE encoder.
 `--local-files-only` reuses an already downloaded encoder on an offline machine.
-The trained TGIF head and the VideoMAE encoder are separate downloads.
+The trained TGIF head is supplied by the research group; the VideoMAE encoder
+is a separate public third-party download.
 
 ## 1. Visual feature extraction
 
@@ -182,7 +186,7 @@ python export_cached_inputs.py --legacy-root /path/to/TGIF \
 ```
 
 [export_lab_bundles.py](export_lab_bundles.py) is the one-time exporter for the
-original lab checkpoints. Recipients normally use `download_models.py` instead.
+original lab checkpoints. Recipients normally install the laboratory ZIP with `download_models.py --archive` instead.
 [source_manifest.json](source_manifest.json) records the source files and
 hashes of the transferred implementation. All three stage scripts accept
 `--help` from any working directory.
@@ -192,9 +196,9 @@ hashes of the transferred implementation. All three stage scripts accept
 This folder packages the **TGIF** attention pipeline and its trained 256-D
 model definition. The separate **WEAR envelope-shape DWA v4** uses AC-RMS and
 ordered slope histograms to control sensor windows; its entry points are
-[shape_dwa.py](../src/tgif_dwa/shape_dwa.py),
-[shape_wear.py](../src/tgif_dwa/shape_wear.py) and
-[infer_wear_shape.py](../scripts/infer_wear_shape.py). Specify the dataset and
+[shape_dwa.py](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/blob/main/src/tgif_dwa/shape_dwa.py),
+[shape_wear.py](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/blob/main/src/tgif_dwa/shape_wear.py) and
+[infer_wear_shape.py](https://github.com/shureduan/TGIF-Multimodal-Temporal-Segmentation/blob/main/scripts/infer_wear_shape.py). Specify the dataset and
 model recipe when describing the method.
 
 This handoff produces predictions, durations and metrics for the supplied
