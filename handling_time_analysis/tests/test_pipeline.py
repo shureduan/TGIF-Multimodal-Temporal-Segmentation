@@ -37,6 +37,13 @@ class Contracts(unittest.TestCase):
         self.assertFalse(valid[0]);self.assertFalse(valid[-1])
         self.assertTrue(valid[2]);self.assertGreater(x[2,3],.99)
         self.assertTrue(np.isfinite(x).all())
+    def test_dwa_six_feature_profile(self):
+        t=np.arange(5000)/500;signal=.05*np.sin(2*np.pi*30*t)
+        x,valid,_=features(signal,np.array([3.,5.,7.]),0.,feature_set='dwa6')
+        self.assertEqual(x.shape,(3,6));self.assertTrue(valid.all())
+        self.assertGreater(x[:,2].min(),.99)  # 20-40 Hz / 0.5-150 Hz energy
+        self.assertGreater(x[:,4].min(),.8)  # 30-40 Hz / total energy; Hann leakage is expected
+        np.testing.assert_allclose(x[:,5],.5,atol=.03)  # normalized 30-Hz peak
     def test_all_missing_does_not_fabricate_features(self):
         x,valid,_=features(np.full(2000,np.nan),np.array([1.,2.]),0.)
         self.assertFalse(valid.any());self.assertTrue(np.isnan(x).all())
@@ -141,5 +148,22 @@ class BundleIntegrity(unittest.TestCase):
             archive=Path(temp)/'bad.zip'
             with zipfile.ZipFile(archive,'w') as z:z.writestr('../outside','bad')
             with self.assertRaises(ValueError):unpack(archive,temp,43)
+
+class DWAIntegration(unittest.TestCase):
+    def test_released_seed_checkpoint_loads_in_three_step_runner(self):
+        from pipeline.dwa_inference import DEFAULT_DWA_DIR,infer_arrays
+        rng=np.random.default_rng(12);length=48
+        result=infer_arrays(
+            rng.normal(size=(length,768)).astype(np.float32),
+            rng.normal(size=(length,768)).astype(np.float32),
+            rng.normal(size=(length,6)).astype(np.float32),
+            checkpoint_path=DEFAULT_DWA_DIR/'weights/seed_43_best.pt',
+            video_norm_path=DEFAULT_DWA_DIR/'weights/video_norm.npz',
+            device='cpu',
+        )
+        self.assertEqual(result['split_seed'],43)
+        self.assertEqual(result['predictions'].shape,(length,))
+        self.assertEqual(result['probabilities'].shape,(length,3))
+        self.assertTrue(np.isfinite(result['probabilities']).all())
 
 if __name__=='__main__':unittest.main()

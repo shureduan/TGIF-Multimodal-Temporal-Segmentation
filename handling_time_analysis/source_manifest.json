@@ -84,8 +84,8 @@
         "sha256": "f1cbfbb23a4f916fd44f55f682b3eccbb887351f8c78b41e6c1f56f142358041"
       }
     ],
-    "adaptation": "Keep minute clock grid and four feature definitions; require fixed caller-supplied offset, retain validity flags and omit supervised alignment search.",
-    "packaged_sha256": "3debe255ce663148f2a093ef5680ac2a0c3889c80724185950171d8558babcf3"
+    "adaptation": "Keep minute clock grid and four feature definitions; require fixed caller-supplied offset, retain validity flags and omit supervised alignment search. Added the six-feature DWA profile using fixed caller-supplied clock offset.",
+    "packaged_sha256": "da4766ad48ffe18524d08feecea81e52064b6cddb3ffdab25f2f8bdfe6d62ee7"
   },
   "pipeline/inference.py": {
     "sources": [
@@ -96,5 +96,69 @@
     ],
     "adaptation": "Use frozen paired statistics and predicted segment windows; no annotation mask in inference; classify tail chunk and fall back on missing sensor tokens.",
     "packaged_sha256": "b5333ddae61720a6c850c88774a5e57254f130244ec73176e5e20eea5f8fb44a"
+  },
+  "pipeline/models/tgif_dwa/boundary_dwa.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/boundary_dwa.py",
+    "source_sha256": "39389f44cac62e452136db17487c8327e13f10bb76fede57d9401286f26b9300",
+    "packaged_sha256": "39389f44cac62e452136db17487c8327e13f10bb76fede57d9401286f26b9300"
+  },
+  "pipeline/models/tgif_dwa/iterative_dwa.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/iterative_dwa.py",
+    "source_sha256": "f80513e5313f9510c338c6ce00d01f315e164a958f889d683efbc8f0c59f33eb",
+    "packaged_sha256": "f80513e5313f9510c338c6ce00d01f315e164a958f889d683efbc8f0c59f33eb"
+  },
+  "pipeline/models/tgif_dwa/mstcn.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/mstcn.py",
+    "source_sha256": "0df8987fe1b9b7db16e1a15846ac5952ad44845acd4904966c8d53348ffd0f00",
+    "packaged_sha256": "0df8987fe1b9b7db16e1a15846ac5952ad44845acd4904966c8d53348ffd0f00"
+  },
+  "pipeline/models/tgif_dwa/signal_dwa.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/signal_dwa.py",
+    "source_sha256": "1b36ba47f23b68742975df82929fdb608f8b687947bd6f0f3ac7797102307eff",
+    "packaged_sha256": "1b36ba47f23b68742975df82929fdb608f8b687947bd6f0f3ac7797102307eff"
+  },
+  "pipeline/models/tgif_dwa/tgif_adaptation.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/tgif_adaptation.py",
+    "source_sha256": "d36c43c468f279f42992dae6be4f9270183f5765c2969d8feb3654944a2000e0",
+    "packaged_sha256": "d64f13b5b645115c2f04c33defb5066a48690e6a373f3e965e972d26a80974f1"
+  },
+  "pipeline/models/tgif_dwa/wear_model.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/wear_model.py",
+    "source_sha256": "e6f0c3b9f794fd9e1ebdde51891110e31b0552da987169c79ea506393e6582f6",
+    "packaged_sha256": "e6f0c3b9f794fd9e1ebdde51891110e31b0552da987169c79ea506393e6582f6"
+  },
+  "pipeline/models/tgif_dwa/wear_data.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/wear_data.py",
+    "source_sha256": "a0146a1a82e53444a036a004df7244b5bea3f03ea12971852bfed6ae287aea53",
+    "packaged_sha256": "a0146a1a82e53444a036a004df7244b5bea3f03ea12971852bfed6ae287aea53"
+  },
+  "pipeline/models/tgif_dwa/segmentation_metrics.py": {
+    "source": "src/tgif_dwa/segmentation_metrics.py",
+    "source_sha256": "f92e75a51718fe8bdb37814e9dc8ee15455181b2952a1afb2cd96a6182a724f5",
+    "packaged_sha256": "f92e75a51718fe8bdb37814e9dc8ee15455181b2952a1afb2cd96a6182a724f5"
+  },
+  "pipeline/models/tgif_dwa/gated_projection.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/tgif_dwa/tgif_adaptation.py",
+    "source_sha256": "d36c43c468f279f42992dae6be4f9270183f5765c2969d8feb3654944a2000e0",
+    "adaptation": "Extracted the unchanged GatedProjection class into a video-branch module.",
+    "packaged_sha256": "0a2cae71e02dff97197f04bf17cc6b5b79040b9ec25eaf24c79cd72bf3d2cd42"
+  },
+  "pipeline/models/tgif_dwa/video_baseline.py": {
+    "source": "multimodal/video_prior_fusion/models/video_mstcn.py",
+    "source_sha256": "b1c6a190fcf705a451b74550982dd82f12e0e7d36ef2d5ecba9c33daceedce8f",
+    "adaptation": "Uses the packaged TGIF DWA MS-TCN and GatedProjection classes, preserving the paired two-ROI video-only architecture.",
+    "packaged_sha256": "35cf24659074d0b68537500170d35cb8a236444b63dd1ae067376f4121e7390a"
+  },
+  "pipeline/dwa_inference.py": {
+    "source": "tgif_dwa_reproducibility/dwa_code_and_weights/infer.py",
+    "source_sha256": "67e0a7a8384b40234d6682ae1407ed30e6100fcf24a9d3ea03894bf9433442f2",
+    "adaptation": "Integrated into the original three-step output contract and local model package.",
+    "packaged_sha256": "75b0c4215fd014930324239210c5b3d489980f7afa47e0125e5d963d8a04f40d"
+  },
+  "train_tgif_dwa.py": {
+    "source": "paper/dwa_paper/analysis/tgif_full_expanded_old_protocol_cpu_20261112/train_full_expanded.py",
+    "source_sha256": "2ba007952348be014afbc64e537e12adfc748eabedb1698838a611ab21beb35c",
+    "adaptation": "Portable CLI paths and packaged DWA/video model imports; training recipe and checkpoint outputs preserved.",
+    "packaged_sha256": "20265eee0b60947bb8aab3bc1f6f49fb5142d372e1e05c02914fc944417af9e9"
   }
 }
